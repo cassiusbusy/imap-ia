@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winterfood Curitiba – PM Canvas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: canvas do IMAP no topo (5 grupos), cada bloco leva a uma seção de detalhe; anexo com Gantt e caminho crítico */
+:root{
+  --bg:#eef1f4; --paper:#fff; --ink:#18242f; --muted:#5a6876; --line:#d3dae1;
+  --accent:#1f5f7a; --warm:#b8641a; --crit:#c0392b; --crit-soft:#f7dcd8;
+  --c-why:#fde5cf; --c-what:#dff0e1; --c-who:#fbf1c9; --c-how:#e6e9ec; --c-when:#dcebf6;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11181e; --paper:#18222a; --ink:#e6edf2; --muted:#9fb0bd; --line:#2c3a45;
+  --accent:#7cc0dc; --warm:#e89a52; --crit:#ff7b6b; --crit-soft:#4a2320;
+  --c-why:#3a2716; --c-what:#17291f; --c-who:#332c12; --c-how:#232a31; --c-when:#16283a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11181e; --paper:#18222a; --ink:#e6edf2; --muted:#9fb0bd; --line:#2c3a45;
+  --accent:#7cc0dc; --warm:#e89a52; --crit:#ff7b6b; --crit-soft:#4a2320;
+  --c-why:#3a2716; --c-what:#17291f; --c-who:#332c12; --c-how:#232a31; --c-when:#16283a; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body)}
+.wrap{max-width:1440px;margin:0 auto;padding:24px 20px 80px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,4vw,46px);font-weight:800}
+h2{font-size:26px}
+h3{font-size:17px}
+a{color:var(--accent)}
+.lede{max-width:80ch;color:var(--muted);margin:6px 0 0}
+nav.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin:0 -20px;padding:10px 20px;display:flex;gap:6px 16px;flex-wrap:wrap;font-weight:600;font-size:14.5px}
+nav.top a{text-decoration:none}
+nav.top a:focus-visible,.block:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.hint{font-size:14px;color:var(--muted)}
+
+.canvas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;
+  grid-template-areas:"h1 h2 h3 h4 h5" "j p s pr ri" "j p a pr ri" "o q a re cu" "o q e re cu" "r q en en en"}
+.ch{font:700 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}
+.block{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:11px 13px 30px;border:1px solid var(--line);position:relative;transition:transform .12s,box-shadow .12s}
+.block:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.block h3{font-size:15px;margin-bottom:5px}
+.block h3 small{font:600 11.5px var(--body);color:var(--muted)}
+.block ul{margin:0;padding-left:17px;font-size:13.8px}
+.block li{margin:2px 0}
+.block p{margin:0;font-size:13.8px}
+.block .more{position:absolute;right:12px;bottom:8px;font-size:12.5px;font-weight:700;color:var(--accent)}
+.why{background:var(--c-why)} .what{background:var(--c-what)} .who{background:var(--c-who)} .how{background:var(--c-how)} .when{background:var(--c-when)}
+.sponsor{border:2px solid var(--warm)}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px 14px;font-size:13.5px}
+.mini b{color:var(--accent)}
+table{border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;width:100%}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:14px}
+td.r,th.r{text-align:right}
+.block table td{padding:2px 0;border:0;font-size:13.8px}
+.block table td.r{white-space:nowrap;padding-left:6px}
+.tot td{border-top:1.5px solid var(--ink)!important;font-weight:700}
+
+.detail{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:60px}
+.detail .head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.detail .tag{font:700 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.back{font-size:14px;font-weight:600}
+.detail p,.detail li{max-width:85ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card h3{margin-bottom:6px}
+.scroll{overflow-x:auto}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font:800 26px var(--display);color:var(--warm);font-variant-numeric:tabular-nums}
+.kpi span{font-size:13.5px;color:var(--muted)}
+.calc{font-variant-numeric:tabular-nums;background:var(--c-what);border-radius:10px;padding:12px 16px}
+.pill{display:inline-block;font:700 12px var(--body);padding:2px 8px;border-radius:999px}
+.p-a{background:var(--crit-soft);color:var(--crit)} .p-m{background:var(--c-who);color:var(--warm)} .p-b{background:var(--c-what);color:var(--accent)}
+.fl{font-size:12.5px;font-weight:600;white-space:nowrap}
+.note{font-size:13.5px;color:var(--muted)}
+.src{font-size:13px;color:var(--muted)}
+
+/* Gantt */
+.gantt{display:grid;grid-template-columns:260px 1fr;gap:0;min-width:900px;font-size:13.5px}
+.g-name{padding:6px 8px;border-bottom:1px solid var(--line);display:flex;gap:6px;align-items:baseline}
+.g-name .id{font-weight:700;color:var(--muted);width:22px}
+.g-row{position:relative;border-bottom:1px solid var(--line);height:34px;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/var(--w)) 100%}
+.g-bar{position:absolute;top:7px;height:20px;border-radius:5px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:1px 6px;white-space:nowrap;overflow:hidden}
+.g-bar.crit{background:var(--crit)}
+.g-slack{position:absolute;top:15px;height:4px;background:var(--line);border-radius:2px}
+.g-head{display:flex;border-bottom:1.5px solid var(--ink);font-size:11.5px;color:var(--muted)}
+.g-head span{flex:1;text-align:center;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;align-items:center}
+.sw{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+tr.crit td{color:var(--crit);font-weight:600}
+
+@media (max-width:1100px){.canvas{grid-template-columns:1fr 1fr;grid-template-areas:"h1 h1" "j o" "r r" "h2 h2" "p q" "h3 h3" "s s" "a e" "h4 h4" "pr re" "h5 h5" "ri cu" "en en"}}
+@media (max-width:640px){.canvas{grid-template-columns:1fr;grid-template-areas:"h1" "j" "o" "r" "h2" "p" "q" "h3" "s" "a" "e" "h4" "pr" "re" "h5" "ri" "cu" "en"}.wrap{padding:18px 16px 60px}nav.top{margin:0 -16px;padding:10px 16px}.detail{padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header id="canvas">
+  <h1>Winterfood Curitiba</h1>
+  <p class="lede">Festival gastronômico de inverno em rede de restaurantes, proposto para estender a temporada turística de Curitiba aos meses de frio. Termo de abertura no modelo PM Canvas do IMAP. Clique em qualquer bloco para ver o detalhamento e as fontes.</p>
+</header>
+
+<nav class="top" aria-label="Seções">
+  <a href="#canvas">Canvas</a><a href="#d-porque">Por quê</a><a href="#d-oque">O quê</a><a href="#d-quem">Quem</a><a href="#d-como">Como</a><a href="#d-riscos">Riscos</a><a href="#d-custos">Custos</a><a href="#anexo">Anexo: cronograma</a><a href="#fontes">Fontes</a>
+</nav>
+
+<section class="canvas" aria-label="PM Canvas">
+  <div class="ch" style="grid-area:h1">Por quê?</div><div class="ch" style="grid-area:h2">O quê?</div><div class="ch" style="grid-area:h3">Quem?</div><div class="ch" style="grid-area:h4">Como?</div><div class="ch" style="grid-area:h5">Quanto e quando?</div>
+
+  <a class="block why" style="grid-area:j" href="#d-porque"><h3>Justificativas <small>(passado e situação atual)</small></h3>
+    <p>Nos últimos anos, Curitiba conseguiu atrair turistas fora das férias de verão: o Natal de 2025 trouxe 469,8 mil visitantes e movimentou R$ 722 milhões. Esse resultado mostrou que eventos sazonais bem posicionados ampliam o período de visitação e espalham os ganhos para hotéis, restaurantes e comércio. Faltava levar essa estratégia ao inverno, para que a cidade tivesse motivos para receber turistas o ano todo.</p><span class="more">Detalhes ↓</span></a>
+
+  <a class="block why" style="grid-area:o" href="#d-porque"><h3>Objetivo <small>(SMART)</small></h3>
+    <p>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes participantes, 55 mil pratos do festival vendidos e aumento de 10% no número de turistas no período em relação ao ano anterior, medido pelo BI de Turismo.</p><span class="more">Detalhes ↓</span></a>
+
+  <a class="block why" style="grid-area:r" href="#d-porque"><h3>Resultados esperados</h3>
+    <ul><li><b>Tangíveis:</b> cerca de R$ 3 milhões em vendas nos restaurantes; +10% a 20% de turistas no inverno; festival no calendário oficial.</li>
+    <li><b>Intangíveis:</b> Curitiba lembrada como destino gastronômico de inverno; orgulho local; cooperação entre restaurantes; valorização do pinhão.</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block what" style="grid-area:p" href="#d-oque"><h3>Produto</h3>
+    <p>Festival de 4 semanas em que 50 restaurantes de várias regiões servem pratos quentes exclusivos (sopas, caldos, lámen) a preço-teto, com votação popular, o Desafio de Chefs e o Concurso da Sopa de Pinhão como atrações de mídia.</p><span class="more">Detalhes ↓</span></a>
+
+  <a class="block what" style="grid-area:q" href="#d-oque"><h3>Principais requisitos</h3>
+    <ul><li>Pelo menos 50 restaurantes em diferentes regiões</li><li>Prato exclusivo por casa, com preço-teto</li><li>Porção e ingredientes no padrão do cardápio normal</li><li>Percentual mínimo de ingredientes locais</li><li>Selo e identidade visual únicos</li><li>Mapa digital e votação popular</li><li>Desafio de Chefs com júri e voto do público</li><li>Concurso com protocolo de segurança</li><li>Medição da venda incremental</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block who sponsor" style="grid-area:s" href="#d-quem"><h3>Patrocinador</h3>
+    <p>Presidente do Instituto Municipal de Turismo de Curitiba, Rodrigo Swinka</p><span class="more">Detalhes ↓</span></a>
+
+  <a class="block who" style="grid-area:a" href="#d-quem"><h3>Áreas envolvidas <small>(da Prefeitura)</small></h3>
+    <ul><li>Instituto Municipal de Turismo</li><li>SECOM</li><li>Seg. Alimentar e Nutricional</li><li>Vigilância Sanitária</li><li>Agência Curitiba</li><li>ICI (site e dados)</li><li>Procuradoria</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block who" style="grid-area:e" href="#d-quem"><h3>Partes interessadas externas</h3>
+    <ul><li>Abrasel-PR e restaurantes</li><li>Produtores de pinhão e erva-mate</li><li>Hotéis (Seha)</li><li>Patrocinadores</li><li>Turistas e moradores</li><li>Imprensa e influenciadores</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block how" style="grid-area:pr" href="#d-como"><h3>Premissas</h3>
+    <ul><li>O festival entra no calendário oficial do Inverno Curitiba</li><li>Cada restaurante arca com seus pratos e fica com a receita</li><li>A Abrasel-PR aceita ser parceira na articulação</li><li>O BI de Turismo fornece a linha de base</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block how" style="grid-area:re" href="#d-como"><h3>Restrições</h3>
+    <ul><li>Teto de R$ 450 mil</li><li>Janela fixa: inverno (junho a agosto)</li><li>Contratações pela Lei 14.133</li><li>Normas sanitárias</li><li>LGPD na votação</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block when" style="grid-area:ri" href="#d-riscos"><h3>Riscos</h3>
+    <ul><li>Baixa adesão dos restaurantes</li><li>Patrocínio insuficiente</li><li>Atraso na contratação de mídia</li><li>Queimadura e engasgo no concurso</li><li>Queda de qualidade e sobrecarga</li><li>Prato só substituir o pedido normal</li><li>Inverno quente ou chuva</li><li>Passagens caras nas férias</li></ul><span class="more">Detalhes ↓</span></a>
+
+  <a class="block when" style="grid-area:cu" href="#d-custos"><h3>Custos estimados</h3>
+    <table><tr><td>Comunicação e mídia</td><td class="r">R$ 220 mil</td></tr><tr><td>Plataforma digital</td><td class="r">R$ 60 mil</td></tr><tr><td>Desafio de Chefs e Concurso</td><td class="r">R$ 80 mil</td></tr><tr><td>Premiação, materiais e pesquisa</td><td class="r">R$ 90 mil</td></tr><tr class="tot"><td>Total</td><td class="r">R$ 450 mil</td></tr></table><span class="more">Detalhes ↓</span></a>
+
+  <a class="block when" style="grid-area:en" href="#anexo"><h3>Entregas e prazos <small>(a partir da aprovação)</small></h3>
+    <div class="mini"><span><b>Mês 1</b> plano e governança</span><span><b>Meses 1–3</b> regulamento e patrocínio</span><span><b>Meses 2–4</b> adesão dos restaurantes</span><span><b>Meses 3–5</b> site, pratos e mídia</span><span><b>Mês 5–6</b> lançamento</span><span><b>Mês 6–7</b> festival</span><span><b>Mês 7–8</b> premiação e relatório</span></div><span class="more">Cronograma detalhado ↓</span></a>
+</section>
+
+<!-- ===== POR QUÊ ===== -->
+<section class="detail" id="d-porque">
+  <div class="head"><div><div class="tag">Por quê</div><h2>Justificativa, objetivo e resultados</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+
+  <h3>O que aconteceu antes: eventos sazonais funcionam em Curitiba</h3>
+  <div class="kpis">
+    <div class="kpi"><b>469,8 mil</b><span>turistas no Natal de Curitiba 2025, 60% a mais que em 2024 <a class="fl" href="https://www.curitiba.pr.gov.br/noticias/natal-de-curitiba-2025-reune-mais-de-3-milhoes-de-pessoas-gera-r$-722-milhoes-e-consolida-a-capital-como-potencia-nacional-do-turismo-de-eventos/81573">fonte ↗</a></span></div>
+    <div class="kpi"><b>R$ 722 mi</b><span>movimentados pelo Natal de 2025, alta de 80% <a class="fl" href="https://www.curitiba.pr.gov.br/noticias/natal-de-curitiba-2025-reune-mais-de-3-milhoes-de-pessoas-gera-r$-722-milhoes-e-consolida-a-capital-como-potencia-nacional-do-turismo-de-eventos/81573">fonte ↗</a></span></div>
+    <div class="kpi"><b>~25%</b><span>crescimento de movimento e faturamento de bares, restaurantes e hotéis no Natal de 2025 sobre 2024 (Seha) <a class="fl" href="https://www.curitiba.pr.gov.br/noticias/natal-eleva-faturamento-de-hoteis-e-restaurantes-e-confirma-forca-do-destino-curitiba/81335">fonte ↗</a></span></div>
+    <div class="kpi"><b>~80%</b><span>ocupação hoteleira projetada pelo setor para o inverno <a class="fl" href="https://www.gazetadopovo.com.br/vozes/parana-sa/turismo-inverno-curitiba/">fonte ↗</a></span></div>
+  </div>
+  <p>O inverno já traz visitantes, mas não tem um evento-âncora gastronômico consolidado como o Natal. Os ganhos que o Natal leva a restaurantes e hotéis mostram o tamanho da oportunidade.</p>
+
+  <h3>Benchmark: festivais gastronômicos e de inverno em outras cidades</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Cidade e evento</th><th>Formato</th><th>Começo</th><th>Hoje</th><th>O que ensina</th><th>Fontes</th></tr></thead>
+    <tbody>
+      <tr><td><b>Toronto · Winterlicious</b><br><span class="note">festival da prefeitura desde 2003</span></td><td>Espalhado, menu a preço fixo, 2 semanas no inverno</td><td>2003: 35 restaurantes. 2009: 180 mil refeições e CAD 12 mi de impacto</td><td>2026: mais de 240 restaurantes; mais de 8 milhões de refeições e CAD 353 mi acumulados (junto com o Summerlicious)</td><td>É o nosso modelo. Cresceu de forma gradual, edição a edição.</td><td><a href="https://www.toronto.ca/news/savour-the-season-book-your-winterlicious-table-now/">Prefeitura de Toronto ↗</a><br><a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">2003 e 2009 ↗</a></td></tr>
+      <tr><td><b>Denver · Restaurant Week</b><br><span class="note">desde 2005</span></td><td>Espalhado, preço fixo, baixa temporada</td><td>Criado para a época fraca dos restaurantes</td><td>144.650 refeições e quase US$ 10,5 mi em vendas numa edição de 10 dias</td><td>Mede vendas e refeições; boa referência de indicador.</td><td><a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">Visit Denver ↗</a></td></tr>
+      <tr><td><b>Sunderland (Reino Unido) · Restaurant Week</b></td><td>Espalhado, ofertas em restaurantes</td><td>2016 (1ª edição): mais de 50 restaurantes e £ 250 mil para a economia local</td><td>2023: 18 mil participantes e £ 547 mil</td><td>Mostra o tamanho realista de uma 1ª edição com 50 casas.</td><td><a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição ↗</a><br><a href="https://bdaily.co.uk/articles/2023/09/26/sunderland-restaurant-week-goes-from-strength-to-strength">2023 ↗</a></td></tr>
+      <tr><td><b>Lages (SC) · Festa Nacional do Pinhão</b></td><td>Concentrado, com shows e gastronomia</td><td>Edição nacional desde 1989</td><td>2026: 380 mil pessoas e R$ 90 mi</td><td>O pinhão atrai público no inverno do Sul. Formato concentrado custa caro: na 33ª edição a prefeitura calculava R$ 10 mi só de produção.</td><td><a href="https://www.nsctotal.com.br/?p=7970043">2026 ↗</a><br><a href="https://www.nsctotal.com.br/?p=6864391">investimento ↗</a></td></tr>
+      <tr><td><b>Campos do Jordão · Festival de Inverno</b></td><td>Música clássica e programação na cidade</td><td>Desde 1970</td><td>Estudo da FGV: 1.844 empregos e R$ 17,4 mi em impostos no município</td><td>Prova a força de um evento de inverno, mas não é gastronômico.</td><td><a href="https://diariodoturismo.com.br/festival-de-campos-do-jordao-fecha-julho-com-18-mil-empregos/">Estudo FGV ↗</a></td></tr>
+    </tbody></table></div>
+  <p class="note">Os números são de anos e moedas diferentes e servem como ordem de grandeza, não como comparação direta.</p>
+
+  <h3>Como chegamos às metas</h3>
+  <div class="calc">
+    50 restaurantes × 40 pratos do festival por dia × 28 dias = <b>56 mil pratos</b> (meta arredondada para 55 mil)<br>
+    55 mil pratos × tíquete médio estimado de R$ 55 = <b>cerca de R$ 3 milhões</b> em vendas nos restaurantes<br>
+    R$ 3 milhões em vendas ÷ R$ 450 mil de investimento = cerca de <b>R$ 6,7 em vendas para cada R$ 1</b> investido
+  </div>
+  <p>É uma meta de primeira edição, entre a <a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição de Sunderland</a> (50 casas) e uma <a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">edição madura de Denver</a> (144 mil refeições). Os 40 pratos por dia e o tíquete de R$ 55 são premissas da equipe, a validar com a Abrasel-PR. A meta de turistas (+10%, com faixa de 10% a 20%) é um alvo, não um efeito comprovado: nenhuma fonte encontrada mediu esse impacto para festival gastronômico, por isso o projeto prevê medir.</p>
+
+  <div class="cols">
+    <div class="card"><h3>Resultados tangíveis</h3><ul><li>Cerca de R$ 3 milhões em vendas nos restaurantes participantes</li><li>55 mil pratos do festival vendidos</li><li>+10% a 20% de turistas no período (BI de Turismo)</li><li>Festival incluído no calendário oficial</li><li>Relatório de impacto com a venda incremental</li></ul></div>
+    <div class="card"><h3>Resultados intangíveis</h3><ul><li>Curitiba lembrada como destino gastronômico de inverno</li><li>Orgulho local e engajamento dos moradores</li><li>Cooperação entre restaurantes concorrentes</li><li>Valorização do pinhão, da erva-mate e dos produtores locais</li></ul></div>
+  </div>
+</section>
+
+<!-- ===== O QUÊ ===== -->
+<section class="detail" id="d-oque">
+  <div class="head"><div><div class="tag">O quê</div><h2>Produto e requisitos</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="cols">
+    <div class="card"><h3>Festival em rede</h3><p>50 restaurantes, em diferentes regiões, servem durante 4 semanas um prato quente exclusivo: sopas, caldos, lámen e outros. Cada prato tem preço-teto definido no regulamento. O público vota pelo site. É o mesmo formato do Winterlicious: aproveita a estrutura dos restaurantes e dispensa montagem de grandes eventos.</p></div>
+    <div class="card"><h3>Desafio de Chefs</h3><p>Competição ao vivo entre chefs dos restaurantes participantes, com provas de sopa, caldo e lámen. Júri técnico e voto do público. É a atração de mídia de qualidade, que valoriza os profissionais e os ingredientes locais.</p></div>
+    <div class="card"><h3>Concurso da Sopa de Pinhão</h3><p>Concurso de quem toma mais sopa de pinhão, inspirado nos concursos de comer de Nova York. É a atração de "buzz" para as redes. Exige protocolo de segurança: sopa servida morna, socorrista no local, só maiores de 18 anos e termo de responsabilidade.</p></div>
+  </div>
+  <h3>Principais requisitos</h3>
+  <p class="note">Requisito é a característica que o produto precisa ter. O projeto termina quando todos estiverem atendidos.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Requisito</th><th>Critério de aceite</th></tr></thead>
+    <tbody>
+      <tr><td>Rede de restaurantes</td><td>Pelo menos 50 participantes, distribuídos por diferentes regiões da cidade</td></tr>
+      <tr><td>Prato exclusivo</td><td>Ao menos um prato quente exclusivo por restaurante, com preço-teto</td></tr>
+      <tr><td>Qualidade</td><td>Porção e ingredientes no mesmo padrão do cardápio normal (<a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">crítica comum ao Winterlicious</a>)</td></tr>
+      <tr><td>Ingredientes locais</td><td>Percentual mínimo de insumos de produtores do Paraná, como pinhão e erva-mate</td></tr>
+      <tr><td>Identidade única</td><td>Selo e identidade visual aplicados em todos os participantes</td></tr>
+      <tr><td>Plataforma digital</td><td>Mapa dos restaurantes, cardápios e votação popular, com LGPD</td></tr>
+      <tr><td>Desafio de Chefs</td><td>Regulamento, júri técnico e voto do público</td></tr>
+      <tr><td>Concurso da Sopa de Pinhão</td><td>Protocolo de segurança aprovado e aplicado</td></tr>
+      <tr><td>Medição</td><td>Venda incremental medida (comparação com o mesmo período do ano anterior), não só os pratos vendidos</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ===== QUEM ===== -->
+<section class="detail" id="d-quem">
+  <div class="head"><div><div class="tag">Quem</div><h2>Patrocinador e partes interessadas</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="cols">
+    <div class="card"><h3>Patrocinador</h3><p><b>Presidente do Instituto Municipal de Turismo de Curitiba, Rodrigo Swinka.</b> Banca o projeto política e financeiramente e faz a interlocução com o Gabinete do Prefeito. Cargo e nome juntos: se a pessoa mudar, o cargo continua responsável.</p></div>
+    <div class="card"><h3>Áreas envolvidas (da Prefeitura)</h3><ul><li><b>Instituto Municipal de Turismo:</b> gerência do projeto</li><li><b>SECOM:</b> campanha e imprensa</li><li><b>Segurança Alimentar e Nutricional:</b> ingredientes locais e produtores</li><li><b>Vigilância Sanitária:</b> fiscalização e protocolo do concurso</li><li><b>Agência Curitiba:</b> apoio ao setor</li><li><b>ICI:</b> site, votação e dados</li><li><b>Procuradoria:</b> regulamento e premiação</li></ul></div>
+    <div class="card"><h3>Partes interessadas externas</h3><ul><li><b>Abrasel-PR e restaurantes:</b> adesão e execução</li><li><b>Produtores de pinhão e erva-mate:</b> fornecimento</li><li><b>Hotéis (Seha):</b> pacotes e medição de ocupação</li><li><b>Patrocinadores:</b> cotas</li><li><b>Turistas e moradores:</b> público e votantes</li><li><b>Imprensa e influenciadores:</b> divulgação</li><li><b>Restaurantes não participantes:</b> podem perder movimento no período, como <a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">apontado no Winterlicious</a></li></ul></div>
+  </div>
+</section>
+
+<!-- ===== COMO ===== -->
+<section class="detail" id="d-como">
+  <div class="head"><div><div class="tag">Como</div><h2>Premissas e restrições</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="cols">
+    <div class="card"><h3>Premissas</h3><p class="note">Suposições que o projeto assume como verdadeiras e sobre as quais não age. O que pode ou não acontecer, e tem mitigação, está em Riscos.</p><ul><li>O festival entra no calendário oficial do Inverno Curitiba.</li><li>Cada restaurante arca com o custo dos próprios pratos e fica com a receita.</li><li>A Abrasel-PR aceita ser parceira na articulação com o setor.</li><li>O BI de Turismo fornece a linha de base do fluxo de turistas.</li></ul></div>
+    <div class="card"><h3>Restrições</h3><p class="note">Limites impostos de fora.</p><ul><li><b>Orçamento:</b> teto de R$ 450 mil</li><li><b>Prazo:</b> o festival precisa acontecer no inverno (junho a agosto); pelo cronograma, a aprovação tem de sair cerca de 7 meses antes</li><li><b>Legal:</b> contratações pela Lei 14.133; premiação conforme a Lei 5.768</li><li><b>Sanitária:</b> normas para alimentos e para o concurso</li><li><b>Dados:</b> LGPD na votação</li></ul></div>
+  </div>
+</section>
+
+<!-- ===== RISCOS ===== -->
+<section class="detail" id="d-riscos">
+  <div class="head"><div><div class="tag">Quanto e quando</div><h2>Riscos</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="scroll"><table>
+    <thead><tr><th>Risco</th><th>Probabilidade</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Patrocínio insuficiente</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-a">Alto</span></td><td>Captação começa no Mês 1, porque está no caminho crítico; versão reduzida se não fechar</td></tr>
+      <tr><td>Atraso na contratação de mídia (licitação)</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-a">Alto</span></td><td>Termo de referência pronto antes da captação terminar; usar atas de registro de preço existentes</td></tr>
+      <tr><td>Baixa adesão dos restaurantes</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-a">Alto</span></td><td>Chamamento pela Abrasel com 4 meses de antecedência; mostrar ganhos de divulgação</td></tr>
+      <tr><td>Queimadura ou engasgo no Concurso da Sopa de Pinhão</td><td><span class="pill p-b">Baixa</span></td><td><span class="pill p-a">Alto</span></td><td>Sopa morna, pinhão bem batido, socorrista no local, só maiores de 18, termo de responsabilidade</td></tr>
+      <tr><td>Queda de qualidade e sobrecarga das equipes</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-m">Médio</span></td><td>Regra de porção e ingredientes no regulamento; limite de pratos por dia</td></tr>
+      <tr><td>Prato do festival só substituir o pedido normal</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-m">Médio</span></td><td>Medir venda incremental; incentivar combo com entrada ou sobremesa</td></tr>
+      <tr><td>Passagens caras e choque de datas nas férias</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-m">Médio</span></td><td>Foco no turista que vem de carro (SP, SC, interior do PR); alinhar calendário com o Turismo</td></tr>
+      <tr><td>Sobreposição com ações de inverno já existentes</td><td><span class="pill p-m">Média</span></td><td><span class="pill p-m">Médio</span></td><td>Integrar em vez de competir</td></tr>
+      <tr><td>Inverno quente</td><td><span class="pill p-b">Baixa</span></td><td><span class="pill p-m">Médio</span></td><td>Comunicar a experiência gastronômica, não só o frio; cardápio variado</td></tr>
+      <tr><td>Chuva contínua</td><td><span class="pill p-a">Alta</span></td><td><span class="pill p-b">Baixo</span></td><td>Consumo acontece dentro dos restaurantes; estrutura coberta para o Desafio e o Concurso</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ===== CUSTOS ===== -->
+<section class="detail" id="d-custos">
+  <div class="head"><div><div class="tag">Quanto e quando</div><h2>Custos estimados</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="scroll"><table>
+    <thead><tr><th>Item</th><th>O que inclui</th><th class="r">Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Comunicação e mídia</td><td>Identidade visual, campanha em Curitiba, SP, SC e interior do PR, impulsionamento, foto e vídeo</td><td class="r">R$ 220 mil</td></tr>
+      <tr><td>Plataforma digital</td><td>Site com mapa, cardápios e votação; painel de indicadores</td><td class="r">R$ 60 mil</td></tr>
+      <tr><td>Desafio de Chefs e Concurso</td><td>Estrutura, equipe de socorro, seguro, júri</td><td class="r">R$ 80 mil</td></tr>
+      <tr><td>Premiação, materiais e pesquisa</td><td>Troféus, selos, kit do restaurante, pesquisa de impacto</td><td class="r">R$ 90 mil</td></tr>
+      <tr class="tot"><td>Total</td><td></td><td class="r">R$ 450 mil</td></tr>
+    </tbody></table></div>
+  <p class="note">Valores estimados pela equipe. Como comparação, a Festa do Pinhão, em formato concentrado com shows, tinha produção estimada em <a href="https://www.nsctotal.com.br/?p=6864391">R$ 10 milhões</a>.</p>
+</section>
+
+<!-- ===== ANEXO ===== -->
+<section class="detail" id="anexo">
+  <div class="head"><div><div class="tag">Anexo</div><h2>Cronograma detalhado e caminho crítico</h2></div><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <p>Prazos em semanas contadas a partir da aprovação, sem datas fechadas. Duração total: <b id="dur"></b> semanas, cerca de 7 meses. Para o festival cair em julho, a aprovação precisa sair até dezembro.</p>
+  <div class="legend"><span><i class="sw" style="background:var(--crit)"></i>Caminho crítico (sem folga)</span><span><i class="sw" style="background:var(--accent)"></i>Atividade com folga</span><span><i class="sw" style="background:var(--line)"></i>Folga disponível</span></div>
+  <div class="scroll"><div class="gantt" id="gantt"></div></div>
+  <p id="critText"></p>
+  <div class="scroll"><table id="ctable"><thead><tr><th>ID</th><th>Atividade</th><th>Depende de</th><th class="r">Duração (sem.)</th><th class="r">Início</th><th class="r">Fim</th><th class="r">Folga</th></tr></thead><tbody></tbody></table></div>
+  <p class="note">Início e fim em semanas contadas a partir da aprovação (semana 0). Folga é quantas semanas a atividade pode atrasar sem atrasar o festival.</p>
+</section>
+
+<section class="detail" id="fontes">
+  <div class="head"><h2>Fontes</h2><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <ul class="src">
+    <li><a href="https://www.curitiba.pr.gov.br/noticias/natal-de-curitiba-2025-reune-mais-de-3-milhoes-de-pessoas-gera-r$-722-milhoes-e-consolida-a-capital-como-potencia-nacional-do-turismo-de-eventos/81573">Prefeitura de Curitiba – Natal de Curitiba 2025: números oficiais</a></li>
+    <li><a href="https://www.curitiba.pr.gov.br/noticias/natal-eleva-faturamento-de-hoteis-e-restaurantes-e-confirma-forca-do-destino-curitiba/81335">Prefeitura de Curitiba – Natal eleva faturamento de hotéis e restaurantes (Seha)</a></li>
+    <li><a href="https://www.gazetadopovo.com.br/vozes/parana-sa/turismo-inverno-curitiba/">Gazeta do Povo – ocupação hoteleira no inverno</a></li>
+    <li><a href="https://www.toronto.ca/news/savour-the-season-book-your-winterlicious-table-now/">City of Toronto – Winterlicious 2026</a> · <a href="https://www.toronto.ca/Licious">City of Toronto – programa Licious</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">Wikipedia – Summerlicious and Winterlicious (2003, 2009 e críticas)</a></li>
+    <li><a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">Visit Denver – Denver Restaurant Week</a></li>
+    <li><a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">Bdaily – 1ª Sunderland Restaurant Week (2016)</a> · <a href="https://bdaily.co.uk/articles/2023/09/26/sunderland-restaurant-week-goes-from-strength-to-strength">Sunderland Restaurant Week 2023</a></li>
+    <li><a href="https://www.nsctotal.com.br/?p=7970043">NSC Total – 36ª Festa Nacional do Pinhão: 380 mil pessoas e R$ 90 milhões</a> · <a href="https://www.nsctotal.com.br/?p=6864391">investimento de R$ 10 milhões na 33ª edição</a></li>
+    <li><a href="https://diariodoturismo.com.br/festival-de-campos-do-jordao-fecha-julho-com-18-mil-empregos/">Diário do Turismo – Festival de Inverno de Campos do Jordão: empregos e impostos</a></li>
+  </ul>
+</section>
+
+</div>
+<script>
+const T = [
+  {id:"A",n:"Aprovação e designação do gerente",d:1,p:[]},
+  {id:"B",n:"Plano do projeto e comitê de governança",d:2,p:["A"]},
+  {id:"C",n:"Captação de patrocínio (cotas)",d:8,p:["B"]},
+  {id:"D",n:"Regulamento e parecer da Procuradoria",d:4,p:["B"]},
+  {id:"E",n:"Identidade visual e marca",d:4,p:["B"]},
+  {id:"R",n:"Linha de base dos indicadores (BI de Turismo)",d:2,p:["B"]},
+  {id:"F",n:"Chamamento e adesão dos restaurantes (Abrasel)",d:6,p:["D","E"]},
+  {id:"H",n:"Desenvolvimento do site, mapa e votação",d:8,p:["D"]},
+  {id:"J",n:"Planejamento do Desafio e do Concurso (protocolo e licenças)",d:6,p:["D"]},
+  {id:"I",n:"Contratação de agência e mídia (Lei 14.133)",d:6,p:["C"]},
+  {id:"G",n:"Curadoria e aprovação dos pratos",d:3,p:["F"]},
+  {id:"K",n:"Kit e orientação dos restaurantes",d:2,p:["G"]},
+  {id:"M",n:"Testes do site e carga dos cardápios",d:2,p:["H","G"]},
+  {id:"L",n:"Campanha de lançamento",d:4,p:["I","E","G"]},
+  {id:"N",n:"Festival (4 semanas), Desafio de Chefs e Concurso",d:4,p:["K","L","M","J"]},
+  {id:"P",n:"Apuração e premiação",d:1,p:["N"]},
+  {id:"Q",n:"Pesquisa e relatório de impacto",d:4,p:["N","R"]}
+];
+const by = Object.fromEntries(T.map(t=>[t.id,t]));
+T.forEach(t=>{ t.es = t.p.length ? Math.max(...t.p.map(x=>by[x].ef)) : 0; t.ef = t.es + t.d; });
+const total = Math.max(...T.map(t=>t.ef));
+[...T].reverse().forEach(t=>{ const succ = T.filter(s=>s.p.includes(t.id)); t.lf = succ.length ? Math.min(...succ.map(s=>s.ls)) : total; t.ls = t.lf - t.d; t.slack = t.ls - t.es; t.crit = t.slack===0; });
+document.getElementById("dur").textContent = total;
+const g = document.getElementById("gantt");
+const W = total;
+let head = '<div class="g-name"></div><div class="g-head">';
+for(let w=1; w<=W; w++) head += `<span>${w}</span>`;
+g.innerHTML = head + '</div>';
+T.forEach(t=>{
+  const left = t.es/W*100, width = t.d/W*100;
+  const slack = t.slack>0 ? `<div class="g-slack" style="left:${(t.ef)/W*100}%;width:${t.slack/W*100}%"></div>` : "";
+  g.insertAdjacentHTML("beforeend",
+    `<div class="g-name"><span class="id">${t.id}</span><span>${t.n}</span></div>
+     <div class="g-row" style="--w:${W}">${slack}<div class="g-bar${t.crit?' crit':''}" style="left:${left}%;width:${width}%" title="${t.n}: semanas ${t.es+1} a ${t.ef}; folga ${t.slack} sem.">${t.d} sem.</div></div>`);
+});
+const crit = T.filter(t=>t.crit).sort((a,b)=>a.es-b.es);
+document.getElementById("critText").innerHTML = "<b>Caminho crítico:</b> " + crit.map(t=>t.n).join(" → ") + ". Qualquer atraso nessas atividades atrasa o festival. Por isso a captação de patrocínio e a contratação de mídia são as atividades a vigiar de perto.";
+const tb = document.querySelector("#ctable tbody");
+T.forEach(t=>tb.insertAdjacentHTML("beforeend",`<tr class="${t.crit?'crit':''}"><td>${t.id}</td><td>${t.n}</td><td>${t.p.join(", ")||"–"}</td><td class="r">${t.d}</td><td class="r">${t.es}</td><td class="r">${t.ef}</td><td class="r">${t.slack}</td></tr>`));
+</script>
+</body>
+</html>
