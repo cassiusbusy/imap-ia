@@ -81,6 +81,13 @@ td.r,th.r{text-align:right}
 .pill{display:inline-block;font:700 12px var(--body);padding:2px 8px;border-radius:999px}
 .p-a{background:var(--crit-soft);color:var(--crit)} .p-m{background:var(--c-who);color:var(--warm)} .p-b{background:var(--c-what);color:var(--accent)}
 .fl{font-size:12.5px;font-weight:600;white-space:nowrap}
+.val{text-decoration:underline dotted;text-underline-offset:3px;cursor:help;position:relative;font-weight:600}
+.val:hover::after,.val:focus::after{content:attr(data-tip);position:absolute;left:0;top:calc(100% + 6px);z-index:10;width:260px;background:var(--ink);color:var(--bg);font-weight:400;font-size:13px;line-height:1.4;padding:8px 10px;border-radius:8px;white-space:normal}
+.val:focus-visible{outline:2px solid var(--warm)}
+.notice{border:2px solid var(--warm);background:var(--c-why);border-radius:10px;padding:14px 16px;font-size:14.5px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.notice button{font:700 14px var(--body);background:var(--warm);color:#fff;border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.notice button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ia{border:2px solid var(--accent)}
 .note{font-size:13.5px;color:var(--muted)}
 .src{font-size:13px;color:var(--muted)}
 
@@ -111,7 +118,7 @@ tr.crit td{color:var(--crit);font-weight:600}
 </header>
 
 <nav class="top" aria-label="Seções">
-  <a href="#canvas">Canvas</a><a href="#d-porque">Por quê</a><a href="#d-oque">O quê</a><a href="#d-quem">Quem</a><a href="#d-como">Como</a><a href="#d-riscos">Riscos</a><a href="#d-custos">Custos</a><a href="#anexo">Anexo: cronograma</a><a href="#fontes">Fontes</a>
+  <a href="#canvas">Canvas</a><a href="#d-porque">Por quê</a><a href="#d-oque">O quê</a><a href="#d-quem">Quem</a><a href="#d-como">Como</a><a href="#d-riscos">Riscos</a><a href="#d-custos">Custos</a><a href="#anexo">Anexo: cronograma</a><a href="#fontes">Fontes</a><a href="#uso-ia">Uso de IA</a>
 </nav>
 
 <section class="canvas" aria-label="PM Canvas">
@@ -172,16 +179,18 @@ tr.crit td{color:var(--crit);font-weight:600}
   <p>O inverno já traz visitantes, mas não tem um evento-âncora gastronômico consolidado como o Natal. Os ganhos que o Natal leva a restaurantes e hotéis mostram o tamanho da oportunidade.</p>
 
   <h3>Benchmark: festivais gastronômicos e de inverno em outras cidades</h3>
+  <div class="notice" role="note"><b>Valores em moedas e anos diferentes.</b> Passe o mouse (ou toque) sobre os valores sublinhados para ver o equivalente em reais de hoje, ou use o botão para trocar todos de uma vez. A atualização corrige pela inflação do país de origem (Canadá, EUA e Reino Unido até 2025; IPCA até junho de 2026) e converte pelo câmbio de novembro de 2026 (1 dólar canadense ≈ R$ 3,90; 1 dólar ≈ R$ 5,56; 1 libra ≈ R$ 7,38). É uma aproximação para comparar ordens de grandeza.
+  <button type="button" id="toggleVals" aria-pressed="false">Mostrar tudo em reais de hoje</button></div>
   <div class="scroll"><table>
     <thead><tr><th>Cidade e evento</th><th>Formato</th><th>Começo</th><th>Hoje</th><th>O que ensina</th><th>Fontes</th></tr></thead>
     <tbody>
-      <tr><td><b>Toronto · Winterlicious</b><br><span class="note">festival da prefeitura desde 2003</span></td><td>Espalhado, menu a preço fixo, 2 semanas no inverno</td><td>2003: 35 restaurantes. 2009: 180 mil refeições e CAD 12 mi de impacto</td><td>2026: mais de 240 restaurantes; mais de 8 milhões de refeições e CAD 353 mi acumulados (junto com o Summerlicious)</td><td>É o nosso modelo. Cresceu de forma gradual, edição a edição.</td><td><a href="https://www.toronto.ca/news/savour-the-season-book-your-winterlicious-table-now/">Prefeitura de Toronto ↗</a><br><a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">2003 e 2009 ↗</a></td></tr>
-      <tr><td><b>Denver · Restaurant Week</b><br><span class="note">desde 2005</span></td><td>Espalhado, preço fixo, baixa temporada</td><td>Criado para a época fraca dos restaurantes</td><td>144.650 refeições e quase US$ 10,5 mi em vendas numa edição de 10 dias</td><td>Mede vendas e refeições; boa referência de indicador.</td><td><a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">Visit Denver ↗</a></td></tr>
-      <tr><td><b>Sunderland (Reino Unido) · Restaurant Week</b></td><td>Espalhado, ofertas em restaurantes</td><td>2016 (1ª edição): mais de 50 restaurantes e £ 250 mil para a economia local</td><td>2023: 18 mil participantes e £ 547 mil</td><td>Mostra o tamanho realista de uma 1ª edição com 50 casas.</td><td><a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição ↗</a><br><a href="https://bdaily.co.uk/articles/2023/09/26/sunderland-restaurant-week-goes-from-strength-to-strength">2023 ↗</a></td></tr>
-      <tr><td><b>Lages (SC) · Festa Nacional do Pinhão</b></td><td>Concentrado, com shows e gastronomia</td><td>Edição nacional desde 1989</td><td>2026: 380 mil pessoas e R$ 90 mi</td><td>O pinhão atrai público no inverno do Sul. Formato concentrado custa caro: na 33ª edição a prefeitura calculava R$ 10 mi só de produção.</td><td><a href="https://www.nsctotal.com.br/?p=7970043">2026 ↗</a><br><a href="https://www.nsctotal.com.br/?p=6864391">investimento ↗</a></td></tr>
-      <tr><td><b>Campos do Jordão · Festival de Inverno</b></td><td>Música clássica e programação na cidade</td><td>Desde 1970</td><td>Estudo da FGV: 1.844 empregos e R$ 17,4 mi em impostos no município</td><td>Prova a força de um evento de inverno, mas não é gastronômico.</td><td><a href="https://diariodoturismo.com.br/festival-de-campos-do-jordao-fecha-julho-com-18-mil-empregos/">Estudo FGV ↗</a></td></tr>
+      <tr><td><b>Toronto · Winterlicious</b><br><span class="note">festival da prefeitura desde 2003</span></td><td>Espalhado, menu a preço fixo, 2 semanas no inverno</td><td>2003: 35 restaurantes. 2009: 180 mil refeições e <span class="val" tabindex="0" data-a="12 milhões de dólares canadenses" data-b="≈ R$ 67 milhões" data-note="Valor de 2009 corrigido pela inflação do Canadá até 2025 e convertido pelo câmbio de novembro de 2026">12 milhões de dólares canadenses</span> de impacto</td><td>2026: mais de 240 restaurantes; mais de 8 milhões de refeições e <span class="val" tabindex="0" data-a="353 milhões de dólares canadenses" data-b="≈ R$ 1,4 bilhão" data-note="Soma de 2003 a 2026, convertida pelo câmbio de novembro de 2026, sem correção pela inflação">353 milhões de dólares canadenses</span> acumulados (junto com o Summerlicious)</td><td>É o nosso modelo. Cresceu de forma gradual, edição a edição.</td><td><a href="https://www.toronto.ca/news/savour-the-season-book-your-winterlicious-table-now/">Prefeitura de Toronto ↗</a><br><a href="https://en.wikipedia.org/wiki/Summerlicious_and_Winterlicious">2003 e 2009 ↗</a></td></tr>
+      <tr><td><b>Denver · Restaurant Week</b><br><span class="note">desde 2005</span></td><td>Espalhado, preço fixo, baixa temporada</td><td>Criado para a época fraca dos restaurantes</td><td>2024: 144.650 refeições e quase <span class="val" tabindex="0" data-a="10,5 milhões de dólares" data-b="≈ R$ 60 milhões" data-note="Valor de 2024 corrigido pela inflação dos EUA até 2025 e convertido pelo câmbio de novembro de 2026">10,5 milhões de dólares</span> em vendas numa edição de 10 dias</td><td>Mede vendas e refeições; boa referência de indicador.</td><td><a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">Visit Denver ↗</a></td></tr>
+      <tr><td><b>Sunderland (Reino Unido) · Restaurant Week</b></td><td>Espalhado, ofertas em restaurantes</td><td>2016 (1ª edição): mais de 50 restaurantes e <span class="val" tabindex="0" data-a="250 mil libras" data-b="≈ R$ 2,5 milhões" data-note="Valor de 2016 corrigido pela inflação do Reino Unido até 2025 e convertido pelo câmbio de novembro de 2026">250 mil libras</span> para a economia local</td><td>2023: 18 mil participantes e <span class="val" tabindex="0" data-a="547 mil libras" data-b="≈ R$ 4,4 milhões" data-note="Valor de 2023 corrigido pela inflação do Reino Unido até 2025 e convertido pelo câmbio de novembro de 2026">547 mil libras</span></td><td>Mostra o tamanho realista de uma 1ª edição com 50 casas: em valores de hoje, bem perto da nossa meta de R$ 3 milhões.</td><td><a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição ↗</a><br><a href="https://bdaily.co.uk/articles/2023/09/26/sunderland-restaurant-week-goes-from-strength-to-strength">2023 ↗</a></td></tr>
+      <tr><td><b>Lages (SC) · Festa Nacional do Pinhão</b></td><td>Concentrado, com shows e gastronomia</td><td>Edição nacional desde 1989</td><td>2026: 380 mil pessoas e <span class="val" tabindex="0" data-a="R$ 90 milhões" data-b="R$ 90 milhões" data-note="Valor de 2026, já em reais de hoje">R$ 90 milhões</span></td><td>O pinhão atrai público no inverno do Sul. Formato concentrado custa caro: na 33ª edição (2023) a prefeitura calculava <span class="val" tabindex="0" data-a="R$ 10 milhões" data-b="≈ R$ 11,3 milhões" data-note="Valor de 2023 corrigido pelo IPCA até junho de 2026">R$ 10 milhões</span> só de produção.</td><td><a href="https://www.nsctotal.com.br/?p=7970043">2026 ↗</a><br><a href="https://www.nsctotal.com.br/?p=6864391">investimento ↗</a></td></tr>
+      <tr><td><b>Campos do Jordão · Festival de Inverno</b></td><td>Música clássica e programação na cidade</td><td>Desde 1970</td><td>Estudo da FGV: 1.844 empregos e <span class="val" tabindex="0" data-a="R$ 17,4 milhões*" data-b="R$ 17,4 milhões*" data-note="A fonte não informa o ano do dado, por isso o valor não foi corrigido">R$ 17,4 milhões*</span> em impostos no município</td><td>Prova a força de um evento de inverno, mas não é gastronômico.</td><td><a href="https://diariodoturismo.com.br/festival-de-campos-do-jordao-fecha-julho-com-18-mil-empregos/">Estudo FGV ↗</a></td></tr>
     </tbody></table></div>
-  <p class="note">Os números são de anos e moedas diferentes e servem como ordem de grandeza, não como comparação direta.</p>
+  <p class="note">* Ano do dado não informado na fonte; valor sem correção. Os números servem como ordem de grandeza, não como comparação direta.</p>
 
   <h3>Como chegamos às metas</h3>
   <div class="calc">
@@ -189,7 +198,7 @@ tr.crit td{color:var(--crit);font-weight:600}
     55 mil pratos × tíquete médio estimado de R$ 55 = <b>cerca de R$ 3 milhões</b> em vendas nos restaurantes<br>
     R$ 3 milhões em vendas ÷ R$ 450 mil de investimento = cerca de <b>R$ 6,7 em vendas para cada R$ 1</b> investido
   </div>
-  <p>É uma meta de primeira edição, entre a <a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição de Sunderland</a> (50 casas) e uma <a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">edição madura de Denver</a> (144 mil refeições). Os 40 pratos por dia e o tíquete de R$ 55 são premissas da equipe, a validar com a Abrasel-PR. A meta de turistas (+10%, com faixa de 10% a 20%) é um alvo, não um efeito comprovado: nenhuma fonte encontrada mediu esse impacto para festival gastronômico, por isso o projeto prevê medir.</p>
+  <p>É uma meta de primeira edição, entre a <a href="https://www.bdaily.co.uk/articles/2016/10/11/eat-drink-sunderland-restaurant-week-leaves-local-economy-250k-better-off">1ª edição de Sunderland</a> (50 casas) e uma <a href="https://visitdenver.com/articles/post/visit-denvers-20th-annual-restaurant-week/">edição madura de Denver</a> (144 mil refeições). Os 40 pratos por dia e o tíquete de R$ 55 são premissas da equipe, a validar com a Abrasel-PR. A meta de turistas (+10%, com faixa de 10% a 20%) é um alvo, não um efeito comprovado: nenhuma fonte encontrada (entre as 190 consultadas no NotebookLM) mediu esse impacto para festival gastronômico, por isso o projeto prevê medir.</p>
 
   <div class="cols">
     <div class="card"><h3>Resultados tangíveis</h3><ul><li>Cerca de R$ 3 milhões em vendas nos restaurantes participantes</li><li>55 mil pratos do festival vendidos</li><li>+10% a 20% de turistas no período (BI de Turismo)</li><li>Festival incluído no calendário oficial</li><li>Relatório de impacto com a venda incremental</li></ul></div>
@@ -290,7 +299,7 @@ tr.crit td{color:var(--crit);font-weight:600}
 </section>
 
 <section class="detail" id="fontes">
-  <div class="head"><h2>Fontes</h2><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
+  <div class="head"><h2>Fontes usadas nesta apresentação</h2><a class="back" href="#canvas">↑ Voltar ao canvas</a></div>
   <ul class="src">
     <li><a href="https://www.curitiba.pr.gov.br/noticias/natal-de-curitiba-2025-reune-mais-de-3-milhoes-de-pessoas-gera-r$-722-milhoes-e-consolida-a-capital-como-potencia-nacional-do-turismo-de-eventos/81573">Prefeitura de Curitiba – Natal de Curitiba 2025: números oficiais</a></li>
     <li><a href="https://www.curitiba.pr.gov.br/noticias/natal-eleva-faturamento-de-hoteis-e-restaurantes-e-confirma-forca-do-destino-curitiba/81335">Prefeitura de Curitiba – Natal eleva faturamento de hotéis e restaurantes (Seha)</a></li>
@@ -302,6 +311,19 @@ tr.crit td{color:var(--crit);font-weight:600}
     <li><a href="https://www.nsctotal.com.br/?p=7970043">NSC Total – 36ª Festa Nacional do Pinhão: 380 mil pessoas e R$ 90 milhões</a> · <a href="https://www.nsctotal.com.br/?p=6864391">investimento de R$ 10 milhões na 33ª edição</a></li>
     <li><a href="https://diariodoturismo.com.br/festival-de-campos-do-jordao-fecha-julho-com-18-mil-empregos/">Diário do Turismo – Festival de Inverno de Campos do Jordão: empregos e impostos</a></li>
   </ul>
+  <h3>Índices usados na atualização de valores</h3>
+  <ul class="src">
+    <li><a href="https://www.stats.gov.nl.ca/DataTools/Dashboard/DashboardFact.aspx?qfid=32">Statistics Canada – IPC anual do Canadá (2025)</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/CPIAUCSL">BLS/FRED – inflação dos EUA</a></li>
+    <li><a href="https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/december2025">ONS – inflação do Reino Unido</a> · <a href="https://historysaid.com/united-kingdom/consumer-price-index/highest">Banco Mundial – IPC do Reino Unido</a></li>
+    <li><a href="https://numerando.com.br/indices/ipca/acumulado">IBGE (via Numerando) – IPCA acumulado</a></li>
+    <li>Câmbio: <a href="https://valorfinal.com.br/cotacao-dolar-canadense-hoje">dólar canadense</a> · <a href="https://brasil61.com/n/dolar-fecha-cotado-a-r-5-56-com-mercado-atento-a-inflacao-dos-estados-unidos-bras2617456.amp">dólar</a> · <a href="https://www.remessaonline.com.br/blog/libra-banco-da-inglaterra-juros/">libra</a></li>
+  </ul>
+</section>
+
+<section class="detail ia" id="uso-ia" role="note">
+  <h2>Uso de inteligência artificial</h2>
+  <p>Ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade do autor, que revisou todo o material.</p>
 </section>
 
 </div>
@@ -346,6 +368,15 @@ const crit = T.filter(t=>t.crit).sort((a,b)=>a.es-b.es);
 document.getElementById("critText").innerHTML = "<b>Caminho crítico:</b> " + crit.map(t=>t.n).join(" → ") + ". Qualquer atraso nessas atividades atrasa o festival. Por isso a captação de patrocínio e a contratação de mídia são as atividades a vigiar de perto.";
 const tb = document.querySelector("#ctable tbody");
 T.forEach(t=>tb.insertAdjacentHTML("beforeend",`<tr class="${t.crit?'crit':''}"><td>${t.id}</td><td>${t.n}</td><td>${t.p.join(", ")||"–"}</td><td class="r">${t.d}</td><td class="r">${t.es}</td><td class="r">${t.ef}</td><td class="r">${t.slack}</td></tr>`));
+
+let showNow=false;
+function renderVals(){document.querySelectorAll(".val").forEach(el=>{
+  el.textContent = showNow ? el.dataset.b : el.dataset.a;
+  el.dataset.tip = (showNow ? "Valor original: "+el.dataset.a : "Em reais de hoje: "+el.dataset.b) + ". " + el.dataset.note + ".";
+});
+const b=document.getElementById("toggleVals"); b.setAttribute("aria-pressed",showNow); b.textContent = showNow ? "Mostrar valores originais" : "Mostrar tudo em reais de hoje";}
+document.getElementById("toggleVals").addEventListener("click",()=>{showNow=!showNow;renderVals();});
+renderVals();
 </script>
 </body>
 </html>
