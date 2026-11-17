@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PV3VJ4KC');</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trabalhos – Especialização em IA na Administração Pública</title>
+<meta name="description" content="Trabalhos apresentados na Especialização em Inteligência Artificial na Administração Pública (IMAP/Curitiba).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabeçalho curto e uma lista de cartões, um por trabalho; novos trabalhos entram no array TRABALHOS */
+:root{
+  --bg:#eef1f4; --paper:#fff; --ink:#18242f; --muted:#5a6876; --line:#d3dae1;
+  --accent:#1f5f7a; --warm:#b8641a;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#11181e; --paper:#18222a; --ink:#e6edf2; --muted:#9fb0bd; --line:#2c3a45;
+  --accent:#7cc0dc; --warm:#e89a52; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding:48px 20px 64px;display:flex;flex-direction:column;gap:32px}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1}
+.eyebrow{font:700 12.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
+.lede{color:var(--muted);max-width:65ch;margin:10px 0 0}
+.list{display:grid;gap:14px}
+.card{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.card:focus-visible{outline:3px solid var(--warm);outline-offset:3px}
+.card h2{font-size:21px}
+.card p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font:600 12.5px var(--body);border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted)}
+.go{font-weight:700;color:var(--accent);white-space:nowrap}
+footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:560px){.card{grid-template-columns:1fr}.go{justify-self:start}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="wrap">
+  <header>
+    <div class="eyebrow">IMAP · Curitiba · Turma 2026/2</div>
+    <h1>Trabalhos da Especialização em IA na Administração Pública</h1>
+    <p class="lede">Trabalhos apresentados ao longo do curso, publicados para consulta da turma e dos professores.</p>
+  </header>
 
+  <main class="list" id="lista" aria-label="Trabalhos"></main>
+
+  <footer>Ferramentas de IA generativa foram usadas como apoio na preparação dos trabalhos. O conteúdo, as análises e as conclusões são de responsabilidade dos autores.</footer>
+</div>
+<script>
+/* Para adicionar um trabalho: copie um item, mude os campos e aponte "pasta" para a pasta do trabalho. */
+const TRABALHOS = [
+  {
+    titulo: "Winterfood Curitiba",
+    resumo: "Termo de abertura no modelo PM Canvas para um festival gastronômico de inverno em rede de restaurantes, com benchmark, metas e cronograma com caminho crítico.",
+    tags: ["Gestão de projetos", "PM Canvas", "Turismo"],
+    data: "Novembro de 2026",
+    pasta: "winterfood/"
+  }
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const lista = document.getElementById("lista");
+lista.innerHTML = TRABALHOS.map(t => `
+  <a class="card" href="${esc(t.pasta)}" data-titulo="${esc(t.titulo)}">
+    <div>
+      <h2>${esc(t.titulo)}</h2>
+      <p>${esc(t.resumo)}</p>
+      <div class="meta"><span class="tag">${esc(t.data)}</span>${t.tags.map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
+    </div>
+    <span class="go">Abrir →</span>
+  </a>`).join("");
+window.dataLayer = window.dataLayer || [];
+lista.querySelectorAll(".card").forEach(c => c.addEventListener("click", () =>
+  window.dataLayer.push({event: "trabalho_clique", trabalho: c.dataset.titulo})));
+</script>
+</body>
+</html>
