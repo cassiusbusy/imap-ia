@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planning Poker Winterfood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: lista de tarefas à esquerda, mesa de votação à direita, resumo com caminho crítico embaixo */
+:root{
+  --bg:#eef1f4; --paper:#fff; --ink:#18242f; --muted:#5a6876; --line:#d3dae1;
+  --accent:#1f5f7a; --warm:#b8641a; --crit:#c0392b; --ok:#2e7d4f; --soft:#e3eef6;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11181e; --paper:#18222a; --ink:#e6edf2; --muted:#9fb0bd; --line:#2c3a45;
+  --accent:#7cc0dc; --warm:#e89a52; --crit:#ff7b6b; --ok:#6fcf97; --soft:#16283a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11181e; --paper:#18222a; --ink:#e6edf2; --muted:#9fb0bd; --line:#2c3a45;
+  --accent:#7cc0dc; --warm:#e89a52; --crit:#ff7b6b; --ok:#6fcf97; --soft:#16283a; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15.5px/1.5 var(--body)}
+.wrap{max-width:1280px;margin:0 auto;padding:22px 20px 60px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(26px,3.5vw,36px);font-weight:800}
+h2{font-size:20px}
+.lede{color:var(--muted);margin:4px 0 0;max-width:80ch}
+.status{font-size:14px;border-radius:10px;padding:10px 14px;background:var(--soft);border:1px solid var(--line)}
+.status b{color:var(--accent)}
+.main{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tasks{display:flex;flex-direction:column;gap:4px;max-height:640px;overflow:auto}
+.task{all:unset;cursor:pointer;display:grid;grid-template-columns:26px 1fr auto;gap:8px;align-items:center;padding:7px 9px;border-radius:8px;font-size:14px}
+.task:hover{background:var(--soft)}
+.task[aria-current="true"]{background:var(--accent);color:var(--paper)}
+.task:focus-visible{outline:3px solid var(--warm)}
+.task .id{font-weight:700;opacity:.75}
+.chip{font:700 12px var(--body);padding:2px 8px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.chip.done{background:var(--ok);color:#fff}
+.chip.todo{border:1px solid var(--line);color:var(--muted)}
+.task[aria-current="true"] .chip.todo{color:var(--paper);border-color:var(--paper)}
+.table-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.meta{font-size:14px;color:var(--muted)}
+.cards{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.card{font:800 24px var(--display);width:64px;height:88px;border-radius:10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;transition:transform .1s}
+.card small{font:600 11px var(--body);color:var(--muted)}
+.card:hover{transform:translateY(-3px)}
+.card[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--paper)}
+.card[aria-pressed="true"] small{color:var(--paper)}
+.card:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.card:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.players{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 12px}
+.player{border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:110px;text-align:center;font-size:14px}
+.player b{display:block;font:800 22px var(--display);font-variant-numeric:tabular-nums}
+.player.waiting b{color:var(--muted);font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:700 14px var(--body);border-radius:999px;padding:8px 16px;cursor:pointer;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--paper)}
+.btn:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:12px 0}
+.stat{border-radius:10px;background:var(--soft);padding:8px 12px}
+.stat span{font-size:12.5px;color:var(--muted)}
+.stat b{display:block;font:800 22px var(--display);font-variant-numeric:tabular-nums}
+.alert{border-left:4px solid var(--warm);padding:6px 10px;font-size:14px;background:var(--soft);border-radius:0 8px 8px 0}
+.agree{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.agree .btn{padding:6px 12px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+tr.crit td{color:var(--crit);font-weight:600}
+.scroll{overflow-x:auto}
+.note{font-size:13.5px;color:var(--muted)}
+.big{font:800 28px var(--display);color:var(--warm)}
+@media (max-width:860px){.main{grid-template-columns:1fr}.tasks{max-height:none}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Planning Poker do Winterfood</h1>
+    <p class="lede">Estimativa em equipe da duração de cada tarefa do cronograma, em semanas. Cada pessoa vota em segredo; quando todos votarem, alguém revela as cartas, a equipe conversa sobre as diferenças e define o valor acordado. O caminho crítico é recalculado com os valores acordados.</p>
+  </header>
+
+  <div class="status" id="status" role="status">Conectando à mesa compartilhada…</div>
+
+  <div class="main">
+    <nav class="panel" aria-label="Tarefas">
+      <h2 style="margin-bottom:8px">Tarefas</h2>
+      <div class="tasks" id="tasks"></div>
+    </nav>
+
+    <section class="panel" aria-labelledby="tTitle">
+      <div class="table-head">
+        <div>
+          <h2 id="tTitle"></h2>
+          <div class="meta" id="tMeta"></div>
+        </div>
+        <div class="btns"><button class="btn" id="prev" type="button">← Anterior</button><button class="btn" id="next" type="button">Próxima →</button></div>
+      </div>
+
+      <div class="cards" id="cards" role="group" aria-label="Sua carta, em semanas"></div>
+      <p class="note">Cartas na sequência de Fibonacci: quanto maior a tarefa, maior a incerteza. "?" quer dizer "não sei estimar".</p>
+
+      <h3 style="margin-top:6px">Mesa</h3>
+      <div class="players" id="players"></div>
+      <div class="btns">
+        <button class="btn primary" id="reveal" type="button">Revelar cartas</button>
+        <button class="btn" id="reset" type="button">Nova rodada</button>
+      </div>
+      <div id="result"></div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <div class="table-head"><h2>Resumo e caminho crítico</h2><button class="btn" id="copy" type="button">Copiar resumo</button></div>
+    <p class="note">A duração usada no cálculo é o valor acordado; sem acordo, vale a estimativa original do cronograma.</p>
+    <p>Duração total: <span class="big" id="total"></span> semanas</p>
+    <div class="scroll"><table>
+      <thead><tr><th>ID</th><th>Tarefa</th><th class="r">Original</th><th class="r">Votos</th><th class="r">Mediana</th><th class="r">Acordado</th><th class="r">Usado</th><th class="r">Folga</th></tr></thead>
+      <tbody id="summary"></tbody>
+    </table></div>
+    <p class="note" id="critText"></p>
+  </section>
+</div>
+
+<script>
+const T = [
+  {id:"A",n:"Aprovação e designação do gerente",d:1,p:[]},
+  {id:"B",n:"Plano do projeto e comitê de governança",d:2,p:["A"]},
+  {id:"C",n:"Captação de patrocínio (cotas)",d:8,p:["B"]},
+  {id:"D",n:"Regulamento e parecer da Procuradoria",d:4,p:["B"]},
+  {id:"E",n:"Identidade visual, busca no INPI e pedido de registro da marca",d:4,p:["B"]},
+  {id:"R",n:"Linha de base dos indicadores (BI de Turismo)",d:2,p:["B"]},
+  {id:"F",n:"Chamamento e adesão dos restaurantes (Abrasel e categoria lámen)",d:6,p:["D","E"]},
+  {id:"H",n:"Desenvolvimento do site, mapa, votação e Passaporte",d:8,p:["D"]},
+  {id:"J",n:"Planejamento dos Desafios e do Concurso (Mercado Municipal, protocolo e licenças)",d:6,p:["D"]},
+  {id:"I",n:"Contratação de agência e mídia (Lei 14.133)",d:6,p:["C"]},
+  {id:"G",n:"Curadoria e aprovação dos pratos",d:3,p:["F"]},
+  {id:"K",n:"Kit e orientação dos restaurantes",d:2,p:["G"]},
+  {id:"M",n:"Testes do site e carga dos cardápios",d:2,p:["H","G"]},
+  {id:"L",n:"Campanha de lançamento",d:4,p:["I","E","G"]},
+  {id:"N",n:"Festival (4 semanas), Desafios e Concurso",d:4,p:["K","L","M","J"]},
+  {id:"P",n:"Apuração e premiação",d:1,p:["N"]},
+  {id:"Q",n:"Pesquisa e relatório de impacto",d:4,p:["N","R"]}
+];
+const CARDS = [1,2,3,5,8,13,"?"];
+const by = Object.fromEntries(T.map(t=>[t.id,t]));
+
+let db=null, user=null, myId=null, canAdmin=false, canWrite=true;
+let votes = {};      // uid -> {taskId:{v, r}}
+let state = {revealed:{}, round:{}, agreed:{}};
+let current = "A";
+let names = {};
+const localMode = () => !db;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+
+function roundOf(tid){ return state.round?.[tid] || 1; }
+function votesFor(tid){
+  const r = roundOf(tid), out = [];
+  for (const [uid, doc] of Object.entries(votes)) {
+    const x = doc?.[tid];
+    if (x && x.r === r && x.v !== undefined) out.push({uid, v:x.v});
+  }
+  return out;
+}
+function median(a){ if(!a.length) return null; const s=[...a].sort((x,y)=>x-y), m=Math.floor(s.length/2); return s.length%2 ? s[m] : (s[m-1]+s[m])/2; }
+function fmt(n){ return n==null ? "–" : (Math.round(n*10)/10).toLocaleString("pt-BR"); }
+function used(t){ const a = state.agreed?.[t.id]; return typeof a === "number" ? a : t.d; }
+
+function cpm(){
+  const L = T.map(t=>({...t, d: used(t)}));
+  const m = Object.fromEntries(L.map(t=>[t.id,t]));
+  L.forEach(t=>{ t.es = t.p.length ? Math.max(...t.p.map(x=>m[x].ef)) : 0; t.ef = t.es + t.d; });
+  const total = Math.max(...L.map(t=>t.ef));
+  [...L].reverse().forEach(t=>{ const succ = L.filter(s=>s.p.includes(t.id)); t.lf = succ.length ? Math.min(...succ.map(s=>s.ls)) : total; t.ls = t.lf - t.d; t.slack = t.ls - t.es; });
+  return {L, m, total};
+}
+
+async function nameOf(uid){
+  if (uid === "local") return "Você";
+  if (names[uid]) return names[uid];
+  if (user && user.profiles) { try { const ps = await user.profiles([uid]); names[uid] = (ps[uid] && ps[uid].name) || "Alguém"; } catch { names[uid] = "Alguém"; } }
+  else names[uid] = "Alguém";
+  return names[uid];
+}
+
+function renderTasks(){
+  $("tasks").innerHTML = T.map(t=>{
+    const a = state.agreed?.[t.id];
+    const chip = typeof a === "number" ? `<span class="chip done">${a} sem.</span>` : `<span class="chip todo">${votesFor(t.id).length} voto(s)</span>`;
+    return `<button class="task" type="button" data-id="${t.id}" aria-current="${t.id===current}"><span class="id">${t.id}</span><span>${esc(t.n)}</span>${chip}</button>`;
+  }).join("");
+  $("tasks").querySelectorAll(".task").forEach(b=>b.addEventListener("click",()=>{ current=b.dataset.id; renderAll(); }));
+}
+
+async function renderTable(){
+  const t = by[current];
+  $("tTitle").textContent = `${t.id} · ${t.n}`;
+  $("tMeta").textContent = `Estimativa original: ${t.d} semana(s) · Depende de: ${t.p.length ? t.p.join(", ") : "nenhuma"}`;
+  const mine = votes[myId]?.[current];
+  const myV = mine && mine.r === roundOf(current) ? mine.v : undefined;
+  const revealed = !!state.revealed?.[current];
+  $("cards").innerHTML = CARDS.map(c=>`<button class="card" type="button" data-v="${c}" aria-pressed="${String(myV)===String(c)}" ${(!canWrite||revealed)?"disabled":""}>${c}<small>${c==="?"?"não sei":"sem."}</small></button>`).join("");
+  $("cards").querySelectorAll(".card").forEach(b=>b.addEventListener("click",()=>vote(b.dataset.v)));
+
+  const vs = votesFor(current);
+  const cardsHtml = [];
+  for (const x of vs) {
+    const nm = await nameOf(x.uid);
+    const val = revealed ? esc(x.v) : (x.uid===myId ? esc(x.v) : "✓");
+    cardsHtml.push(`<div class="player ${revealed?"":"waiting"}"><b>${val}</b>${esc(nm)}${x.uid===myId?" (você)":""}</div>`);
+  }
+  $("players").innerHTML = cardsHtml.length ? cardsHtml.join("") : `<p class="note">Ninguém votou nesta tarefa ainda.</p>`;
+
+  $("reveal").disabled = !canAdmin || revealed || !vs.length;
+  $("reset").disabled = !canAdmin;
+  $("reveal").title = canAdmin ? "" : "Só editores e o dono revelam as cartas";
+
+  let res = "";
+  if (revealed && vs.length) {
+    const nums = vs.map(x=>Number(x.v)).filter(n=>!isNaN(n));
+    const q = vs.length - nums.length;
+    const med = median(nums), mn = nums.length?Math.min(...nums):null, mx = nums.length?Math.max(...nums):null;
+    const mean = nums.length ? nums.reduce((a,b)=>a+b,0)/nums.length : null;
+    res += `<div class="stats"><div class="stat"><span>Mediana</span><b>${fmt(med)}</b></div><div class="stat"><span>Média</span><b>${fmt(mean)}</b></div><div class="stat"><span>Menor / maior</span><b>${fmt(mn)} / ${fmt(mx)}</b></div><div class="stat"><span>"Não sei"</span><b>${q}</b></div></div>`;
+    if (mn!=null && mx>=mn*2 && mx-mn>=2) res += `<p class="alert">Votos muito diferentes: quem votou ${fmt(mn)} e quem votou ${fmt(mx)} explicam o raciocínio, e a equipe vota de novo ou decide.</p>`;
+    else if (mn!=null && mn===mx) res += `<p class="alert" style="border-color:var(--ok)">Consenso: todos votaram ${fmt(mn)}.</p>`;
+    if (canAdmin) {
+      const opts = [...new Set([...(med!=null?[Math.round(med)]:[]), ...CARDS.filter(c=>c!=="?"), t.d])].sort((a,b)=>a-b);
+      res += `<div class="agree"><span>Definir valor acordado:</span>${opts.map(o=>`<button class="btn" type="button" data-agree="${o}">${o} sem.</button>`).join("")}</div>`;
+    }
+  }
+  const ag = state.agreed?.[current];
+  if (typeof ag === "number") res += `<p style="margin-top:10px">Valor acordado: <b>${ag} semana(s)</b></p>`;
+  $("result").innerHTML = res;
+  $("result").querySelectorAll("[data-agree]").forEach(b=>b.addEventListener("click",()=>agree(Number(b.dataset.agree))));
+
+  const i = T.findIndex(x=>x.id===current);
+  $("prev").disabled = i===0; $("next").disabled = i===T.length-1;
+}
+
+function renderSummary(){
+  const {L, total} = cpm();
+  $("total").textContent = total;
+  $("summary").innerHTML = L.map(t=>{
+    const nums = votesFor(t.id).map(x=>Number(x.v)).filter(n=>!isNaN(n));
+    const rev = !!state.revealed?.[t.id];
+    const a = state.agreed?.[t.id];
+    return `<tr class="${t.slack===0?"crit":""}"><td>${t.id}</td><td>${esc(t.n)}</td><td class="r">${by[t.id].d}</td><td class="r">${votesFor(t.id).length}</td><td class="r">${rev?fmt(median(nums)):"–"}</td><td class="r">${typeof a==="number"?a:"–"}</td><td class="r">${t.d}</td><td class="r">${t.slack}</td></tr>`;
+  }).join("");
+  const crit = L.filter(t=>t.slack===0).sort((a,b)=>a.es-b.es);
+  $("critText").innerHTML = "<b>Caminho crítico:</b> " + crit.map(t=>esc(t.id+" "+t.n)).join(" → ");
+}
+
+function renderAll(){ renderTasks(); renderTable(); renderSummary(); }
+
+async function vote(v){
+  const val = v==="?" ? "?" : Number(v);
+  if (localMode()) { votes.local = {...(votes.local||{}), [current]:{v:val, r:roundOf(current)}}; renderAll(); return; }
+  const next = {...(votes[myId]||{}), [current]:{v:val, r:roundOf(current)}};
+  try { await db.doc("votes/"+myId).set(next); }
+  catch(e){ if (e && e.code==="invalid_argument") { canWrite=false; setStatus("Você está como visualizador: peça ao dono para convidar você como Editor para votar."); renderAll(); } }
+}
+async function writeState(next){
+  if (localMode()) { state = next; renderAll(); return; }
+  try { await db.doc("sessao/estado").set(next); }
+  catch(e){ if (e && e.code==="invalid_argument") { canAdmin=false; renderAll(); } }
+}
+function reveal(){ writeState({...state, revealed:{...state.revealed, [current]:true}}); }
+function reset(){ writeState({...state, revealed:{...state.revealed, [current]:false}, round:{...state.round, [current]:roundOf(current)+1}}); }
+function agree(n){ writeState({...state, agreed:{...state.agreed, [current]:n}}); }
+
+$("reveal").addEventListener("click", reveal);
+$("reset").addEventListener("click", reset);
+$("prev").addEventListener("click", ()=>{ const i=T.findIndex(x=>x.id===current); if(i>0){current=T[i-1].id; renderAll();} });
+$("next").addEventListener("click", ()=>{ const i=T.findIndex(x=>x.id===current); if(i<T.length-1){current=T[i+1].id; renderAll();} });
+$("copy").addEventListener("click", async ()=>{
+  const {L,total} = cpm();
+  const lines = ["Planning Poker Winterfood – resumo", ...L.map(t=>`${t.id} ${t.n}: original ${by[t.id].d} sem., acordado ${typeof state.agreed?.[t.id]==="number"?state.agreed[t.id]:"–"}, usado ${t.d}, folga ${t.slack}`), `Duração total: ${total} semanas`];
+  try { await navigator.clipboard.writeText(lines.join("\n")); $("copy").textContent="Copiado!"; setTimeout(()=>$("copy").textContent="Copiar resumo",1800); }
+  catch { $("copy").textContent="Não foi possível copiar"; }
+});
+
+function setStatus(html){ $("status").innerHTML = html; }
+
+// Modo local até a mesa compartilhada responder
+myId = "local"; canAdmin = true;
+setStatus("Modo local: os votos ficam só neste navegador. Para votar em equipe, abra a página no claude.ai com a conta convidada.");
+renderAll();
+
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [d, u] = await Promise.all([claude.use("db"), claude.use("user")]);
+    if (!d) return;
+    user = u;
+    const id = u ? await u.id() : null;
+    if (!id) { setStatus("Entre na sua conta do Claude para votar com a equipe. Por enquanto, a mesa funciona só neste navegador."); return; }
+    db = d; myId = id; votes = {}; state = {revealed:{}, round:{}, agreed:{}};
+    canAdmin = u ? !!(u.isOwner() || u.canEdit()) : false;
+    const cw = u && u.can ? u.can("data.write") : null;
+    canWrite = cw === false ? false : true;
+    setStatus("Conectando à mesa compartilhada…");
+    let loaded = false;
+    const timer = setTimeout(()=>{ if(!loaded) setStatus("Não foi possível carregar a mesa ainda. Os dados podem estar desatualizados."); }, 10000);
+    const ok = () => { if(!loaded){ loaded=true; clearTimeout(timer);} setStatus(`<b>Mesa compartilhada ativa.</b> ${canWrite?"Escolha sua carta.":"Você está como visualizador e não pode votar."} ${canAdmin?"Você pode revelar cartas e definir o valor acordado.":"Quem é editor revela as cartas."}`); };
+    db.collection("votes").onSnapshot(snap => {
+      votes = {}; snap.docs.forEach(doc => { votes[doc.id] = doc.data() || {}; });
+      if (!snap.metadata.fromCache) ok(); renderAll();
+    }, () => { clearTimeout(timer); setStatus("A mesa compartilhada ficou indisponível. Recarregue a página mais tarde."); });
+    db.doc("sessao/estado").onSnapshot(snap => {
+      const d = snap.exists ? snap.data() : null;
+      state = {revealed:{...(d?.revealed||{})}, round:{...(d?.round||{})}, agreed:{...(d?.agreed||{})}};
+      if (!snap.metadata.fromCache) ok(); renderAll();
+    }, () => {});
+    renderAll();
+  } catch {}
+})();
+</script>
+</body>
+</html>
