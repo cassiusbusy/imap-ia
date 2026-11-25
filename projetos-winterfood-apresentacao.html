@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PV3VJ4KC');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winterfood Curitiba – Apresentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Apresentação em slides 16:9: uma seção por slide, rolagem com encaixe, setas do teclado */
+:root{--bg:#dfe5ea;--paper:#fff;--ink:#18242f;--muted:#5a6876;--line:#d3dae1;--accent:#1f5f7a;--warm:#b8641a;--crit:#c0392b;--soft:#e3eef6;
+--why:#fde5d2;--what:#e0f0e2;--who:#faf0c8;--how:#e6e8eb;--when:#dce9f5;
+--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--body)}
+a{color:var(--accent)}
+.slide{height:100vh;scroll-snap-align:start;display:grid;place-items:center;padding:2vh 2vw}
+.frame{width:min(96vw,calc(94vh*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
+  padding:4.2% 5%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
+.kicker{font:700 .72em var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
+h1,h2{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:3.3em} h2{font-size:2em}
+.sub{color:var(--muted);font-size:1.05em;margin:0}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1em}
+.cols{display:grid;gap:1em;flex:1;min-height:0;align-items:start}.cv{align-items:stretch}
+.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}.c5{grid-template-columns:repeat(5,1fr)}
+.card{border:1px solid var(--line);border-radius:10px;padding:.8em 1em;background:var(--paper)}
+.card h3{margin:0 0 .3em;font:700 1em var(--display)}
+ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
+.big{font:800 2.2em var(--display);color:var(--warm);line-height:1}
+.kpis{display:flex;gap:1em}.kpis .card{flex:1}
+.more{position:absolute;right:5%;bottom:4%;font:600 .8em var(--body);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.3em .9em;background:var(--soft)}
+.more:hover{background:var(--accent);color:#fff}
+.foot{position:absolute;left:5%;bottom:4%;font-size:.7em;color:var(--muted)}
+.why{background:var(--why)}.what{background:var(--what)}.who{background:var(--who)}.how{background:var(--how)}.when{background:var(--when)}
+.cv .card{font-size:.95em}.cv .card h3{font-size:1.05em}
+.cover{background:linear-gradient(135deg,#1f5f7a,#18242f);color:#fff}
+.cover .kicker{color:#f3b27a}.cover .sub{color:#cfe0ea}.cover .sub a{color:#fff}.cover .more{color:var(--ink)}
+.team{font-size:1.2em;margin-top:auto}
+/* EAP */
+.wbs{display:flex;flex-direction:column;align-items:center;gap:.7em;flex:1}
+.root{background:var(--accent);color:#fff;border-radius:8px;padding:.4em 1.2em;font-weight:700}
+.lv2{display:grid;grid-template-columns:repeat(5,1fr);gap:.6em;width:100%}
+.lv2>div{border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:.85em}
+.lv2 b{display:block;background:var(--soft);padding:.35em .6em}
+.lv2 ul{padding:.3em .6em .4em 1.6em}
+/* Gantt simplificado */
+.gt{display:grid;grid-template-columns:13em 1fr;font-size:.95em;row-gap:.45em;align-items:center}
+.gt .bar{position:relative;height:1.3em;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
+.gt .bar i{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--accent)}
+.gt .bar i.c{background:var(--crit)}
+.gt .bar i.m{background:var(--warm)}
+.gt .ax{display:flex;justify-content:space-between;color:var(--muted);font-size:.85em}
+.legend{display:flex;gap:1.2em;font-size:.75em;color:var(--muted)}
+.legend i{display:inline-block;width:.9em;height:.9em;border-radius:3px;vertical-align:-.1em;margin-right:.3em}
+/* Matriz */
+.mx{align-self:stretch;height:100%;display:grid;grid-template-columns:2.2em repeat(3,1fr);grid-template-rows:repeat(3,1fr) 1.8em;gap:.3em;flex:1}
+.mx .y,.mx .x{display:grid;place-items:center;font-size:.75em;color:var(--muted);font-weight:700}
+.mx .cell{border-radius:6px;padding:.3em .4em;font-size:.72em;display:flex;flex-wrap:wrap;gap:.25em;align-content:flex-start}
+.h{background:#f4c7c1}.m{background:#fbe3b8}.l{background:#d6ebd6}
+.chip{background:#fff;border-radius:999px;padding:0 .5em;font-weight:600;border:1px solid rgba(0,0,0,.1)}
+table{border-collapse:collapse;width:100%;font-size:.95em;align-self:start}
+th,td{text-align:left;padding:.3em .5em;border-bottom:1px solid var(--line)}
+th{background:var(--soft)} td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.t td{font-weight:700;border-top:2px solid var(--ink)}
+/* Navegação */
+.nav{position:fixed;right:14px;bottom:12px;display:flex;gap:6px;align-items:center;font:600 13px var(--body);color:var(--muted);z-index:5}
+.nav button{font:inherit;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:4px 10px;cursor:pointer;color:var(--ink)}
+.toc{position:fixed;left:14px;bottom:12px;font:600 13px var(--body);z-index:5}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html{scroll-snap-type:none} body{background:#fff}
+  .slide{height:210mm;padding:0;break-after:page}
+  .frame{width:297mm;height:210mm;aspect-ratio:auto;border-radius:0;box-shadow:none;font-size:19px}
+  .nav,.toc{display:none}
+}
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<section class="slide" id="s1"><div class="frame cover">
+  <div class="kicker">Gerenciamento de Projetos do Setor Público · IMAP</div>
+  <h1>Winterfood Curitiba</h1>
+  <p class="sub">Festival gastronômico de inverno em rede de restaurantes, para estender a temporada turística de Curitiba aos meses de frio.</p>
+  <p class="team"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
+  <a class="more" href="projetos-winterfood.html">Página completa do projeto →</a>
+</div></section>
+
+<section class="slide" id="s2"><div class="frame">
+  <div class="kicker">Por quê</div>
+  <h2>O Natal provou o modelo. O inverno ainda não tem o seu evento.</h2>
+  <div class="body">
+    <div class="kpis">
+      <div class="card"><div class="big">469,8 mil</div>turistas no Natal de Curitiba 2025</div>
+      <div class="card"><div class="big">R$ 722 mi</div>movimentados no Natal de 2025</div>
+      <div class="card"><div class="big">~25%</div>alta no faturamento de bares, restaurantes e hotéis</div>
+    </div>
+    <div class="card why"><h3>Objetivo (SMART)</h3>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes, 55 mil pratos vendidos e +10% de turistas no período sobre o ano anterior, medido pelo BI de Turismo e pelo Passaporte do Turista.</div>
+  </div>
+  <a class="more" href="projetos-winterfood.html#d-porque">Justificativa e benchmarks →</a>
+</div></section>
+
+<section class="slide" id="s3"><div class="frame">
+  <div class="kicker">PM Canvas</div>
+  <h2>O projeto em uma tela</h2>
+  <div class="cols c5 cv">
+    <div class="card why"><h3>Por quê?</h3><ul><li>Sazonalidade do turismo no inverno</li><li>Objetivo: 4 semanas, 50 casas, 55 mil pratos, +10% turistas</li><li>Resultado: ~R$ 3 mi em vendas</li></ul></div>
+    <div class="card what"><h3>O quê?</h3><ul><li>Prato exclusivo a R$ 60 (R$ 50 com o Passaporte)</li><li>Desafio de Chefs e Desafio Amador</li><li>Concurso da Sopa de Pinhão no Mercado Municipal</li></ul></div>
+    <div class="card who"><h3>Quem?</h3><ul><li><b>Patrocinador:</b> Presidente do IMT, Rodrigo Swinka</li><li>Movimente Curitiba Gastronômica, SECOM, SMSAN</li><li>Abrasel-PR, Seha, produtores de pinhão</li></ul></div>
+    <div class="card how"><h3>Como?</h3><ul><li><b>Premissa:</b> adesão sem custo, receita fica com a casa</li><li><b>Restrição:</b> teto de R$ 450 mil</li><li><b>Restrição:</b> janela de junho a agosto; Lei 14.133</li></ul></div>
+    <div class="card when"><h3>Quanto e quando?</h3><ul><li><b>R$ 450 mil</b>, com reservas de R$ 67,5 mil</li><li>29 semanas da aprovação ao relatório</li><li>Top riscos: patrocínio, mídia, adesão</li></ul></div>
+  </div>
+  <a class="more" href="projetos-winterfood.html#canvas">Abrir o canvas completo →</a>
+</div></section>
+
+<section class="slide" id="s4"><div class="frame">
+  <div class="kicker">EAP</div>
+  <h2>Cinco entregas, 23 pacotes de trabalho</h2>
+  <div class="wbs">
+    <div class="root">1. Winterfood Curitiba</div>
+    <div class="lv2">
+      <div><b>1.1 Gerenciamento</b><ul><li>Termo de abertura e EAP</li><li>Matriz de riscos</li><li>Orçamento e contas</li><li>Lições aprendidas</li></ul></div>
+      <div><b>1.2 Governança</b><ul><li>Acordo Abrasel e Movimente</li><li>Regulamento e adesão</li><li>Capacitação Senac</li><li>Marca no INPI</li><li>Patrocínio</li></ul></div>
+      <div><b>1.3 Plataforma</b><ul><li>Site, mapa e cardápios</li><li>Votação com LGPD</li><li>Passaporte e pesquisa</li><li>Painel de indicadores</li></ul></div>
+      <div><b>1.4 Operação</b><ul><li>Curadoria dos pratos</li><li>Categoria lámen</li><li>Insumos locais</li><li>Desafio de Chefs</li><li>Desafio Amador</li><li>Concurso da Sopa de Pinhão</li></ul></div>
+      <div><b>1.5 Comunicação</b><ul><li>Campanha (SECOM)</li><li>Imprensa e influência</li><li>Pesquisa de gasto</li><li>Relatório de impacto</li></ul></div>
+    </div>
+  </div>
+  <a class="more" href="projetos-winterfood.html#eap">EAP completa →</a>
+</div></section>
+
+<section class="slide" id="s5"><div class="frame">
+  <div class="kicker">Cronograma</div>
+  <h2>29 semanas; o caminho crítico passa pelo patrocínio e pela mídia</h2>
+  <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
+  <div class="gt" id="gt"></div>
+  <p class="sub" style="font-size:.85em">Aprovação → Plano → Captação de patrocínio → Contratação de mídia → Lançamento → Festival → Relatório de impacto. Semanas contadas a partir da aprovação.</p>
+  <a class="more" href="projetos-winterfood.html#cronograma">Gantt e tabela CPM →</a>
+</div></section>
+
+<section class="slide" id="s6"><div class="frame">
+  <div class="kicker">Plano de Gestão de Riscos · 1/2</div>
+  <h2>Matriz de severidade: probabilidade × impacto (1 a 3)</h2>
+  <div class="cols c2" style="grid-template-columns:1.1fr 1fr">
+    <div class="mx">
+      <div class="y">P3</div><div class="cell m"></div><div class="cell h"><span class="chip">R01</span><span class="chip">R05</span></div><div class="cell h"></div>
+      <div class="y">P2</div><div class="cell l"></div><div class="cell m"><span class="chip">R06</span><span class="chip">R07</span><span class="chip">R08</span><span class="chip">R09</span><span class="chip">R10</span><span class="chip">R11</span><span class="chip">R12</span></div><div class="cell h"><span class="chip">R02</span><span class="chip">R03</span><span class="chip">R04</span></div>
+      <div class="y">P1</div><div class="cell l"></div><div class="cell l"><span class="chip">R15</span><span class="chip">R16</span></div><div class="cell m"><span class="chip">R13</span><span class="chip">R14</span></div>
+      <div></div><div class="x">I1</div><div class="x">I2</div><div class="x">I3</div>
+    </div>
+    <table>
+      <thead><tr><th>#</th><th>Risco prioritário</th><th class="r">S</th><th>Resposta</th></tr></thead>
+      <tbody>
+        <tr><td>R03</td><td>Patrocínio insuficiente</td><td class="r">6</td><td>Captação desde o Mês 1; versão reduzida se não fechar</td></tr>
+        <tr><td>R04</td><td>Atraso na mídia</td><td class="r">6</td><td>Termo de referência antecipado; atas de registro de preço</td></tr>
+        <tr><td>R02</td><td>Baixa adesão</td><td class="r">6</td><td>Lista de espera de 15; gatilho &lt;30 casas a 60 dias</td></tr>
+        <tr><td>R01</td><td>Inverno quente ou chuvoso</td><td class="r">6</td><td>Vender a experiência, não só o frio; estrutura coberta</td></tr>
+        <tr><td>R05</td><td>Pouca oferta de lámen</td><td class="r">6</td><td>Chamamento específico; lámen como categoria convidada</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a class="more" href="projetos-winterfood.html#matriz-riscos">Os 16 riscos →</a>
+</div></section>
+
+<section class="slide" id="s7"><div class="frame">
+  <div class="kicker">Plano de Gestão de Riscos · 2/2</div>
+  <h2>Exposição de R$ 73,5 mil; reservas cobrem cerca de 92%</h2>
+  <div class="cols c2" style="grid-template-columns:1.5fr 1fr">
+    <table>
+      <thead><tr><th>Risco</th><th class="r">Prob.</th><th class="r">Impacto</th><th class="r">VME</th></tr></thead>
+      <tbody>
+        <tr><td>R01 Inverno quente ou chuvoso</td><td class="r">35%</td><td class="r">R$ 60 mil</td><td class="r">R$ 21 mil</td></tr>
+        <tr><td>R02 Baixa adesão</td><td class="r">25%</td><td class="r">R$ 48 mil</td><td class="r">R$ 12 mil</td></tr>
+        <tr><td>R03 Patrocínio insuficiente</td><td class="r">30%</td><td class="r">R$ 40 mil</td><td class="r">R$ 12 mil</td></tr>
+        <tr><td>R13 Falha da plataforma</td><td class="r">20%</td><td class="r">R$ 45 mil</td><td class="r">R$ 9 mil</td></tr>
+        <tr><td>R12 Inflação de insumos</td><td class="r">30%</td><td class="r">R$ 30 mil</td><td class="r">R$ 9 mil</td></tr>
+        <tr><td>R06 Qualidade e sobrecarga</td><td class="r">25%</td><td class="r">R$ 24 mil</td><td class="r">R$ 6 mil</td></tr>
+        <tr><td>R16 Baixo alcance fora de Curitiba</td><td class="r">20%</td><td class="r">R$ 22,5 mil</td><td class="r">R$ 4,5 mil</td></tr>
+        <tr class="t"><td>Total</td><td></td><td></td><td class="r">R$ 73,5 mil</td></tr>
+      </tbody>
+    </table>
+    <div style="display:flex;flex-direction:column;gap:1em">
+      <div class="card when"><div class="big">R$ 67,5 mil</div>reserva de contingência (10%, R$ 45 mil) + reserva gerencial (5%, R$ 22,5 mil)</div>
+      <div class="card"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
+    </div>
+  </div>
+  <a class="more" href="projetos-winterfood.html#d-riscos">Plano de riscos completo →</a>
+</div></section>
+
+<section class="slide" id="s8"><div class="frame">
+  <div class="kicker">Plano de Comunicação</div>
+  <h2>Do kick-off ao encerramento, cada público com dono e frequência</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Comunicação</th><th>Para quem</th><th>Responsável</th><th>Frequência</th><th>Semanas</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td>Kick-off</td><td>Patrocinador, comitê, Prefeitura, Abrasel</td><td>Gerente</td><td>Única</td><td>1</td></tr>
+      <tr><td>02</td><td>Status executivo</td><td>Patrocinador e comitê diretor</td><td>Gerente</td><td>Quinzenal</td><td>2–29</td></tr>
+      <tr><td>03</td><td>Alinhamento tático (Kanban)</td><td>Equipe e fornecedores</td><td>Gerente</td><td>Semanal</td><td>2–29</td></tr>
+      <tr><td>04</td><td>Relatório aos patrocinadores</td><td>Empresas patrocinadoras</td><td>Gerente</td><td>Mensal</td><td>10–29</td></tr>
+      <tr><td>05</td><td>Newsletter e WhatsApp da rede</td><td>Restaurantes</td><td>Operação + Abrasel</td><td>Semanal</td><td>8–25</td></tr>
+      <tr><td>06</td><td>Briefing operacional</td><td>Restaurantes</td><td>Operação</td><td>Única</td><td>20</td></tr>
+      <tr><td>07</td><td>Campanha omnichannel</td><td>Turistas e moradores</td><td>SECOM</td><td>Contínua</td><td>18–25</td></tr>
+      <tr><td>08</td><td>Assessoria de imprensa</td><td>Imprensa</td><td>SECOM</td><td>Nos marcos</td><td>18–26</td></tr>
+      <tr><td>09</td><td>Encerramento e lições</td><td>Patrocinador, comitê, Abrasel</td><td>Gerente</td><td>Única</td><td>29</td></tr>
+    </tbody>
+  </table>
+  <a class="more" href="projetos-winterfood.html#crono-comunicacao">Cronograma da comunicação →</a>
+</div></section>
+
+<section class="slide" id="s9"><div class="frame">
+  <div class="kicker">Custos</div>
+  <h2>R$ 450 mil, organizados pela EAP</h2>
+  <div class="cols c2">
+    <table>
+      <tbody>
+        <tr><td>Comunicação e mídia</td><td class="r">R$ 190 mil</td></tr>
+        <tr><td>Plataforma, Passaporte e pesquisa</td><td class="r">R$ 65 mil</td></tr>
+        <tr><td>Desafios, Concurso e premiação</td><td class="r">R$ 127,5 mil</td></tr>
+        <tr><td>Reservas (contingência 10% + gerencial 5%)</td><td class="r">R$ 67,5 mil</td></tr>
+        <tr class="t"><td>Total</td><td class="r">R$ 450 mil</td></tr>
+      </tbody>
+    </table>
+    <div class="card what"><h3>Sem taxa de adesão</h3>A Prefeitura organiza o festival. Cada restaurante arca com os próprios pratos e fica com toda a receita.</div>
+  </div>
+  <a class="more" href="projetos-winterfood.html#d-custos">Detalhe dos custos →</a>
+</div></section>
+
+<section class="slide" id="s10"><div class="frame cover">
+  <div class="kicker">Obrigado</div>
+  <h1>Perguntas?</h1>
+  <p class="sub">Página completa com canvas, EAP, cronograma, riscos, comunicação e as fontes catalogadas pela equipe.</p>
+  <p class="team" style="font-size:.85em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
+  <a class="more" href="projetos-winterfood-fontes.html">Acervo de fontes →</a>
+</div></section>
+
+<a class="toc" href="projetos-winterfood.html">← Página do projeto</a>
+<div class="nav"><button type="button" id="prev" aria-label="Slide anterior">↑</button><span id="pos">1 / 10</span><button type="button" id="next" aria-label="Próximo slide">↓</button></div>
+
+<script>
+/* Gantt resumido: mesmos prazos da página principal (semanas a partir da aprovação) */
+const G=[["Aprovação e plano",0,3,1],["Captação de patrocínio",3,11,1],["Regulamento e identidade",3,7,0],["Adesão e curadoria dos pratos",7,16,0],["Site e Passaporte",7,15,0],["Contratação de mídia",11,17,1],["Campanha de lançamento",17,21,1],["Festival (4 semanas)",21,25,1],["Relatório de impacto",25,29,1]];
+document.getElementById("gt").innerHTML=G.map(([n,a,b,c])=>`<div>${n}</div><div class="bar"><i class="${c?'c':''}" style="left:${a/29*100}%;width:${(b-a)/29*100}%" title="Semanas ${a+1} a ${b}"></i></div>`).join("")+'<div></div><div class="ax"><span>sem. 1</span><span>10</span><span>20</span><span>29</span></div>';
+const S=[...document.querySelectorAll(".slide")];
+let cur=0;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.5){cur=S.indexOf(e.target);document.getElementById("pos").textContent=(cur+1)+" / "+S.length;}}),{threshold:[.5]});
+S.forEach(s=>io.observe(s));
+const go=i=>{i=Math.max(0,Math.min(S.length-1,i));S[i].scrollIntoView({behavior:"smooth"});};
+document.getElementById("prev").onclick=()=>go(cur-1);
+document.getElementById("next").onclick=()=>go(cur+1);
+addEventListener("keydown",e=>{
+  if(["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();go(cur+1);}
+  if(["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(cur-1);}
+  if(e.key==="Home"){e.preventDefault();go(0);} if(e.key==="End"){e.preventDefault();go(S.length-1);}
+});
+</script>
+</body>
+</html>
