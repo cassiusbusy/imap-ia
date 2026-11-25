@@ -47,6 +47,27 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .cover{background:linear-gradient(135deg,#1f5f7a,#18242f);color:#fff}
 .cover .kicker{color:#f3b27a}.cover .sub{color:#cfe0ea}.cover .sub a{color:#fff}.cover .more{color:var(--ink)}
 .team{font-size:1.2em;margin-top:auto}
+/* SMART */
+.sm{--c:#888;text-decoration:underline;text-decoration-color:var(--c);text-decoration-thickness:.18em;text-underline-offset:.22em}
+.lt{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:4px;background:var(--c);color:#fff;font:800 .72em var(--display);vertical-align:.15em;margin:0 .15em}
+.cS{--c:#1f5f7a}.cM{--c:#b8641a}.cA{--c:#2d7a3e}.cR{--c:#8e44ad}.cT{--c:#c0392b}
+.smart{font-size:1.05em;line-height:1.9}
+.smk{display:grid;grid-template-columns:repeat(5,1fr);gap:.6em;font-size:.78em;color:var(--muted)}
+.smk div{display:flex;gap:.45em;align-items:flex-start}.smk .lt{font-size:1.1em;flex:none;margin:0;vertical-align:0}
+.smk b{color:var(--ink)}
+/* Mini canvas clicável */
+.mc{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2em;flex:1;min-height:0}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto repeat(6,1fr);gap:.3em;font-size:.68em}
+.mini .hd{font:700 .85em var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.mini button{font:600 1em var(--body);text-align:left;border:1px solid rgba(0,0,0,.08);border-radius:6px;padding:.35em .5em;cursor:pointer;color:var(--ink);display:flex;align-items:flex-start}
+.mini button:hover{outline:2px solid var(--accent)}
+.mini button[aria-pressed="true"]{outline:3px solid var(--ink)}
+.panel{border-radius:10px;padding:1em 1.2em;overflow:auto;font-size:.88em}
+.panel h3{margin:0 0 .4em;font:800 1.25em var(--display)}
+.panel .grp{font:700 .75em var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* Dica nos itens da matriz */
+.chip{position:relative;cursor:default}
+.chip[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:50%;bottom:130%;transform:translateX(-50%);background:var(--ink);color:#fff;font:600 .95em var(--body);padding:.35em .6em;border-radius:6px;white-space:nowrap;z-index:3;box-shadow:0 3px 10px rgba(0,0,0,.2)}
 /* EAP */
 .wbs{display:flex;flex-direction:column;align-items:center;gap:.7em;flex:1}
 .root{background:var(--accent);color:#fff;border-radius:8px;padding:.4em 1.2em;font-weight:700}
@@ -55,7 +76,7 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .lv2 b{display:block;background:var(--soft);padding:.35em .6em}
 .lv2 ul{padding:.3em .6em .4em 1.6em}
 /* Gantt simplificado */
-.gt{display:grid;grid-template-columns:13em 1fr;font-size:.95em;row-gap:.45em;align-items:center}
+.gt{display:grid;grid-template-columns:12em 1fr;font-size:.8em;row-gap:.35em;align-items:center}
 .gt .bar{position:relative;height:1.3em;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
 .gt .bar i{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--accent)}
 .gt .bar i.c{background:var(--crit)}
@@ -106,7 +127,15 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
       <div class="card"><div class="big">R$ 722 mi</div>movimentados no Natal de 2025</div>
       <div class="card"><div class="big">~25%</div>alta no faturamento de bares, restaurantes e hotéis</div>
     </div>
-    <div class="card why"><h3>Objetivo (SMART)</h3>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes, 55 mil pratos vendidos e +10% de turistas no período sobre o ano anterior, medido pelo BI de Turismo e pelo Passaporte do Turista.</div>
+    <div class="card why"><h3>Objetivo (SMART)</h3>
+      <p class="smart" style="margin:.2em 0 .6em"><span class="sm cS">Realizar o Winterfood Curitiba</span><span class="lt cS">S</span> <span class="sm cT">durante 4 semanas no primeiro inverno após a aprovação</span><span class="lt cT">T</span>, <span class="sm cA">com 50 restaurantes</span><span class="lt cA">A</span>, <span class="sm cM">55 mil pratos vendidos</span><span class="lt cM">M</span> e <span class="sm cR">+10% de turistas no período sobre o ano anterior</span><span class="lt cR">R</span>, <span class="sm cM">medido pelo BI de Turismo e pelo Passaporte do Turista</span><span class="lt cM">M</span>.</p>
+      <div class="smk">
+        <div><span class="lt cS">S</span><span><b>Específico:</b> um festival, com nome e formato definidos</span></div>
+        <div><span class="lt cM">M</span><span><b>Mensurável:</b> pratos vendidos, com fonte de medição</span></div>
+        <div><span class="lt cA">A</span><span><b>Alcançável:</b> 50 casas cabem na base da Abrasel-PR</span></div>
+        <div><span class="lt cR">R</span><span><b>Relevante:</b> mais turistas no inverno resolve a sazonalidade</span></div>
+        <div><span class="lt cT">T</span><span><b>Temporal:</b> 4 semanas, no 1º inverno após a aprovação</span></div>
+      </div></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-porque">Justificativa e benchmarks →</a>
 </div></section>
@@ -114,12 +143,25 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
 <section class="slide" id="s3"><div class="frame">
   <div class="kicker">PM Canvas</div>
   <h2>O projeto em uma tela</h2>
-  <div class="cols c5 cv">
-    <div class="card why"><h3>Por quê?</h3><ul><li>Sazonalidade do turismo no inverno</li><li>Objetivo: 4 semanas, 50 casas, 55 mil pratos, +10% turistas</li><li>Resultado: ~R$ 3 mi em vendas</li></ul></div>
-    <div class="card what"><h3>O quê?</h3><ul><li>Prato exclusivo a R$ 60 (R$ 50 com o Passaporte)</li><li>Desafio de Chefs e Desafio Amador</li><li>Concurso da Sopa de Pinhão no Mercado Municipal</li></ul></div>
-    <div class="card who"><h3>Quem?</h3><ul><li><b>Patrocinador:</b> Presidente do IMT, Rodrigo Swinka</li><li>Movimente Curitiba Gastronômica, SECOM, SMSAN</li><li>Abrasel-PR, Seha, produtores de pinhão</li></ul></div>
-    <div class="card how"><h3>Como?</h3><ul><li><b>Premissa:</b> adesão sem custo, receita fica com a casa</li><li><b>Restrição:</b> teto de R$ 450 mil</li><li><b>Restrição:</b> janela de junho a agosto; Lei 14.133</li></ul></div>
-    <div class="card when"><h3>Quanto e quando?</h3><ul><li><b>R$ 450 mil</b>, com reservas de R$ 67,5 mil</li><li>29 semanas da aprovação ao relatório</li><li>Top riscos: patrocínio, mídia, adesão</li></ul></div>
+  <p class="sub" style="font-size:.75em;margin-top:-.6em">Clique num bloco para ler o conteúdo.</p>
+  <div class="mc">
+    <div class="mini" id="mini">
+      <div class="hd">Por quê?</div><div class="hd">O quê?</div><div class="hd">Quem?</div><div class="hd">Como?</div><div class="hd">Quanto e quando?</div>
+      <button class="why" data-k="just" style="grid-column:1;grid-row:2/4">Justificativas</button>
+      <button class="why" data-k="obj" style="grid-column:1;grid-row:4/6">Objetivo SMART</button>
+      <button class="why" data-k="res" style="grid-column:1;grid-row:6/8">Resultados esperados</button>
+      <button class="what" data-k="prod" style="grid-column:2;grid-row:2/5">Produto</button>
+      <button class="what" data-k="req" style="grid-column:2;grid-row:5/8">Principais requisitos</button>
+      <button class="who" data-k="pat" style="grid-column:3;grid-row:2/3">Patrocinador</button>
+      <button class="who" data-k="areas" style="grid-column:3;grid-row:3/5">Áreas envolvidas</button>
+      <button class="who" data-k="ext" style="grid-column:3;grid-row:5/6">Partes externas</button>
+      <button class="how" data-k="prem" style="grid-column:4;grid-row:2/4">Premissas</button>
+      <button class="how" data-k="restr" style="grid-column:4;grid-row:4/6">Restrições</button>
+      <button class="when" data-k="risc" style="grid-column:5;grid-row:2/4">Riscos</button>
+      <button class="when" data-k="cust" style="grid-column:5;grid-row:4/6">Custos</button>
+      <button class="when" data-k="entr" style="grid-column:3/6;grid-row:6/8">Entregas e prazos</button>
+    </div>
+    <div class="panel why" id="panel" aria-live="polite"></div>
   </div>
   <a class="more" href="projetos-winterfood.html#canvas">Abrir o canvas completo →</a>
 </div></section>
@@ -145,39 +187,38 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
   <h2>29 semanas; o caminho crítico passa pelo patrocínio e pela mídia</h2>
   <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
   <div class="gt" id="gt"></div>
-  <p class="sub" style="font-size:.85em">Aprovação → Plano → Captação de patrocínio → Contratação de mídia → Lançamento → Festival → Relatório de impacto. Semanas contadas a partir da aprovação.</p>
-  <a class="more" href="projetos-winterfood.html#cronograma">Gantt e tabela CPM →</a>
+  <p class="sub" style="font-size:.75em;margin-bottom:2.2em">Aprovação → Plano → Captação de patrocínio → Contratação de mídia → Lançamento → Festival → Relatório de impacto. Semanas contadas a partir da aprovação.</p>
+  <a class="more" href="projetos-winterfood.html#cronograma">Gantt e caminho crítico →</a>
 </div></section>
 
 <section class="slide" id="s6"><div class="frame">
   <div class="kicker">Plano de Gestão de Riscos · 1/2</div>
-  <h2>Matriz de severidade: probabilidade × impacto (1 a 3)</h2>
+  <h2>Matriz de severidade: probabilidade × impacto</h2>
   <div class="cols c2" style="grid-template-columns:1.1fr 1fr">
     <div class="mx">
-      <div class="y">P3</div><div class="cell m"></div><div class="cell h"><span class="chip">R01</span><span class="chip">R05</span></div><div class="cell h"></div>
-      <div class="y">P2</div><div class="cell l"></div><div class="cell m"><span class="chip">R06</span><span class="chip">R07</span><span class="chip">R08</span><span class="chip">R09</span><span class="chip">R10</span><span class="chip">R11</span><span class="chip">R12</span></div><div class="cell h"><span class="chip">R02</span><span class="chip">R03</span><span class="chip">R04</span></div>
-      <div class="y">P1</div><div class="cell l"></div><div class="cell l"><span class="chip">R15</span><span class="chip">R16</span></div><div class="cell m"><span class="chip">R13</span><span class="chip">R14</span></div>
+      <div class="y">P3</div><div class="cell m"></div><div class="cell h"><span class="chip" tabindex="0" title="R01 · Inverno quente ou chuvoso · prioridade 4" data-tip="R01 · Inverno quente ou chuvoso · prioridade 4">R01</span><span class="chip" tabindex="0" title="R05 · Pouca oferta de lámen · prioridade 5" data-tip="R05 · Pouca oferta de lámen · prioridade 5">R05</span></div><div class="cell h"></div>
+      <div class="y">P2</div><div class="cell l"></div><div class="cell m"><span class="chip" tabindex="0" title="R06 · Queda de qualidade e sobrecarga · prioridade 6" data-tip="R06 · Queda de qualidade e sobrecarga · prioridade 6">R06</span><span class="chip" tabindex="0" title="R07 · Prato só substitui o pedido normal · prioridade 7" data-tip="R07 · Prato só substitui o pedido normal · prioridade 7">R07</span><span class="chip" tabindex="0" title="R08 · Cópia de receitas entre concorrentes · prioridade 8" data-tip="R08 · Cópia de receitas entre concorrentes · prioridade 8">R08</span><span class="chip" tabindex="0" title="R09 · Passagens caras e choque de datas · prioridade 9" data-tip="R09 · Passagens caras e choque de datas · prioridade 9">R09</span><span class="chip" tabindex="0" title="R10 · Sobreposição com ações de inverno · prioridade 10" data-tip="R10 · Sobreposição com ações de inverno · prioridade 10">R10</span><span class="chip" tabindex="0" title="R11 · Nome já registrado ou uso indevido · prioridade 11" data-tip="R11 · Nome já registrado ou uso indevido · prioridade 11">R11</span><span class="chip" tabindex="0" title="R12 · Inflação dos insumos de inverno · prioridade 12" data-tip="R12 · Inflação dos insumos de inverno · prioridade 12">R12</span></div><div class="cell h"><span class="chip" tabindex="0" title="R02 · Baixa adesão dos restaurantes · prioridade 3" data-tip="R02 · Baixa adesão dos restaurantes · prioridade 3">R02</span><span class="chip" tabindex="0" title="R03 · Patrocínio insuficiente · prioridade 1" data-tip="R03 · Patrocínio insuficiente · prioridade 1">R03</span><span class="chip" tabindex="0" title="R04 · Atraso na contratação de mídia · prioridade 2" data-tip="R04 · Atraso na contratação de mídia · prioridade 2">R04</span></div>
+      <div class="y">P1</div><div class="cell l"></div><div class="cell l"><span class="chip" tabindex="0" title="R15 · Preço de R$ 60 visto como inflado · prioridade 15" data-tip="R15 · Preço de R$ 60 visto como inflado · prioridade 15">R15</span><span class="chip" tabindex="0" title="R16 · Baixo alcance fora de Curitiba · prioridade 16" data-tip="R16 · Baixo alcance fora de Curitiba · prioridade 16">R16</span></div><div class="cell m"><span class="chip" tabindex="0" title="R13 · Falha da plataforma digital · prioridade 13" data-tip="R13 · Falha da plataforma digital · prioridade 13">R13</span><span class="chip" tabindex="0" title="R14 · Queimadura ou engasgo no Concurso · prioridade 14" data-tip="R14 · Queimadura ou engasgo no Concurso · prioridade 14">R14</span></div>
       <div></div><div class="x">I1</div><div class="x">I2</div><div class="x">I3</div>
     </div>
-    <table>
-      <thead><tr><th>#</th><th>Risco prioritário</th><th class="r">S</th><th>Resposta</th></tr></thead>
+    <div><table style="font-size:.78em">
+      <thead><tr><th>Prior.</th><th>Risco</th><th>Resposta</th></tr></thead>
       <tbody>
-        <tr><td>R03</td><td>Patrocínio insuficiente</td><td class="r">6</td><td>Captação desde o Mês 1; versão reduzida se não fechar</td></tr>
-        <tr><td>R04</td><td>Atraso na mídia</td><td class="r">6</td><td>Termo de referência antecipado; atas de registro de preço</td></tr>
-        <tr><td>R02</td><td>Baixa adesão</td><td class="r">6</td><td>Lista de espera de 15; gatilho &lt;30 casas a 60 dias</td></tr>
-        <tr><td>R01</td><td>Inverno quente ou chuvoso</td><td class="r">6</td><td>Vender a experiência, não só o frio; estrutura coberta</td></tr>
-        <tr><td>R05</td><td>Pouca oferta de lámen</td><td class="r">6</td><td>Chamamento específico; lámen como categoria convidada</td></tr>
+        <tr><td>1</td><td><b>R03</b> Patrocínio insuficiente</td><td>Captação desde o Mês 1 (caminho crítico); versão reduzida se não fechar</td></tr>
+        <tr><td>2</td><td><b>R04</b> Atraso na contratação de mídia</td><td>Termo de referência antecipado; atas de registro de preço</td></tr>
+        <tr><td>3</td><td><b>R02</b> Baixa adesão dos restaurantes</td><td>Lista de espera de 15; gatilho &lt;30 casas a 60 dias</td></tr>
       </tbody>
     </table>
+    <p class="sub" style="font-size:.7em;margin-top:.6em">Os três têm severidade 6 (P2 × I3). Passe o mouse sobre os itens da matriz para ver nome e prioridade.</p></div>
   </div>
-  <a class="more" href="projetos-winterfood.html#matriz-riscos">Os 16 riscos →</a>
+  <a class="more" href="projetos-winterfood.html#d-riscos">Os 16 riscos →</a>
 </div></section>
 
 <section class="slide" id="s7"><div class="frame">
   <div class="kicker">Plano de Gestão de Riscos · 2/2</div>
   <h2>Exposição de R$ 73,5 mil; reservas cobrem cerca de 92%</h2>
   <div class="cols c2" style="grid-template-columns:1.5fr 1fr">
-    <table>
+    <table style="font-size:.75em">
       <thead><tr><th>Risco</th><th class="r">Prob.</th><th class="r">Impacto</th><th class="r">VME</th></tr></thead>
       <tbody>
         <tr><td>R01 Inverno quente ou chuvoso</td><td class="r">35%</td><td class="r">R$ 60 mil</td><td class="r">R$ 21 mil</td></tr>
@@ -191,8 +232,8 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
       </tbody>
     </table>
     <div style="display:flex;flex-direction:column;gap:1em">
-      <div class="card when"><div class="big">R$ 67,5 mil</div>reserva de contingência (10%, R$ 45 mil) + reserva gerencial (5%, R$ 22,5 mil)</div>
-      <div class="card"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
+      <div class="card when" style="font-size:.85em"><div class="big">R$ 67,5 mil</div>reserva de contingência (10%, R$ 45 mil) + reserva gerencial (5%, R$ 22,5 mil)</div>
+      <div class="card" style="font-size:.85em"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-riscos">Plano de riscos completo →</a>
@@ -218,25 +259,7 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
   <a class="more" href="projetos-winterfood.html#crono-comunicacao">Cronograma da comunicação →</a>
 </div></section>
 
-<section class="slide" id="s9"><div class="frame">
-  <div class="kicker">Custos</div>
-  <h2>R$ 450 mil, organizados pela EAP</h2>
-  <div class="cols c2">
-    <table>
-      <tbody>
-        <tr><td>Comunicação e mídia</td><td class="r">R$ 190 mil</td></tr>
-        <tr><td>Plataforma, Passaporte e pesquisa</td><td class="r">R$ 65 mil</td></tr>
-        <tr><td>Desafios, Concurso e premiação</td><td class="r">R$ 127,5 mil</td></tr>
-        <tr><td>Reservas (contingência 10% + gerencial 5%)</td><td class="r">R$ 67,5 mil</td></tr>
-        <tr class="t"><td>Total</td><td class="r">R$ 450 mil</td></tr>
-      </tbody>
-    </table>
-    <div class="card what"><h3>Sem taxa de adesão</h3>A Prefeitura organiza o festival. Cada restaurante arca com os próprios pratos e fica com toda a receita.</div>
-  </div>
-  <a class="more" href="projetos-winterfood.html#d-custos">Detalhe dos custos →</a>
-</div></section>
-
-<section class="slide" id="s10"><div class="frame cover">
+<section class="slide" id="s9"><div class="frame cover">
   <div class="kicker">Obrigado</div>
   <h1>Perguntas?</h1>
   <p class="sub">Página completa com canvas, EAP, cronograma, riscos, comunicação e as fontes catalogadas pela equipe.</p>
@@ -245,12 +268,20 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
 </div></section>
 
 <a class="toc" href="projetos-winterfood.html">← Página do projeto</a>
-<div class="nav"><button type="button" id="prev" aria-label="Slide anterior">↑</button><span id="pos">1 / 10</span><button type="button" id="next" aria-label="Próximo slide">↓</button></div>
+<div class="nav"><button type="button" id="prev" aria-label="Slide anterior">↑</button><span id="pos">1 / 9</span><button type="button" id="next" aria-label="Próximo slide">↓</button></div>
 
 <script>
 /* Gantt resumido: mesmos prazos da página principal (semanas a partir da aprovação) */
 const G=[["Aprovação e plano",0,3,1],["Captação de patrocínio",3,11,1],["Regulamento e identidade",3,7,0],["Adesão e curadoria dos pratos",7,16,0],["Site e Passaporte",7,15,0],["Contratação de mídia",11,17,1],["Campanha de lançamento",17,21,1],["Festival (4 semanas)",21,25,1],["Relatório de impacto",25,29,1]];
 document.getElementById("gt").innerHTML=G.map(([n,a,b,c])=>`<div>${n}</div><div class="bar"><i class="${c?'c':''}" style="left:${a/29*100}%;width:${(b-a)/29*100}%" title="Semanas ${a+1} a ${b}"></i></div>`).join("")+'<div></div><div class="ax"><span>sem. 1</span><span>10</span><span>20</span><span>29</span></div>';
+
+/* Mini canvas: clique num bloco abre o conteúdo; Justificativas aberto por padrão */
+const CV={"just": ["why", "Por quê?", "Justificativas", "<p>Nos últimos anos, Curitiba conseguiu atrair turistas fora das férias de verão: o Natal de 2025 trouxe 469,8 mil visitantes e movimentou R$ 722 milhões. Esse resultado mostrou que eventos sazonais bem posicionados ampliam o período de visitação e espalham os ganhos para hotéis, restaurantes e comércio. Faltava levar essa estratégia ao inverno, para que a cidade tivesse motivos para receber turistas o ano todo.</p>"], "obj": ["why", "Por quê?", "Objetivo SMART", "<p>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes participantes, 55 mil pratos do festival vendidos e aumento de 10% no número de turistas no período em relação ao ano anterior, medido pelo BI de Turismo e pelo Passaporte do Turista.</p>"], "res": ["why", "Por quê?", "Resultados esperados", "<ul><li><b>Tangíveis:</b> cerca de R$ 3 milhões em vendas nos restaurantes; +10% a 20% de turistas no inverno; gasto de visitantes de fora medido; festival no calendário oficial.</li><li><b>Intangíveis:</b> Curitiba lembrada como destino gastronômico de inverno; orgulho local; cooperação entre restaurantes; valorização do pinhão.</li></ul>"], "prod": ["what", "O quê?", "Produto", "<p>Festival de 4 semanas em que 50 restaurantes de várias regiões servem pratos quentes exclusivos (sopas, caldos, lámen) a R$ 60, ou R$ 50 com o Passaporte do Turista. Nos fins de semana, o Mercado Municipal recebe o Desafio de Chefs, o Desafio Amador e o Concurso da Sopa de Pinhão.</p>"], "req": ["what", "O quê?", "Principais requisitos", "<ul><li>Pelo menos 50 restaurantes em diferentes regiões</li><li>Prato exclusivo por casa, com preço-teto</li><li>Passaporte do Turista com pesquisa e LGPD</li><li>Receitas autorais; porção no padrão do cardápio</li><li>Percentual mínimo de ingredientes locais</li><li>Mapa digital e votação popular</li></ul>"], "pat": ["who", "Quem?", "Patrocinador", "<p>Presidente do Instituto Municipal de Turismo de Curitiba, <b>Rodrigo Swinka</b>.</p>"], "areas": ["who", "Quem?", "Áreas envolvidas (da Prefeitura)", "<ul><li>Instituto Municipal de Turismo</li><li>Movimente Curitiba Gastronômica (comitê do CTur)</li><li>SECOM</li><li>SMSAN</li><li>Vigilância Sanitária</li><li>Agência Curitiba, ICI e Procuradoria</li></ul>"], "ext": ["who", "Quem?", "Partes interessadas externas", "<ul><li>Abrasel-PR e restaurantes</li><li>Produtores de pinhão e erva-mate</li><li>Hotéis (Seha) e patrocinadores</li><li>Senac e agricultura familiar</li><li>Casas de lámen fora da Abrasel</li><li>Turistas, moradores, imprensa</li></ul>"], "prem": ["how", "Como?", "Premissas", "<ul><li>O festival entra no calendário oficial do Inverno Curitiba</li><li>Adesão sem custo; cada restaurante arca com seus pratos e fica com a receita</li><li>A Abrasel-PR aceita ser parceira na articulação</li><li>O BI de Turismo fornece a linha de base</li></ul>"], "restr": ["how", "Como?", "Restrições", "<ul><li>Teto de R$ 450 mil</li><li>Janela fixa: inverno (junho a agosto)</li><li>Contratações pela Lei 14.133</li><li>Normas sanitárias</li><li>LGPD na votação</li></ul>"], "risc": ["when", "Quanto e quando?", "Riscos (por prioridade)", "<ol><li>R03 Patrocínio insuficiente</li><li>R04 Atraso na contratação de mídia</li><li>R02 Baixa adesão dos restaurantes</li><li>R01 Inverno quente ou chuvoso</li><li>R05 Pouca oferta de lámen</li></ol><p style='font-size:.85em'>Mais 11 riscos no plano completo.</p>"], "cust": ["when", "Quanto e quando?", "Custos estimados", "<table><tr><td>Comunicação e mídia</td><td class='r'>R$ 190 mil</td></tr><tr><td>Plataforma, Passaporte e pesquisa</td><td class='r'>R$ 65 mil</td></tr><tr><td>Desafios, Concurso e premiação</td><td class='r'>R$ 127,5 mil</td></tr><tr><td>Reservas (10% + 5%)</td><td class='r'>R$ 67,5 mil</td></tr><tr class='t'><td>Total</td><td class='r'>R$ 450 mil</td></tr></table>"], "entr": ["when", "Quanto e quando?", "Entregas e prazos (a partir da aprovação)", "<ul><li><b>Mês 1:</b> plano e governança</li><li><b>Meses 1–3:</b> regulamento e patrocínio</li><li><b>Meses 2–4:</b> adesão dos restaurantes</li><li><b>Meses 3–5:</b> site, pratos e mídia</li><li><b>Meses 5–6:</b> lançamento</li><li><b>Meses 6–7:</b> festival</li><li><b>Meses 7–8:</b> premiação e relatório</li></ul>"]};
+const panel=document.getElementById("panel");
+function openBlock(k){const [cls,grp,t,html]=CV[k];panel.className="panel "+cls;panel.innerHTML=`<div class="grp">${grp}</div><h3>${t}</h3>${html}`;
+  document.querySelectorAll("#mini button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k));}
+document.querySelectorAll("#mini button").forEach(b=>b.addEventListener("click",()=>openBlock(b.dataset.k)));
+openBlock("just");
 const S=[...document.querySelectorAll(".slide")];
 let cur=0;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.5){cur=S.indexOf(e.target);document.getElementById("pos").textContent=(cur+1)+" / "+S.length;}}),{threshold:[.5]});
