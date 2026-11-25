@@ -30,7 +30,7 @@ a{color:var(--accent)}
   padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
 .kicker{font:400 .5em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
 h1,h2{font-family:"Pixelify Sans",var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
-h2{font-size:1.65em}
+h2{font-size:1.35em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 h1{font-size:3.3em} h2{font-size:2em}
 .sub{color:var(--muted);font-size:1.05em;margin:0}
 .body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1em}
@@ -135,7 +135,11 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 .gi{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);border-radius:4px;display:grid;place-items:center;aspect-ratio:1}
 .gi canvas{width:86%;image-rendering:pixelated}.gi.ok{border-color:#ffd34d;background:rgba(255,211,77,.12)}
 .pix{font:400 .55em "Press Start 2P",monospace;letter-spacing:.04em}
-.blink{animation:blink 1s steps(2) infinite}@keyframes blink{50%{opacity:0}}
+.blink{animation:blink 1s steps(2) infinite}
+.start{align-self:flex-start;font:400 1.1em "Press Start 2P",monospace;color:#ffd34d;background:none;border:3px solid #ffd34d;padding:.6em 1em;cursor:pointer;margin-top:.4em}
+.start:hover{background:#ffd34d;color:#0f1b2d;animation:none}
+canvas.egg.chao{bottom:1.5%;left:58%}
+#s4 .lv2{align-items:start}@keyframes blink{50%{opacity:0}}
 /* HUD inferior */
 .hud{position:fixed;left:0;right:0;bottom:0;height:36px;background:#0f1b2d;color:#e6edf2;font:400 10px "Press Start 2P",monospace;display:flex;align-items:center;gap:14px;padding:0 14px;z-index:20}
 .hud a{color:#9fd3ff;text-decoration:none}
@@ -167,12 +171,13 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="track">
 <section class="slide" id="s1"><div class="frame cover">
-  <div class="band"><canvas class="scene" data-s="barigui" aria-hidden="true"></canvas><canvas class="egg walk" data-e="bike" style="left:2%" title="?"></canvas><canvas class="egg " data-e="remo" style="left:42%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="barigui" aria-hidden="true"></canvas><canvas class="egg " data-e="remo" style="left:42%" title="?"></canvas></div>
   
   <div class="kicker">Gerenciamento de Projetos do Setor Público · IMAP</div>
   <h1>Winterfood Curitiba</h1>
   <p class="sub">Festival gastronômico de inverno em rede de restaurantes, para estender a temporada turística de Curitiba aos meses de frio.</p>
   <p class="team"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
+  <button type="button" class="start blink" id="start">▶ START</button>
   <a class="more" href="projetos-winterfood.html">Página completa do projeto →</a>
 </div></section>
 
@@ -180,7 +185,7 @@ canvas.egg.pop{animation:pop .5s steps(4)}
   <div class="band"><canvas class="scene" data-s="palacio" aria-hidden="true"></canvas><canvas class="egg " data-e="casal" style="left:3%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">Por quê</div>
-  <h2>O Natal provou o modelo; falta o do inverno</h2>
+  <h2>Depois do Natal agora o Inverno</h2>
   </div>
   <div class="body">
     <div class="kpis">
@@ -224,10 +229,10 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 </div></section>
 
 <section class="slide" id="s4"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="carregar" aria-hidden="true"></canvas><canvas class="egg " data-e="gemeas" style="left:3%" title="?"></canvas><canvas class="egg " data-e="leao" style="left:70%" title="?"></canvas><canvas class="egg " data-e="paquita" style="left:92%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="carregar" aria-hidden="true"></canvas><canvas class="egg " data-e="gemeas" style="left:3%" title="?"></canvas><canvas class="egg " data-e="leao" style="left:70%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">EAP</div>
-  <h2>Cinco entregas, 21 pacotes de trabalho</h2>
+  <h2>5 macro entregas</h2>
   </div>
   <div class="wbs">
     <div class="root">1. Winterfood Curitiba</div>
@@ -240,13 +245,14 @@ canvas.egg.pop{animation:pop .5s steps(4)}
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#eap">EAP completa →</a>
+  <canvas class="egg chao" data-e="paquita" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s5"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="fogo" aria-hidden="true"></canvas><canvas class="egg walk" data-e="corrida" style="left:2%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="fogo" aria-hidden="true"></canvas><canvas class="egg walk" data-e="corrida" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="bike" style="left:60%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">Cronograma</div>
-  <h2>29 semanas; o crítico é patrocínio e mídia</h2>
+  <h2>A mídia é o caminho crítico</h2>
   </div>
   <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
   <div class="gt" id="gt"></div>
@@ -257,7 +263,7 @@ canvas.egg.pop{animation:pop .5s steps(4)}
   <div class="band"><canvas class="scene" data-s="ingredientes" aria-hidden="true"></canvas><canvas class="egg " data-e="rock" style="left:3%" title="?"></canvas><canvas class="egg " data-e="massagem" style="left:84%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">Plano de Gestão de Riscos · 1/2</div>
-  <h2>Matriz de severidade: probabilidade × impacto</h2>
+  <h2>Matriz de severidade</h2>
   </div>
   <div class="cols c2" style="grid-template-columns:1.1fr 1fr">
     <div class="mx">
@@ -382,7 +388,8 @@ addEventListener("wheel",e=>{const p=e.target.closest(".panel");if(p&&p.scrollHe
 let tx=null;addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});
 addEventListener("touchend",e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(cur+(d<0?1:-1));tx=null;});
 addEventListener("resize",()=>go(cur));
-track.style.transition="none";go(Math.max(0,(parseInt((location.hash||"").replace("#s",""))||1)-1));requestAnimationFrame(()=>requestAnimationFrame(()=>track.style.transition=""));
+track.style.transition="none";document.getElementById("start").onclick=()=>go(1);
+go(Math.max(0,(parseInt((location.hash||"").replace("#s",""))||1)-1));requestAnimationFrame(()=>requestAnimationFrame(()=>track.style.transition=""));
 </script>
 <script>
 /* ===== Pixel art: cenas e easter eggs desenhados em canvas, em pixels lógicos ampliados ===== */
@@ -420,7 +427,7 @@ const EGGS={
    R(g,10,6,1,5,"#e2b33c");R(g,11,10,2,1,"#e2b33c");R(g,12,8,2,2,"#e2b33c");R(g,9,6,1,1,"#e2b33c");
    note(g,15+(f?1:0),2-(t%3),"#2a2a2a");note(g,18,(t%4)+1,"#2a2a2a");}},
  duas:{w:20,h:15,name:"Duas amigas caminhando",d:(g,t)=>{const f=t%2;person(g,2,1,{long:1,hair:"#c9a227",shirt:"#d9534f",walk:1},f);person(g,11,1,{long:1,hair:"#2b1b10",shirt:"#4a9a6b",walk:1,skin:SK[1]},1-f);}},
- corrida:{w:28,h:15,name:"Três corredores",d:(g,t)=>{const f=t%2;[0,9,18].forEach((x,i)=>person(g,x+1,1,{shirt:["#ff7a00","#2a9df4","#c0392b"][i],hair:["#222","#8a5a2b","#e0c070"][i],pants:"#111",walk:1,bob:1,skin:SK[i]},(f+i)%2));}},
+ corrida:{w:28,h:15,name:"Três corredores",d:(g,t)=>{const f=t%2;[0,9,18].forEach((x,i)=>person(g,x+1,1,{shirt:["#ff7a00","#2a9df4","#c0392b"][i],hair:["#222","#8a5a2b","#e0c070"][i],pants:["#1f2f4a","#111","#2c3e50"][i],legs:SK[i],feet:"#f4f4f4",walk:1,bob:1,skin:SK[i]},(f+i)%2));}},
  remo:{w:28,h:14,name:"Remadora",d:(g,t)=>{const f=t%2;R(g,0,11,28,3,"#4a90c2");R(g,4,10,18,2,"#c84a2b");R(g,5,12,16,1,"#8a2f1c");
    R(g,11,4,4,1,"#3b2a1e");R(g,11,5,4,3,SK[0]);R(g,11,8,4,3,"#ffcc00");
    if(f){R(g,6,9,8,1,"#6b4a2b");R(g,15,9,8,1,"#6b4a2b");}else{R(g,3,11,11,1,"#6b4a2b");R(g,15,11,11,1,"#6b4a2b");}}},
@@ -438,10 +445,20 @@ const EGGS={
    if(f){R(g,13,0,1,2,"#e2b33c");R(g,1,1,1,2,"#e2b33c");}}},
  gemeas:{w:22,h:15,name:"Mãe com as gêmeas",d:(g,t)=>{const f=t%2;person(g,8,1,{long:1,hair:"#6b3e1f",shirt:"#e67e22",skin:SK[1],walk:1},f);
    kid(g,2,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);kid(g,16,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);R(g,1,6,1,1,"#ff4081");R(g,15,6,1,1,"#ff4081");}},
- paquita:{w:14,h:17,name:"Paquita",d:(g,t)=>{const f=t%2;R(g,4,1,6,1,"#fff");R(g,5,0,4,1,"#fff");R(g,6,1,2,1,"#e74c3c");
-   person(g,4,3,{long:1,longLen:6,hair:"#f2d16b",shirt:"#fff",sleeve:"#fff",skirt:"#fff",pants:"#fff",legs:SK[0],feet:"#e74c3c",
-   print:(g,x,y)=>{R(g,x+1,y+4,4,1,"#e74c3c");R(g,x+2,y+6,2,1,"#e74c3c");}},0);
-   R(g,4,15,1,1,"#e74c3c");R(g,9,15,1,1,"#e74c3c");if(f){R(g,2,4,2,1,SK[0]);R(g,10,4,2,1,SK[0]);}}},
+ paquita:{w:44,h:24,name:"Paquita e a nave da Xuxa",d:(g,t)=>{
+   const x=3,y=2,f=t%2,sk=SK[0],bl="#2441c9",gd="#e8c13a";
+   R(g,x+3,y,2,1,"#ffd400");R(g,x+2,y+1,4,1,"#ffd400");
+   R(g,x+1,y+2,6,3,bl);R(g,x+2,y+3,4,1,gd);R(g,x+1,y+5,6,1,"#d8dde3");
+   R(g,x,y+6,1,7,"#f2d16b");R(g,x+7,y+6,1,7,"#f2d16b");R(g,x+1,y+6,6,1,"#f2d16b");R(g,x+1,y+7,6,3,sk);R(g,x+2,y+8,1,1,"#2a1d14");R(g,x+5,y+8,1,1,"#2a1d14");R(g,x+3,y+9,2,1,"#c0392b");
+   R(g,x+1,y+10,6,5,bl);R(g,x+4,y+10,1,5,gd);R(g,x+2,y+11,2,1,gd);R(g,x+5,y+11,2,1,gd);R(g,x+2,y+13,2,1,gd);R(g,x+5,y+13,2,1,gd);
+   R(g,x-1,y+11,1,3,bl);R(g,x+8,y+11,1,3,bl);R(g,x,y+14,1,1,sk);R(g,x+7,y+14,1,1,sk);
+   R(g,x+1,y+15,6,2,"#f4f4f4");R(g,x+1,y+16,6,1,"#c8ccd2");R(g,x+2,y+17,1,2,sk);R(g,x+5,y+17,1,2,sk);R(g,x+1,y+19,3,3,"#f4f4f4");R(g,x+4,y+19,3,3,"#f4f4f4");R(g,x+1,y+21,6,1,"#aab0b8");R(g,x+3,y+19,1,3,"#c8ccd2");
+   const k=t%40, ny=k<16?-12+k:4, nx=16;
+   R(g,nx+6,ny+1,16,3,"#f7a8c8");R(g,nx+3,ny+4,22,4,"#f48fb1");R(g,nx+1,ny+8,26,4,"#ec6fa0");R(g,nx+4,ny+12,20,2,"#d94f86");
+   R(g,nx+9,ny+5,10,2,"#d81b3c");R(g,nx+11,ny+4,2,1,"#d81b3c");R(g,nx+15,ny+4,2,1,"#d81b3c");R(g,nx+10,ny+7,8,1,"#a3122b");
+   for(let i=0;i<7;i++)R(g,nx+2+i*4,ny+10,1,1,["#ffd34d","#fff","#ff4d4d"][(i+t)%3]);
+   if(k<16){R(g,nx+8,ny+14,1,2,"#9fd3ff");R(g,nx+19,ny+14,1,2,"#9fd3ff");}else{R(g,nx+5,ny+14,1,4,"#888");R(g,nx+22,ny+14,1,4,"#888");}
+   if(k>18&&f){R(g,nx+12,ny+15,4,1,"#ffd34d");}}},
  casal:{w:22,h:17,name:"Casal apaixonado",d:(g,t)=>{person(g,3,4,{shirt:"#2980b9",hair:"#2b1b10"});person(g,12,4,{long:1,hair:"#a0522d",shirt:"#e84393",skin:SK[2]});
    for(let i=0;i<4;i++){const k=(t+i*2)%8;heart(g,8+((i*5)%7)-2,3-k+ (i%2),"#e23b5a");}}},
  massagem:{w:26,h:15,name:"Massagem no pé",d:(g,t)=>{const f=t%2;R(g,1,9,9,2,"#8b5a2b");R(g,1,11,1,3,"#8b5a2b");R(g,8,11,1,3,"#8b5a2b");
@@ -492,7 +509,7 @@ const SCENES={
    for(let i=0;i<58;i++){const x=2+i*4.4,j=(i*7)%5,up=(i+t)%6===0;R(g,x,27-j%2,3,2,SK[i%4]);R(g,x,29-j%2,3,3,["#c0392b","#2980b9","#27ae60","#8e44ad","#f39c12","#ecf0f1"][i%6]);if(up){R(g,x+3,24,1,3,SK[i%4]);R(g,x+3,23,1,1,"#fff");}}}},
  /* Caminhão visto de lado saindo da zona rural, carroceria cheia de verduras */
  caminhao:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#cfe8ff","#cfe8ff");R(g,0,18,256,10,"#9cc58a");R(g,0,22,256,6,"#7fb069");
-   const off=(t*2)%64;
+   const off=0;
    for(let k=-1;k<6;k++){const x=k*64-off;arv(g,x+10,24,16);tree(g,x+30,24,9);arv(g,x+46,24,12);tree(g,x+56,24,7,"#3c8a3c");}
    R(g,0,27,256,5,"#7d6a55");R(g,0,29,256,1,"#a1846a");
    const tx=((t*2)%300)-50;
@@ -509,7 +526,7 @@ const SCENES={
    person(g,x+46,15,{shirt:"#27ae60",hair:"#e0c070",walk:1},f);R(g,x+44,20,3,1,"#7a4b2e");R(g,x+5,19,4,1,"#2b2b2b");R(g,x+33,19,4,1,"#2b2b2b");
    if(f) R(g,x+20,3,2,1,"#888");}},
  /* 5: acendendo o fogo */
- fogo:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#2b2140","#2b2140");stars(g,256,12,t,20);ground(g,256,32,"#4a3a2a");
+ fogo:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#cfe8ff","#cfe8ff");R(g,226,3,8,8,"#ffd34d");R(g,224,5,12,4,"#ffd34d");R(g,30,5,18,4,"#fff");R(g,34,3,10,2,"#fff");R(g,150,4,16,3,"#fff");ground(g,256,32,"#7fb069");
    const k=Math.min(t%14,8);pot(g,118,10,28,0,k>2,t);
    for(let i=0;i<6;i++)R(g,116+i*5,27-((i%2)),6,2,"#6b3e1f");
    if(k<=2){R(g,103,18,4,1,"#8b5a2b");R(g,107,17,1,1,"#ffd34d");}
@@ -563,7 +580,8 @@ function renderGallery(){const gal=document.getElementById("gallery");if(!gal)re
     if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#2a3440";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
   const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===EGG_ORDER.length?`Você achou todos os ${EGG_ORDER.length}! A equipe agradece.`:`Você achou ${FOUND.size} de ${EGG_ORDER.length} personagens escondidos nos slides.`;}
 function sizeEggs(){document.querySelectorAll(".band").forEach(b=>{const sc=b.querySelector("canvas.scene");if(!sc||!sc.width)return;const k=b.clientWidth/sc.width;
-  b.querySelectorAll("canvas.egg").forEach(c=>{c.style.width=(EGGS[c.dataset.e].w*k)+"px";});});}
+  b.querySelectorAll("canvas.egg").forEach(c=>{c.style.width=(EGGS[c.dataset.e].w*k)+"px";});});
+  document.querySelectorAll("canvas.egg.chao").forEach(c=>{const fr=c.closest(".frame");c.style.width=(EGGS[c.dataset.e].w*fr.clientWidth/256*.6)+"px";});}
 mount();sizeEggs();addEventListener("resize",sizeEggs);renderGallery();loop();
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(loop,220);
 
