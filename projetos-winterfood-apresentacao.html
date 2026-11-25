@@ -30,6 +30,7 @@ a{color:var(--accent)}
   padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
 .kicker{font:400 .5em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
 h1,h2{font-family:"Pixelify Sans",var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
+h2{font-size:1.65em}
 h1{font-size:3.3em} h2{font-size:2em}
 .sub{color:var(--muted);font-size:1.05em;margin:0}
 .body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1em}
@@ -60,10 +61,18 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .smk div{display:flex;gap:.45em;align-items:flex-start}.smk .lt{font-size:1.1em;flex:none;margin:0;vertical-align:0}
 .smk b{color:var(--ink)}
 /* Mini canvas clicável */
-.mc{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2em;flex:1;min-height:0}
-.mini{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto repeat(6,1fr);gap:.3em;font-size:.68em}
+.mc{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2em;flex:1;min-height:0;overflow:hidden}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto repeat(6,minmax(0,1fr));gap:.3em;font-size:.6em;min-height:0}
 .mini .hd{font:700 .85em var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
-.mini button{font:600 1em var(--body);text-align:left;border:1px solid rgba(0,0,0,.08);border-radius:6px;padding:.35em .5em;cursor:pointer;color:var(--ink);display:flex;align-items:flex-start}
+.mini button{font:600 1em var(--body);text-align:left;border:3px solid #8b6b3d;border-style:dashed;border-radius:2px;padding:.25em .35em;min-height:0;overflow:hidden;cursor:pointer;color:var(--ink);display:flex;align-items:flex-start;image-rendering:pixelated}
+.mini button span{background:rgba(255,255,255,.88);padding:.1em .35em;border-radius:2px}
+.mini button.why{background:repeating-linear-gradient(0deg,#c98a52 0 4px,#a86a3a 4px 7px)}
+.mini button.what{background:repeating-linear-gradient(90deg,#7fb069 0 5px,#5e9450 5px 8px)}
+.mini button.who{background:repeating-linear-gradient(45deg,#e8cf6a 0 4px,#d6b84e 4px 7px)}
+.mini button.how{background:radial-gradient(#7a9a6a 1.5px,transparent 2px) 0 0/8px 8px,#a9c49a}
+.mini button.when{background:repeating-linear-gradient(0deg,#9bc4a0 0 3px,#86b08b 3px 6px)}
+.mini{background:#6b8f4e;padding:.35em;border-radius:4px}
+.mini .hd{color:#fff}
 .mini button:hover{outline:2px solid var(--accent)}
 .mini button[aria-pressed="true"]{outline:3px solid var(--ink)}
 .panel{border-radius:10px;padding:1em 1.2em;overflow:auto;font-size:.88em}
@@ -73,9 +82,9 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .chip{position:relative;cursor:default}
 .chip[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:50%;bottom:130%;transform:translateX(-50%);background:var(--ink);color:#fff;font:600 .95em var(--body);padding:.35em .6em;border-radius:6px;white-space:nowrap;z-index:3;box-shadow:0 3px 10px rgba(0,0,0,.2)}
 /* Cronograma da comunicação */
-.ct{display:grid;grid-template-columns:17em 1fr;font-size:.6em;align-items:center}
+.ct{display:grid;grid-template-columns:19em 1fr;font-size:.52em;align-items:center}
 .ct .nm{padding:.25em 0;border-bottom:1px solid var(--line);display:flex;gap:.4em}.ct .nm b{color:var(--warm)}
-.ct .rw{position:relative;height:100%;min-height:1.75em;border-bottom:1px solid var(--line);background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
+.ct .rw{position:relative;height:100%;min-height:1.55em;border-bottom:1px solid var(--line);background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
 .ct .d{position:absolute;top:50%;width:.6em;height:.6em;margin:-.3em 0 0 -.3em;border-radius:50%;background:var(--warm)}
 .ct .ln{position:absolute;top:50%;height:2px;margin-top:-1px;background:var(--warm);opacity:.4}
 .ct .bd{position:absolute;top:25%;height:50%;border-radius:4px;background:var(--warm);color:#fff;font-size:.85em;font-weight:700;padding-left:.4em;display:flex;align-items:center}
@@ -88,7 +97,7 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .lv2 b{display:block;background:var(--soft);padding:.35em .6em}
 .lv2 ul{padding:.3em .6em .4em 1.6em}
 /* Gantt simplificado */
-.gt{display:grid;grid-template-columns:12em 1fr;font-size:.68em;row-gap:.3em;align-items:center}
+.gt{display:grid;grid-template-columns:14em 1fr;font-size:.58em;row-gap:.25em;align-items:center}
 .gt .bar{position:relative;height:1.3em;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
 .gt .bar i{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--accent)}
 .gt .bar i.c{background:var(--crit)}
@@ -108,10 +117,16 @@ th{background:var(--soft)} td.r,th.r{text-align:right;font-variant-numeric:tabul
 tr.t td{font-weight:700;border-top:2px solid var(--ink)}
 /* Cabeçalho com cena em pixel art */
 .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2em}
+.hdr{display:flex;flex-direction:column;gap:.35em}
 .hd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:.5em}
-canvas.scene{flex:none;width:30%;image-rendering:pixelated;border:3px solid var(--ink);border-radius:4px;background:#fff}
-.cover canvas.scene{border:0;background:transparent;width:60%;margin:-2% 0 -1% -1%}
-canvas.egg{position:absolute;bottom:1.6%;z-index:4;cursor:pointer;image-rendering:pixelated;filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
+.band{position:relative;flex:none;line-height:0}
+.band canvas.scene{width:100%;height:auto;image-rendering:pixelated;border:3px solid var(--ink);border-radius:4px;display:block}
+.cover .band canvas.scene{border-color:rgba(255,255,255,.35)}
+canvas.scene{image-rendering:pixelated}
+.band .say{position:absolute;top:6%;transform:translateX(-10%);background:#fff;color:#111;font:400 clamp(8px,.75vw,12px) "Press Start 2P",monospace;line-height:1.4;padding:.5em .7em;border:3px solid #111;white-space:nowrap;z-index:5}
+.band .say::after{content:"";position:absolute;left:18px;bottom:-9px;border:6px solid transparent;border-top-color:#111}
+
+canvas.egg{position:absolute;bottom:3px;z-index:4;cursor:pointer;image-rendering:pixelated;filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
 canvas.egg.walk{animation:walk 18s linear infinite alternate}
 @keyframes walk{from{transform:translateX(0)}to{transform:translateX(min(30vw,420px))}}
 canvas.egg.pop{animation:pop .5s steps(4)}
@@ -152,20 +167,21 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="track">
 <section class="slide" id="s1"><div class="frame cover">
-  <canvas class="scene" data-s="palacio" aria-hidden="true"></canvas>
+  <div class="band"><canvas class="scene" data-s="barigui" aria-hidden="true"></canvas><canvas class="egg walk" data-e="bike" style="left:2%" title="?"></canvas><canvas class="egg " data-e="remo" style="left:42%" title="?"></canvas></div>
+  
   <div class="kicker">Gerenciamento de Projetos do Setor Público · IMAP</div>
   <h1>Winterfood Curitiba</h1>
   <p class="sub">Festival gastronômico de inverno em rede de restaurantes, para estender a temporada turística de Curitiba aos meses de frio.</p>
   <p class="team"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
   <a class="more" href="projetos-winterfood.html">Página completa do projeto →</a>
-  <canvas class="egg " data-e="casal" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s2"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="palacio" aria-hidden="true"></canvas><canvas class="egg " data-e="casal" style="left:3%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">Por quê</div>
-  <h2>O Natal provou o modelo. O inverno ainda não tem o seu evento.</h2>
-  </div><canvas class="scene" data-s="fazenda" aria-hidden="true"></canvas></div>
+  <h2>O Natal provou o modelo; falta o do inverno</h2>
+  </div>
   <div class="body">
     <div class="kpis">
       <div class="card"><div class="big">469,8 mil</div>turistas no Natal de Curitiba 2025</div>
@@ -176,45 +192,43 @@ canvas.egg.pop{animation:pop .5s steps(4)}
       <p class="smart" style="margin:.2em 0 0"><span class="sm cS">Realizar o Winterfood Curitiba</span> <span class="sm cT">durante 4 semanas no primeiro inverno após a aprovação</span>, <span class="sm cA">com 50 restaurantes</span>, <span class="sm cM">55 mil pratos vendidos</span> e <span class="sm cR">+10% de turistas no período sobre o ano anterior</span>, <span class="sm cM">medido pelo BI de Turismo e pelo Passaporte do Turista</span>.</p></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-porque">Justificativa e benchmarks →</a>
-  <canvas class="egg walk" data-e="bike" style="left:4%" title="?"></canvas>
-  <canvas class="egg " data-e="remo" style="left:40%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s3"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="caminhao" aria-hidden="true"></canvas><canvas class="egg " data-e="abelhas" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="duas" style="left:62%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">PM Canvas</div>
-  <h2>O projeto em uma tela</h2>
-  <p class="sub" style="font-size:.75em">Clique num bloco para ler o conteúdo.</p>
-  </div><canvas class="scene" data-s="araucaria" aria-hidden="true"></canvas></div>
+  <h2>O projeto em uma tela <span class="sub" style="font:500 .4em var(--body)">clique num terreno para ler</span></h2>
+  
+  </div>
   <div class="mc">
     <div class="mini" id="mini">
       <div class="hd">Por quê?</div><div class="hd">O quê?</div><div class="hd">Quem?</div><div class="hd">Como?</div><div class="hd">Quanto e quando?</div>
-      <button class="why" data-k="just" style="grid-column:1;grid-row:2/4">Justificativas</button>
-      <button class="why" data-k="obj" style="grid-column:1;grid-row:4/6">Objetivo SMART</button>
-      <button class="why" data-k="res" style="grid-column:1;grid-row:6/8">Resultados esperados</button>
-      <button class="what" data-k="prod" style="grid-column:2;grid-row:2/5">Produto</button>
-      <button class="what" data-k="req" style="grid-column:2;grid-row:5/8">Principais requisitos</button>
-      <button class="who" data-k="pat" style="grid-column:3;grid-row:2/3">Patrocinador</button>
-      <button class="who" data-k="areas" style="grid-column:3;grid-row:3/5">Áreas envolvidas</button>
-      <button class="who" data-k="ext" style="grid-column:3;grid-row:5/6">Partes externas</button>
-      <button class="how" data-k="prem" style="grid-column:4;grid-row:2/4">Premissas</button>
-      <button class="how" data-k="restr" style="grid-column:4;grid-row:4/6">Restrições</button>
-      <button class="when" data-k="risc" style="grid-column:5;grid-row:2/4">Riscos</button>
-      <button class="when" data-k="cust" style="grid-column:5;grid-row:4/6">Custos</button>
-      <button class="when" data-k="entr" style="grid-column:3/6;grid-row:6/8">Entregas e prazos</button>
+      <button class="why" data-k="just" style="grid-column:1;grid-row:2/4"><span>Justificativas</span></button>
+      <button class="why" data-k="obj" style="grid-column:1;grid-row:4/6"><span>Objetivo SMART</span></button>
+      <button class="why" data-k="res" style="grid-column:1;grid-row:6/8"><span>Resultados esperados</span></button>
+      <button class="what" data-k="prod" style="grid-column:2;grid-row:2/5"><span>Produto</span></button>
+      <button class="what" data-k="req" style="grid-column:2;grid-row:5/8"><span>Principais requisitos</span></button>
+      <button class="who" data-k="pat" style="grid-column:3;grid-row:2/3"><span>Patrocinador</span></button>
+      <button class="who" data-k="areas" style="grid-column:3;grid-row:3/5"><span>Áreas envolvidas</span></button>
+      <button class="who" data-k="ext" style="grid-column:3;grid-row:5/6"><span>Partes externas</span></button>
+      <button class="how" data-k="prem" style="grid-column:4;grid-row:2/4"><span>Premissas</span></button>
+      <button class="how" data-k="restr" style="grid-column:4;grid-row:4/6"><span>Restrições</span></button>
+      <button class="when" data-k="risc" style="grid-column:5;grid-row:2/4"><span>Riscos</span></button>
+      <button class="when" data-k="cust" style="grid-column:5;grid-row:4/6"><span>Custos</span></button>
+      <button class="when" data-k="entr" style="grid-column:3/6;grid-row:6/8"><span>Entregas e prazos</span></button>
     </div>
     <div class="panel why" id="panel" aria-live="polite"></div>
   </div>
   <a class="more" href="projetos-winterfood.html#canvas">Abrir o canvas completo →</a>
-  <canvas class="egg " data-e="abelhas" style="left:4%" title="?"></canvas>
-  <canvas class="egg walk" data-e="duas" style="left:22%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s4"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="carregar" aria-hidden="true"></canvas><canvas class="egg " data-e="gemeas" style="left:3%" title="?"></canvas><canvas class="egg " data-e="leao" style="left:70%" title="?"></canvas><canvas class="egg " data-e="paquita" style="left:92%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">EAP</div>
   <h2>Cinco entregas, 21 pacotes de trabalho</h2>
-  </div><canvas class="scene" data-s="blocos" aria-hidden="true"></canvas></div>
+  </div>
   <div class="wbs">
     <div class="root">1. Winterfood Curitiba</div>
     <div class="lv2">
@@ -226,26 +240,25 @@ canvas.egg.pop{animation:pop .5s steps(4)}
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#eap">EAP completa →</a>
-  <canvas class="egg " data-e="gemeas" style="left:4%" title="?"></canvas>
-  <canvas class="egg " data-e="paquita" style="left:30%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s5"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="fogo" aria-hidden="true"></canvas><canvas class="egg walk" data-e="corrida" style="left:2%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">Cronograma</div>
-  <h2>29 semanas; o caminho crítico passa pelo patrocínio e pela mídia</h2>
-  </div><canvas class="scene" data-s="onibus" aria-hidden="true"></canvas></div>
+  <h2>29 semanas; o crítico é patrocínio e mídia</h2>
+  </div>
   <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
   <div class="gt" id="gt"></div>
   <a class="more" href="projetos-winterfood.html#cronograma">Gantt e caminho crítico →</a>
-  <canvas class="egg walk" data-e="corrida" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s6"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="ingredientes" aria-hidden="true"></canvas><canvas class="egg " data-e="rock" style="left:3%" title="?"></canvas><canvas class="egg " data-e="massagem" style="left:84%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">Plano de Gestão de Riscos · 1/2</div>
   <h2>Matriz de severidade: probabilidade × impacto</h2>
-  </div><canvas class="scene" data-s="chuva" aria-hidden="true"></canvas></div>
+  </div>
   <div class="cols c2" style="grid-template-columns:1.1fr 1fr">
     <div class="mx">
       <div class="y">P3</div><div class="cell m"></div><div class="cell h"><span class="chip" tabindex="0" title="R01 · Inverno quente ou chuvoso · prioridade 4" data-tip="R01 · Inverno quente ou chuvoso · prioridade 4">R01</span><span class="chip" tabindex="0" title="R05 · Pouca oferta de lámen · prioridade 5" data-tip="R05 · Pouca oferta de lámen · prioridade 5">R05</span></div><div class="cell h"></div>
@@ -264,15 +277,14 @@ canvas.egg.pop{animation:pop .5s steps(4)}
     <p class="sub" style="font-size:.7em;margin-top:.6em">Os três têm severidade 6 (P2 × I3). Passe o mouse sobre os itens da matriz para ver nome e prioridade.</p></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-riscos">Os 16 riscos →</a>
-  <canvas class="egg " data-e="rock" style="left:4%" title="?"></canvas>
-  <canvas class="egg " data-e="massagem" style="left:24%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s7"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="mexer" aria-hidden="true"></canvas><canvas class="egg " data-e="cafe" style="left:93%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">Plano de Gestão de Riscos · 2/2</div>
-  <h2>Exposição de R$ 73,5 mil; reservas cobrem cerca de 76%</h2>
-  </div><canvas class="scene" data-s="cofre" aria-hidden="true"></canvas></div>
+  <h2>Exposição de R$ 73,5 mil; reservas cobrem 76%</h2>
+  </div>
   <div class="cols c2" style="grid-template-columns:1.5fr 1fr">
     <table style="font-size:.75em">
       <thead><tr><th>Risco</th><th class="r">Prob.</th><th class="r">Impacto</th><th class="r">VME</th></tr></thead>
@@ -293,17 +305,16 @@ canvas.egg.pop{animation:pop .5s steps(4)}
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-riscos">Plano de riscos completo →</a>
-  <canvas class="egg " data-e="cafe" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s8"><div class="frame">
-  <div class="hd"><div>
+  <div class="band"><canvas class="scene" data-s="barracas" aria-hidden="true"></canvas><canvas class="egg " data-e="sax" style="left:93%" title="?"></canvas></div>
+  <div class="hdr">
   <div class="kicker">Plano de Comunicação</div>
   <h2>Quando cada comunicação acontece</h2>
-  </div><canvas class="scene" data-s="torre" aria-hidden="true"></canvas></div>
+  </div>
   <div class="ct" id="ct"></div>
   <a class="more" href="projetos-winterfood.html#crono-comunicacao">Plano completo e sobreposição ao cronograma →</a>
-  <canvas class="egg " data-e="sax" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s9"><div class="frame cover end">
@@ -322,7 +333,7 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 <div class="hud" role="navigation" aria-label="Navegação dos slides">
   <a href="projetos-winterfood.html">◀ PROJETO</a><span>WINTERFOOD.EXE</span>
   <div class="prog" id="prog"></div>
-  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/12</span></span>
+  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/13</span></span>
   <button class="arr" id="prev" aria-label="Slide anterior">◀</button><span id="pos">1/9</span><button class="arr" id="next" aria-label="Próximo slide">▶</button>
 </div>
 <div id="toast" role="status"></div>
@@ -418,7 +429,7 @@ const EGGS={
    R(g,8,1,4,1,"#e74c3c");R(g,8,2,4,3,SK[1]);R(g,8,5,4,4,"#2ecc71");R(g,11,6,4,1,"#2ecc71");R(g,f?8:10,9,1,2,"#1f2f4a");R(g,f?10:8,9,1,3,"#1f2f4a");}},
  cafe:{w:18,h:15,name:"Hora do café",d:(g,t)=>{person(g,3,2,{shirt:"#8e5a3c",hair:"#111",beard:0,skin:SK[1],noArms:1});R(g,2,6,1,3,"#8e5a3c");R(g,9,6,3,1,"#8e5a3c");
    R(g,11,4,3,3,"#fff");R(g,14,5,1,1,"#fff");R(g,12,4,1,1,"#5a3a1a");const s=t%3;R(g,12,2-s%2,1,1,"#ccc");R(g,13,1+s%2,1,1,"#ccc");}},
- abelhas:{w:24,h:16,name:"Apicultora",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666"});R(g,3,3,4,2,"#9aa3a9");
+ abelhas:{w:24,h:16,name:"Apicultor",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666",beard:"#6b4a2b"});R(g,2,2,6,1,"#e0e0e0");R(g,3,3,4,1,"#9aa3a9");
    R(g,13,7,8,3,"#d9a441");R(g,13,10,8,4,"#b8862e");R(g,12,6,10,1,"#7a5a2a");R(g,16,11,2,1,"#3a2a10");
    for(let i=0;i<5;i++){const a=t*0.9+i*1.7;const x=17+Math.cos(a)*6,y=5+Math.sin(a*1.3)*4;R(g,x,y,1,1,"#111");R(g,x+1,y,1,1,"#ffcc00");}}},
  rock:{w:16,h:16,name:"Headbanger",d:(g,t)=>{const f=t%2;person(g,5,2+(f?1:0),{long:1,longLen:f?7:5,hair:"#111",shirt:"#111",sleeve:"#111",pants:"#3a4a6a",
@@ -438,73 +449,93 @@ const EGGS={
    if(f) R(g,2,4,1,1,"#ccc");
    R(g,17,3,4,1,"#3b2a1e");R(g,17,4,4,2,SK[1]);R(g,17,6,4,2,"#3b2a1e");R(g,17,8,4,4,"#27ae60");R(g,16+(f?0:1),8,1,2,SK[1]);R(g,17,12,5,2,"#2c3440");}}
 };
-const EGG_ORDER=["casal","bike","remo","abelhas","duas","gemeas","paquita","corrida","rock","massagem","cafe","sax"];
+EGGS.leao={w:34,h:17,name:"O domador e o leão",say:"Ele é terribili",d:(g,t)=>{const f=t%3===0;
+   person(g,2,4,{shirt:"#7b5e3b",hair:"#3b2a1e",beard:"#3b2a1e",pants:"#2c3440"});R(g,8,8,3,1,"#7b5e3b");
+   R(g,14,8,14,6,"#e1a73b");R(g,15,14,2,3,"#c98d26");R(g,25,14,2,3,"#c98d26");R(g,27,9,3,1,"#e1a73b");R(g,30,8,1,1,"#7a4b2e");
+   R(g,10,3,9,10,"#8a4b1f");R(g,9,5,1,6,"#8a4b1f");R(g,11,5,6,6,"#e1a73b");R(g,12,6,1,1,"#111");R(g,15,6,1,1,"#111");R(g,13,8,2,1,"#5a2d16");
+   if(f){R(g,12,9,4,2,"#5a1010");R(g,12,9,1,1,"#fff");R(g,15,9,1,1,"#fff");R(g,6,3,2,1,"#c0392b");R(g,5,6,2,1,"#c0392b");R(g,6,9,2,1,"#c0392b");}else R(g,12,10,4,1,"#5a2d16");}};
+const EGG_ORDER=["bike","remo","casal","abelhas","duas","gemeas","paquita","leao","corrida","rock","massagem","cafe","sax"];
 
-/* ---------- Cenas ---------- */
+/* ---------- Cenas (faixa no alto de cada slide) ---------- */
 const stars=(g,w,h,t,n=24)=>{for(let i=0;i<n;i++){const x=(i*53)%w,y=(i*29)%h;if((i+t)%5) R(g,x,y,1,1,"#cfd8ff");}};
+const sky=(g,w,h,c1,c2)=>{R(g,0,0,w,h,c1);R(g,0,Math.round(h*.45),w,Math.round(h*.55),c2);};
+/* Caldeirão: x,y canto superior; w largura */
+function pot(g,x,y,w=18,full=0,fire=0,t=0){
+  if(fire){for(let i=0;i<w;i+=3){const h=2+((i+t)%3);R(g,x+i,y+13-h,2,h,(i+t)%2?"#ff9f1a":"#ffd34d");}R(g,x+1,y+13,w-2,2,"#6b3e1f");}
+  R(g,x,y+1,w,1,"#2b2b2b");R(g,x+1,y+2,w-2,8,"#1e1e1e");R(g,x+2,y+10,w-4,2,"#1e1e1e");R(g,x+2,y+3,1,5,"#444");
+  R(g,x-1,y+3,1,2,"#2b2b2b");R(g,x+w,y+3,1,2,"#2b2b2b");
+  if(full){R(g,x+1,y+1,w-2,1,"#e6a23c");R(g,x+3,y+1,1,1,"#2ecc71");R(g,x+w-5,y+1,1,1,"#7a4b2e");}
+}
+const steam=(g,x,y,t,n=3)=>{for(let i=0;i<n;i++){const yy=y-((t+i*2)%6);R(g,x+i*4+((t+i)%2),yy,1,2,"rgba(255,255,255,.85)");}};
+const ground=(g,w,h,c="#7fb069")=>{R(g,0,h-4,w,4,c);R(g,0,h-4,w,1,"rgba(0,0,0,.15)");};
+const tree=(g,x,base,h,c="#2d6e3e")=>{R(g,x+2,base-h+5,2,h-5,"#5a3a1a");R(g,x,base-h,6,6,c);R(g,x+1,base-h-1,4,1,c);};
+const arv=(g,x,base,h)=>{R(g,x,base-h,2,h,"#5a3a1a");for(let k=0;k<4;k++){const y=base-h+k*3,w=14-k*3;R(g,x-w/2+1,y,w,2,"#2d5a3a");R(g,x-w/2,y-1,2,1,"#2d5a3a");R(g,x+w/2,y-1,2,1,"#2d5a3a");}};
+
 const SCENES={
- /* Palácio Avenida no Natal, Papai Noel de trenó e o público na rua */
- palacio:{w:200,h:64,d:(g,t)=>{g.clearRect(0,0,200,64);stars(g,200,30,t,30);
-   const bx=62;R(g,bx,14,76,40,"#efe3c4");R(g,bx-2,13,80,2,"#d8c79e");R(g,bx-2,30,80,1,"#d8c79e");R(g,bx+30,8,16,6,"#efe3c4");R(g,bx+34,5,8,3,"#d8c79e");R(g,bx+37,3,2,2,"#ffd34d");
-   for(let r=0;r<3;r++)for(let c=0;c<9;c++){const x=bx+3+c*8,y=17+r*12;R(g,x,y+1,5,7,"#ffcf4a");R(g,x+1,y,3,1,"#ffcf4a");R(g,x+1,y+3,3,2,SK[(c+r)%4]);R(g,x+1,y+5,3,3,(c+r)%2?"#c0392b":"#fff");}
-   for(let i=0;i<40;i++){const x=bx-2+i*2;R(g,x,12,1,1,["#ff4d4d","#4dff88","#ffd34d","#6ab0ff"][(i+t)%4]);}
-   for(let i=0;i<20;i++){R(g,bx-3,13+i*2,1,1,["#ff4d4d","#4dff88","#ffd34d"][(i+t)%3]);R(g,bx+78,13+i*2,1,1,["#ffd34d","#ff4d4d","#4dff88"][(i+t)%3]);}
-   [[30,40],[170,40]].forEach(([x,y])=>{R(g,x-1,y+8,2,6,"#5a3a1a");for(let k=0;k<4;k++)R(g,x-1-k*2,y+k*2,2+k*4,2,"#1e6b3a");for(let k=0;k<8;k++)R(g,x-6+((k*7)%13),y+1+((k*5)%8),1,1,["#ffd34d","#ff4d4d"][(k+t)%2]);});
-   const sx=((t*3)%280)-60,sy=6+Math.round(Math.sin(t/2)*2);
-   for(let k=0;k<3;k++){const rx=sx+40+k*9;R(g,rx,sy+2,6,3,"#8b5a2b");R(g,rx+5,sy,2,2,"#8b5a2b");R(g,rx+6,sy-2,1,2,"#5a3a1a");R(g,rx+1,sy+5,1,2,"#5a3a1a");R(g,rx+4,sy+5,1,2,"#5a3a1a");if(k===2)R(g,rx+7,sy+1,1,1,"#ff2a2a");}
-   R(g,sx+28,sy+3,12,1,"#d8c79e");R(g,sx+12,sy+3,16,6,"#c0392b");R(g,sx+10,sy+8,20,1,"#ffd34d");R(g,sx+14,sy,5,4,"#7a4b2e");
-   R(g,sx+21,sy-1,4,2,"#c0392b");R(g,sx+21,sy+1,4,2,SK[0]);R(g,sx+21,sy+3,4,2,"#fff");
-   for(let k=1;k<6;k++) if((t+k)%2) R(g,sx+10-k*5,sy+6+(k%2),1,1,"#ffd34d");
-   R(g,0,56,200,8,"#3a3f4a");
-   for(let i=0;i<46;i++){const x=2+i*4.3,j=(i*7)%5,up=(i+t)%6===0;R(g,x,53-j%2,3,2,SK[i%4]);R(g,x,55-j%2,3,4,["#c0392b","#2980b9","#27ae60","#8e44ad","#f39c12","#ecf0f1"][i%6]);if(up){R(g,x+3,50,1,3,SK[i%4]);R(g,x+3,49,1,1,"#fff");}}
- }},
- /* Terrenos vistos de cima; caminhão sai da zona rural com insumos para a cidade */
- fazenda:{w:128,h:40,d:(g,t)=>{const C=["#6aa84f","#93c47d","#d9c46b","#8b6b3d","#b6d7a8","#7fb069"];
-   for(let y=0;y<40;y+=10)for(let x=0;x<96;x+=12){const c=C[(x*3+y*7)%6];R(g,x,y,12,10,c);if(c==="#8b6b3d"||c==="#d9c46b")for(let k=0;k<10;k+=2)R(g,x,y+k,12,1,"rgba(0,0,0,.12)");R(g,x,y,12,1,"rgba(0,0,0,.08)");R(g,x,y,1,10,"rgba(0,0,0,.08)");}
-   R(g,20,22,14,9,"#4a90c2");R(g,22,21,10,1,"#4a90c2");
-   [[50,4],[70,30],[8,6],[88,14]].forEach(([x,y])=>{R(g,x,y,5,5,"#1e4d2b");R(g,x+1,y-1,3,7,"#1e4d2b");R(g,x-1,y+1,7,3,"#1e4d2b");R(g,x+2,y+2,1,1,"#2d6e3e");});
-   R(g,40,15,6,5,"#b03a2e");R(g,40,15,6,1,"#7a2a20");
-   R(g,96,0,32,40,"#9aa3a9");for(let y=2;y<40;y+=8)for(let x=98;x<128;x+=8)R(g,x,y,6,6,["#c7cdd1","#7f8c8d","#b2bec3"][(x+y)%3]);
-   R(g,0,18,128,3,"#a1846a");R(g,0,19,128,1,"#c4a98a");
-   const tx=((t*2)%150)-20;R(g,tx,17,9,5,"#ecf0f1");R(g,tx+1,18,2,1,"#e67e22");R(g,tx+4,18,2,1,"#8b5a2b");R(g,tx+1,20,2,1,"#27ae60");R(g,tx+5,20,2,1,"#e67e22");R(g,tx+9,17,4,5,"#c0392b");R(g,tx+11,18,2,3,"#9fd3ff");
- }},
- /* Araucárias e gralha-azul plantando pinhão */
- araucaria:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#ffe7c4");R(g,0,24,128,16,"#9cc58a");R(g,0,30,128,10,"#7fb069");
-   const arv=(x,h)=>{R(g,x,40-h,2,h,"#5a3a1a");for(let k=0;k<4;k++){const y=40-h+k*3,w=16-k*3;R(g,x-w/2+1,y,w,2,"#2d5a3a");R(g,x-w/2,y-1,2,1,"#2d5a3a");R(g,x+w/2,y-1,2,1,"#2d5a3a");}};
-   arv(18,30);arv(52,24);arv(96,32);arv(116,20);
-   const bx=((t*2)%160)-16,by=10+Math.round(Math.sin(t/1.5)*2);R(g,bx,by,6,3,"#1f6fd1");R(g,bx+5,by-1,3,3,"#111");R(g,bx+8,by,1,1,"#555");R(g,bx+1,by-1-(t%2),3,1,"#1f6fd1");
-   const py=(by+4+(t%10)*3);if(py<38) R(g,bx+2,py,2,2,"#7a4b2e");}},
- /* Blocos caindo e formando a EAP */
- blocos:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#eaf2f8");R(g,0,38,128,2,"#b0bec5");const k=t%16;
-   R(g,49,2,30,7,"#1f5f7a");R(g,62,9,2,4,"#5a6876");R(g,10,13,108,1,"#5a6876");
-   const cols=["#c0392b","#e67e22","#27ae60","#8e44ad","#2980b9"];
-   for(let i=0;i<5;i++){const x=6+i*24,ty=22,show=k>i*2;R(g,x+9,13,1,ty-13,"#5a6876");if(show){const y=Math.min(ty,-8+(k-i*2)*12);R(g,x,y,20,8,cols[i]);R(g,x+1,y+1,18,1,"rgba(255,255,255,.35)");}}}},
- /* Linha Turismo passando pela Estufa do Jardim Botânico */
- onibus:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#cfe8ff");R(g,0,30,128,10,"#7d8a91");R(g,0,34,128,1,"#f4f4f4");
-   R(g,82,14,34,14,"#e8f4fb");for(let x=82;x<116;x+=4)R(g,x,14,1,14,"#ffffff");R(g,82,14,34,1,"#fff");R(g,90,8,18,6,"#e8f4fb");R(g,95,4,8,4,"#e8f4fb");R(g,98,2,2,2,"#fff");
-   for(let x=84;x<114;x+=4)R(g,x+1,16,2,10,"#b9dff5");R(g,80,28,38,2,"#3c8a3c");for(let x=0;x<80;x+=6)R(g,x,27,4,3,["#e74c3c","#f1c40f","#9b59b6"][x/6%3]);
-   const bx=((t*3)%170)-40;R(g,bx,16,30,14,"#2e8b57");R(g,bx,22,30,2,"#f1c40f");for(let x=2;x<28;x+=5){R(g,bx+x,18,3,3,"#bfe6ff");R(g,bx+x,25,3,3,"#bfe6ff");}R(g,bx+5,30,4,3,"#222");R(g,bx+21,30,4,3,"#222");R(g,bx+29,26,1,2,"#ffd34d");}},
- /* Chuva, sol e raio: inverno quente ou chuvoso */
- chuva:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,t%11===0?"#f5f5ff":"#9fb3c8");R(g,0,34,128,6,"#6d7b86");
-   R(g,98,4,10,10,"#ffd34d");R(g,96,6,14,6,"#ffd34d");
-   [[10,4],[40,2],[70,6]].forEach(([x,y])=>{R(g,x,y+3,26,6,"#e8edf2");R(g,x+4,y,12,4,"#e8edf2");R(g,x+2,y+8,22,2,"#c9d3dc");});
-   for(let i=0;i<34;i++){const x=(i*11)%96+6,y=(i*7+t*4)%26+12;R(g,x,y,1,2,"#2f6fb5");}
-   if(t%11===0){R(g,52,12,2,6,"#fff59d");R(g,50,18,2,4,"#fff59d");R(g,52,22,2,4,"#fff59d");}
-   R(g,58,24,12,2,"#c0392b");R(g,59,22,10,2,"#e74c3c");R(g,63,26,1,8,"#333");R(g,56,30,16,4,"#8b5a2b");R(g,62,28,4,2,"#ddd");}},
- /* Cofrinho recebendo moedas: reservas */
- cofre:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#fdf0e6");R(g,0,36,128,4,"#d6c2b0");
-   R(g,48,16,32,18,"#f4a6b8");R(g,46,20,4,8,"#f4a6b8");R(g,80,22,4,4,"#f4a6b8");R(g,50,34,4,2,"#e48aa0");R(g,72,34,4,2,"#e48aa0");R(g,74,14,4,3,"#f4a6b8");R(g,72,21,2,2,"#333");R(g,58,15,10,1,"#b85c76");
-   for(let i=0;i<3;i++){const y=((t*3+i*12)%22)-6;if(y<14)R(g,61+i*2,y,4,4,"#f1c40f");}
-   for(let s=0;s<3;s++)for(let k=0;k<(3+s);k++)R(g,8+s*10,33-k*2,8,2,k%2?"#e0b20c":"#f1c40f");
-   for(let s=0;s<3;s++)for(let k=0;k<(5-s);k++)R(g,96+s*10,33-k*2,8,2,k%2?"#e0b20c":"#f1c40f");}},
- /* Torre transmitindo, outdoor e notificações no celular */
- torre:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#e8f0ff");R(g,0,36,128,4,"#9aa3a9");
-   R(g,20,8,2,28,"#c0392b");R(g,16,20,10,1,"#c0392b");R(g,18,14,6,1,"#c0392b");R(g,20,6,2,2,"#ffd34d");
-   for(let k=1;k<4;k++){const r=((t+k*2)%8)*2+3;g.strokeStyle="rgba(31,95,122,"+(1-r/20)+")";g.lineWidth=1;g.beginPath();g.arc(21,7,r,-1.2,1.2);g.stroke();g.beginPath();g.arc(21,7,r,Math.PI-1.2,Math.PI+1.2);g.stroke();}
-   R(g,44,10,46,18,"#1f2a36");R(g,46,12,42,14,"#b8641a");R(g,58,28,2,8,"#555");R(g,74,28,2,8,"#555");
-   const W="WINTERFOOD";g.fillStyle="#fff";for(let i=0;i<W.length;i++)R(g,48+i*4,17,3,4,"#fff");
-   R(g,102,10,14,24,"#222");R(g,103,12,12,19,"#dfe9f5");const n=t%6;for(let i=0;i<Math.min(n,4);i++){R(g,104,13+i*4,10,3,i%2?"#b8641a":"#1f5f7a");}R(g,107,32,4,1,"#555");}},
- /* Sopa fumegante e "CONTINUE?" */
+ /* Capa: Parque Barigui, lago, capivaras e ciclovia */
+ barigui:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#0f1b2d","#0f1b2d");stars(g,256,14,t,40);R(g,226,3,5,5,"#f4f1c9");R(g,227,3,4,4,"#0f1b2d");
+   R(g,0,20,256,12,"#1e3b2a");R(g,60,23,120,6,"#24507a");for(let i=0;i<10;i++)R(g,66+i*11,25+(i%2),5,1,(i+t)%3?"#3a6ea0":"#9fd3ff");
+   [10,30,200,240].forEach((x,i)=>arv(g,x,22,10+(i%2)*4));[45,190,215].forEach(x=>tree(g,x,22,8,"#1e5a35"));
+   R(g,0,29,256,3,"#5a4a3a");
+   [[24,26],[34,27]].forEach(([x,y])=>{R(g,x,y,6,3,"#7a5232");R(g,x+5,y-1,2,2,"#7a5232");R(g,x+6,y-1,1,1,"#111");});}},
+ /* Natal no Palácio Avenida (antigo prédio do HSBC): coral nas janelas, Papai Noel e público */
+ palacio:{w:256,h:34,d:(g,t)=>{R(g,0,0,256,34,"#0f1b2d");stars(g,256,16,t,36);
+   const bx=90;R(g,bx,8,76,20,"#efe3c4");R(g,bx-2,7,80,1,"#d8c79e");R(g,bx-2,15,80,1,"#d8c79e");R(g,bx+30,4,16,4,"#efe3c4");R(g,bx+34,2,8,2,"#d8c79e");R(g,bx+37,0,2,2,"#ffd34d");
+   for(let r=0;r<3;r++)for(let c=0;c<9;c++){const x=bx+3+c*8,y=9+r*6;R(g,x,y,5,5,"#ffcf4a");R(g,x+1,y+1,3,1,SK[(c+r)%4]);R(g,x+1,y+2,3,3,(c+r)%2?"#c0392b":"#fff");}
+   for(let i=0;i<40;i++)R(g,bx-2+i*2,6,1,1,["#ff4d4d","#4dff88","#ffd34d","#6ab0ff"][(i+t)%4]);
+   for(let i=0;i<11;i++){R(g,bx-3,7+i*2,1,1,["#ff4d4d","#4dff88","#ffd34d"][(i+t)%3]);R(g,bx+78,7+i*2,1,1,["#ffd34d","#ff4d4d","#4dff88"][(i+t)%3]);}
+   [[60,14],[196,14]].forEach(([x,y])=>{R(g,x-1,y+8,2,5,"#5a3a1a");for(let k=0;k<4;k++)R(g,x-1-k*2,y+k*2,2+k*4,2,"#1e6b3a");for(let k=0;k<8;k++)R(g,x-6+((k*7)%13),y+1+((k*5)%8),1,1,["#ffd34d","#ff4d4d"][(k+t)%2]);});
+   const sx=((t*3)%330)-70,sy=1+Math.round(Math.sin(t/2));
+   for(let k=0;k<3;k++){const rx=sx+40+k*9;R(g,rx,sy+2,6,3,"#8b5a2b");R(g,rx+5,sy,2,2,"#8b5a2b");R(g,rx+6,sy-1,1,1,"#5a3a1a");R(g,rx+1,sy+5,1,1,"#5a3a1a");R(g,rx+4,sy+5,1,1,"#5a3a1a");if(k===2)R(g,rx+7,sy+1,1,1,"#ff2a2a");}
+   R(g,sx+28,sy+3,12,1,"#d8c79e");R(g,sx+12,sy+3,16,4,"#c0392b");R(g,sx+10,sy+6,20,1,"#ffd34d");R(g,sx+14,sy,5,3,"#7a4b2e");R(g,sx+21,sy-1,4,2,"#c0392b");R(g,sx+21,sy+1,4,2,SK[0]);R(g,sx+21,sy+3,4,1,"#fff");
+   R(g,0,31,256,3,"#3a3f4a");
+   for(let i=0;i<58;i++){const x=2+i*4.4,j=(i*7)%5,up=(i+t)%6===0;R(g,x,27-j%2,3,2,SK[i%4]);R(g,x,29-j%2,3,3,["#c0392b","#2980b9","#27ae60","#8e44ad","#f39c12","#ecf0f1"][i%6]);if(up){R(g,x+3,24,1,3,SK[i%4]);R(g,x+3,23,1,1,"#fff");}}}},
+ /* Caminhão visto de lado saindo da zona rural, carroceria cheia de verduras */
+ caminhao:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#cfe8ff","#cfe8ff");R(g,0,18,256,10,"#9cc58a");R(g,0,22,256,6,"#7fb069");
+   const off=(t*2)%64;
+   for(let k=-1;k<6;k++){const x=k*64-off;arv(g,x+10,24,16);tree(g,x+30,24,9);arv(g,x+46,24,12);tree(g,x+56,24,7,"#3c8a3c");}
+   R(g,0,27,256,5,"#7d6a55");R(g,0,29,256,1,"#a1846a");
+   const tx=((t*2)%300)-50;
+   R(g,tx,14,30,9,"#8b5a2b");R(g,tx,13,30,1,"#6b4a2b");
+   for(let i=0;i<9;i++){R(g,tx+1+i*3,11,3,3,["#2ecc71","#27ae60","#58d68d"][i%3]);R(g,tx+2+i*3,10,1,1,"#1e8449");}
+   for(let i=0;i<7;i++)R(g,tx+3+i*4,9,2,2,["#27ae60","#7dcea0"][i%2]);
+   R(g,tx+30,12,10,11,"#c0392b");R(g,tx+33,13,5,4,"#9fd3ff");R(g,tx+39,20,2,2,"#ffd34d");
+   [tx+5,tx+22,tx+34].forEach(x=>{R(g,x,23,5,5,"#222");R(g,x+2,24+(t%2)*2,1,1,"#aaa");R(g,x+1+(t%2)*2,25,1,1,"#aaa");});
+   if(t%2)R(g,tx-3,20,2,1,"#bbb");}},
+ /* 4: três ajudantes trazem um caldeirão gigante */
+ carregar:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fdf3e3","#fdf3e3");ground(g,256,32,"#c9b79c");
+   const x=((t*2)%300)-60,f=t%2;
+   person(g,x,15,{shirt:"#c0392b",hair:"#222",walk:1},f);pot(g,x+8,8,26);person(g,x+36,15,{shirt:"#2980b9",hair:"#8a5a2b",walk:1,skin:SK[2]},1-f);
+   person(g,x+46,15,{shirt:"#27ae60",hair:"#e0c070",walk:1},f);R(g,x+44,20,3,1,"#7a4b2e");R(g,x+5,19,4,1,"#2b2b2b");R(g,x+33,19,4,1,"#2b2b2b");
+   if(f) R(g,x+20,3,2,1,"#888");}},
+ /* 5: acendendo o fogo */
+ fogo:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#2b2140","#2b2140");stars(g,256,12,t,20);ground(g,256,32,"#4a3a2a");
+   const k=Math.min(t%14,8);pot(g,118,10,28,0,k>2,t);
+   for(let i=0;i<6;i++)R(g,116+i*5,27-((i%2)),6,2,"#6b3e1f");
+   if(k<=2){R(g,103,18,4,1,"#8b5a2b");R(g,107,17,1,1,"#ffd34d");}
+   person(g,96,15,{shirt:"#e67e22",hair:"#222"});R(g,102,19,4,1,SK[0]);
+   person(g,152,15,{shirt:"#8e44ad",hair:"#8a5a2b",skin:SK[1]},t%2);R(g,158,16+(t%2)*2,4,3,"#ecf0f1");
+   person(g,170,15,{shirt:"#16a085",hair:"#e0c070"},0);R(g,169,19,1,1,"#ffd34d");
+   if(k>2)for(let i=0;i<4;i++)R(g,124+i*5,8-((t+i)%4),1,1,i%2?"#ff9f1a":"#ffd34d");}},
+ /* 6: jogando ingredientes no caldeirão */
+ ingredientes:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fff6e0","#fff6e0");ground(g,256,32,"#c9b79c");
+   pot(g,116,10,28,1,1,t);steam(g,122,8,t,4);
+   const items=["#e67e22","#2ecc71","#7a4b2e","#f1c40f","#c0392b"];
+   person(g,84,15,{shirt:"#c0392b",hair:"#222"});person(g,160,15,{shirt:"#2980b9",hair:"#8a5a2b",skin:SK[2]});person(g,180,15,{shirt:"#27ae60",hair:"#e0c070"});
+   for(let i=0;i<3;i++){const p=((t+i*3)%9)/9;const sx=[90,160,180][i],x=sx+(128-sx)*p,y=17-Math.sin(p*Math.PI)*14;R(g,x,y,2,2,items[(i+t)%5]);}
+   R(g,64,22,10,6,"#8b5a2b");for(let i=0;i<4;i++)R(g,65+i*2,21,2,2,items[i]);R(g,196,22,10,6,"#8b5a2b");for(let i=0;i<4;i++)R(g,197+i*2,21,2,2,items[4-i]);}},
+ /* 7: mexendo, com vários outros caldeirões ao lado */
+ mexer:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fdf0e6","#fdf0e6");ground(g,256,32,"#c9b79c");
+   for(let i=0;i<6;i++){const x=10+i*40;pot(g,x,12,22,1,1,t+i);steam(g,x+4,10,t+i,3);person(g,x+24,15,{shirt:["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i],hair:["#222","#8a5a2b","#e0c070","#222","#5a2d16","#111"][i],skin:SK[i%4]},0);
+     const a=(t+i)%4;R(g,x+14+(a<2?a:4-a)*2,4,1,10,"#7a4b2e");}}},
+ /* 8: rua com barraquinhas de sopa e fila */
+ barracas:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#1d2b44","#1d2b44");stars(g,256,10,t,24);R(g,0,26,256,6,"#5d6d7e");
+   for(let i=0;i<5;i++){const x=8+i*50,c=["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22"][i];
+     for(let k=0;k<6;k++)R(g,x+k*4,6,4,4,k%2?c:"#f4f4f4");R(g,x,10,24,1,"#333");R(g,x+1,11,1,10,"#555");R(g,x+22,11,1,10,"#555");R(g,x,18,24,8,"#8b5a2b");R(g,x+2,19,20,1,"#ffd34d");
+     pot(g,x+5,12,12,1,0,t);steam(g,x+7,11,t+i,2);
+     for(let q=0;q<2;q++){const px=x+26+q*7;if(px<250)person(g,px,13,{shirt:["#ecf0f1","#f39c12","#1abc9c","#e84393"][(i+q)%4],hair:"#222",skin:SK[(i+q)%4]},0);}
+     for(let k=0;k<3;k++)R(g,x+3+k*8,5,1,1,["#ffd34d","#ff4d4d","#4dff88"][(k+t+i)%3]);}}},
+ /* Fim: sopa fumegante */
  sopa:{w:128,h:40,d:(g,t)=>{g.clearRect(0,0,128,40);
    R(g,40,22,48,4,"#8a9aa6");R(g,42,26,44,6,"#7a8a96");R(g,46,32,36,3,"#6a7a86");R(g,42,21,44,2,"#e6a23c");R(g,50,20,4,1,"#7a4b2e");R(g,66,20,3,1,"#2ecc71");
    for(let i=0;i<5;i++){const x=48+i*8,y=18-((t+i*2)%8);R(g,x+((t+i)%2),y,1,2,"rgba(255,255,255,.7)");R(g,x+1,y-3,1,2,"rgba(255,255,255,.5)");}}}
@@ -514,7 +545,8 @@ function scale(c){c.style.imageRendering="pixelated";}
 const ANIM=[];
 function mount(){
   document.querySelectorAll("canvas.scene").forEach(c=>{const s=SCENES[c.dataset.s];c.width=s.w;c.height=s.h;scale(c);ANIM.push(()=>{const g=c.getContext("2d");s.d(g,TICK);});});
-  document.querySelectorAll("canvas.egg").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);c.style.width=`calc(${e.w} * min(.3vw, .53vh))`;c.setAttribute("aria-label","Easter egg");
+  document.querySelectorAll("canvas.egg").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);c.setAttribute("aria-label","Easter egg");
+    if(e.say){const b=document.createElement("span");b.className="say";b.textContent=e.say;b.style.left=c.style.left;c.parentNode.appendChild(b);}
     ANIM.push(()=>{const g=c.getContext("2d");g.clearRect(0,0,e.w,e.h);e.d(g,TICK);});
     c.addEventListener("click",()=>found(c.dataset.e,c));});
 }
@@ -523,14 +555,16 @@ function loop(){TICK++;ANIM.forEach(f=>f());}
 /* Contador de easter eggs */
 const FOUND=new Set();
 function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}
-  if(FOUND.has(k))return;FOUND.add(k);document.getElementById("eggs").textContent=FOUND.size+"/12";
+  if(FOUND.has(k))return;FOUND.add(k);document.getElementById("eggs").textContent=FOUND.size+"/"+EGG_ORDER.length;
   const t=document.getElementById("toast");t.textContent="+1 · "+EGGS[k].name;t.classList.remove("show");void t.offsetWidth;t.classList.add("show");renderGallery();}
 function renderGallery(){const gal=document.getElementById("gallery");if(!gal)return;
   gal.innerHTML=EGG_ORDER.map(k=>`<div class="gi${FOUND.has(k)?' ok':''}" title="${FOUND.has(k)?EGGS[k].name:'?'}"><canvas class="egg-g" data-e="${k}"></canvas></div>`).join("");
   gal.querySelectorAll("canvas").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);const g=c.getContext("2d");e.d(g,1);
-    if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#56657a";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
-  const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===12?"Você achou todos os 12! A equipe agradece.":`Você achou ${FOUND.size} de 12 personagens escondidos nos slides.`;}
-mount();renderGallery();loop();
+    if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#2a3440";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
+  const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===EGG_ORDER.length?`Você achou todos os ${EGG_ORDER.length}! A equipe agradece.`:`Você achou ${FOUND.size} de ${EGG_ORDER.length} personagens escondidos nos slides.`;}
+function sizeEggs(){document.querySelectorAll(".band").forEach(b=>{const sc=b.querySelector("canvas.scene");if(!sc||!sc.width)return;const k=b.clientWidth/sc.width;
+  b.querySelectorAll("canvas.egg").forEach(c=>{c.style.width=(EGGS[c.dataset.e].w*k)+"px";});});}
+mount();sizeEggs();addEventListener("resize",sizeEggs);renderGallery();loop();
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(loop,220);
 
 </script>
