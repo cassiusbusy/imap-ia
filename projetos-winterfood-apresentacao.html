@@ -25,13 +25,13 @@ html,body{height:100%;overflow:hidden}
 #track{display:flex;height:100vh;transition:transform .8s cubic-bezier(.75,0,.25,1)}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--body)}
 a{color:var(--accent)}
-.slide{flex:0 0 100vw;width:100vw;min-width:0;overflow:hidden;height:100vh;display:grid;place-items:center;padding:1.5vh 2vw calc(1.5vh + 36px)}
-.frame{width:min(96vw,calc((94vh - 40px)*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
+.slide{flex:0 0 100vw;width:100vw;min-width:0;overflow:hidden;height:100vh;display:grid;place-items:center;padding:1.5vh 2vw}
+.frame{width:min(96vw,calc(96vh*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
   padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
-.kicker{font:400 .5em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
+.kicker{font:400 .38em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
 h1,h2{font-family:"Pixelify Sans",var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
-h2{font-size:1.35em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-h1{font-size:3.3em} h2{font-size:2em}
+h2{font-size:1.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+h1{font-size:2.6em} h2{font-size:2em}
 .sub{color:var(--muted);font-size:1.05em;margin:0}
 .body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1em}
 .cols{display:grid;gap:1em;flex:1;min-height:0;align-items:start}.cv{align-items:stretch}
@@ -61,7 +61,7 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .smk div{display:flex;gap:.45em;align-items:flex-start}.smk .lt{font-size:1.1em;flex:none;margin:0;vertical-align:0}
 .smk b{color:var(--ink)}
 /* Mini canvas clicável */
-.mc{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2em;flex:1;min-height:0;overflow:hidden}
+.mc{display:grid;grid-template-columns:1.85fr 1fr;gap:1.2em;flex:1;min-height:0;overflow:hidden}
 .mini{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto repeat(6,minmax(0,1fr));gap:.3em;font-size:.6em;min-height:0}
 .mini .hd{font:700 .85em var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
 .mini button{font:600 1em var(--body);text-align:left;border:3px solid #8b6b3d;border-style:dashed;border-radius:2px;padding:.25em .35em;min-height:0;overflow:hidden;cursor:pointer;color:var(--ink);display:flex;align-items:flex-start;image-rendering:pixelated}
@@ -118,6 +118,10 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
 /* Cabeçalho com cena em pixel art */
 .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2em}
 .hdr{display:flex;flex-direction:column;gap:.35em}
+.trow{display:flex;align-items:flex-end;gap:.8em}
+.trow h2{flex:0 1 auto;min-width:0}
+canvas.egg.tit{position:static;flex:none;margin-bottom:.1em}
+.trow.right canvas.egg.tit{margin-left:auto}
 .hd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:.5em}
 .band{position:relative;flex:none;line-height:0}
 .band canvas.scene{width:100%;height:auto;image-rendering:pixelated;border:3px solid var(--ink);border-radius:4px;display:block}
@@ -173,12 +177,11 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="track">
 <section class="slide" id="s1"><div class="frame cover">
-  <div class="band"><canvas class="scene" data-s="barigui" aria-hidden="true"></canvas><canvas class="egg " data-e="remo" style="left:42%" title="?"></canvas></div>
   
   <div class="kicker">Gerenciamento de Projetos do Setor Público · IMAP</div>
   <h1>Winterfood Curitiba</h1>
   <p class="sub">Festival gastronômico de inverno em rede de restaurantes, para estender a temporada turística de Curitiba aos meses de frio.</p>
-  <p class="team"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
+  <p class="team" style="margin-top:.6em"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
   <button type="button" class="start blink" id="start">▶ START</button>
   <a class="more" href="projetos-winterfood.html">Página completa do projeto →</a>
 </div></section>
@@ -202,10 +205,10 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </div></section>
 
 <section class="slide" id="s3"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="caminhao" aria-hidden="true"></canvas><canvas class="egg " data-e="abelhas" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="duas" style="left:62%" title="?"></canvas><canvas class="egg " data-e="leitura" style="left:86%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="caminhao" aria-hidden="true"></canvas><canvas class="egg " data-e="abelhas" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="duas" style="left:62%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">PM Canvas</div>
-  <h2>O projeto em uma tela <span class="sub" style="font:500 .4em var(--body)">clique num terreno para ler</span></h2>
+  <div class="trow right"><h2>O projeto em uma tela <span class="sub" style="font:500 .4em var(--body)">clique num terreno para ler</span></h2><canvas class="egg tit" data-e="leitura" title="?" style="margin-right:6%"></canvas></div>
   
   </div>
   <div class="mc">
@@ -288,10 +291,10 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </div></section>
 
 <section class="slide" id="s7"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="mexer" aria-hidden="true"></canvas><canvas class="egg " data-e="cafe" style="left:93%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="mexer" aria-hidden="true"></canvas><canvas class="egg " data-e="cafe" style="left:87%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">Plano de Gestão de Riscos · 2/2</div>
-  <h2>Exposição de R$ 73,5 mil; reservas cobrem 76%</h2>
+  <h2>Reserva de contingência e gerencial</h2>
   </div>
   <div class="cols c2" style="grid-template-columns:1.5fr 1fr">
     <table style="font-size:.75em">
@@ -308,7 +311,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
       </tbody>
     </table>
     <div style="display:flex;flex-direction:column;gap:1em">
-      <div class="card when" style="font-size:.85em"><h3>Reserva de contingência e gerencial</h3><div class="big">R$ 55,5 mil</div>reserva de contingência (10%, R$ 37 mil) + reserva gerencial (5%, R$ 18,5 mil). O restante fica com a mitigação e a folga até o teto de R$ 450 mil.</div>
+      <div class="card when" style="font-size:.85em"><div class="big">R$ 55,5 mil</div><p style="margin:.2em 0">cobrem cerca de 76% da exposição de R$ 73,5 mil.</p>reserva de contingência (10%, R$ 37 mil) + reserva gerencial (5%, R$ 18,5 mil). O restante fica com a mitigação e a folga até o teto de R$ 450 mil.</div>
       <div class="card" style="font-size:.85em"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
     </div>
   </div>
@@ -316,10 +319,10 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </div></section>
 
 <section class="slide" id="s8"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="barracas" aria-hidden="true"></canvas><canvas class="egg " data-e="sax" style="left:93%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="barracas" aria-hidden="true"></canvas></div>
   <div class="hdr">
   <div class="kicker">Plano de Comunicação</div>
-  <h2>Essa reunião podia ser 1 e-mail?</h2>
+  <div class="trow"><h2>Essa reunião podia ser 1 e-mail?</h2><canvas class="egg tit" data-e="sax" title="?"></canvas></div>
   </div>
   <div class="ct" id="ct"></div>
   <a class="more" href="projetos-winterfood.html#crono-comunicacao">Plano completo e sobreposição ao cronograma →</a>
@@ -332,20 +335,11 @@ canvas.egg.chao{bottom:1.5%;left:58%}
   <p class="pix blink" style="color:#ffd34d">CONTINUE? PRESS START</p>
   </div><canvas class="scene" data-s="sopa" aria-hidden="true" style="border:0;background:transparent;width:34%"></canvas></div>
   <div class="menti"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQAAAAB0CZXLAAADIklEQVR42u2ZT47jRBTGf68dqbwro9kiVSQWXIFVV7NiyRW4Ais0UkicSd+AC3AFluwcOAWLluwLgL0rS44/Fhl6elqZDpPWSDZ0LUtfXt6r+up7f2zi6XXFC+AF8F8DII0AWRtTKLmGAVyNLwE20lSi8JJK9rDid2nhx36ZtSapntVd7G2Jl69vue4Ndqr7gt4W82NUZ/0ya3EaukNO1k6X9n6b45R1cTHDxxtVA4mDfZ2aQ7GmORQ4DbOKojOzkuj3g6/6mDUbXw/IzJbTkcG3q1K98qOrpa3q+13N6G3m3ILFRXcDBysJVsjsYOVMCLMAum+75Z1Ft/9C0OC/z/+gK92vUzpqFcDtUQuvAG4A3hwDeGghhQEIcE3IVBKzelK0T2za6OqVH50G1oTBj8QhzIX2R1nPwwK6L+9++o3m8+N2pv28KjEvJ7UkNkfVGQlS6aphSpVYZzQLyEO5X0KXQ3Mo6DfuEla3z3YyXWTBWro4vPfrAJtEfyIlDc92cjxvoSueBOgJtY/5/aarXWN+e9FdUD6bMNWJt6mgPu+LdxFYZ8Or7Q/fnLRQf2pWx/LxST8C7L/7AGGcXBvNSr56e9SgfH84QZg/zzl5OAuozoX580ffBdJIJAygelNRgBudMo2QnSpy0rm/GM4Brj7aApJUOe3a6KQKA6cUBl8SVV8igyqfzajqspTUL+9e/XKz/IfSbp81n4nF3SkL9QRSUvHBIic+cDLAj2ZTbEhpiNJfStDAm0eAFaSHEue3KQ7TmsNIuzYmVkRp8KNT1q5dNasGxCSzvsDXmbZmrrmCQwHRZtOAII2+SmQSrLAUsnYNaoHLJOgTle4tToOvACyBHwmZtqom4+S/o31MYafKqcQSUvl2usFsGpD76UEbnXaqnDKVgFeKUyrdZWa28FW/fG03NL0pne5Yp94lSTspsVEFak314JViNhva34+CgbAAghX0SzrL90OYmk52N66GmMCXBNeu5yTmV+/Sfb98bZY3sD6mJLJ6frSvUlCLq7N2k8KATWg+ef8tSUph8Epk7SZNTwafXvbyIfgF8P8D/A1G7dklTdcb+wAAAABJRU5ErkJggg==" alt="QR code do Menti"><div><p class="pix" style="color:#ffd34d;margin:0 0 .6em">SUA VEZ DE JOGAR</p><p style="margin:0 0 .4em;font-size:1.05em">Responda nossas perguntas no <b>Menti</b>: aponte a câmera para o QR code ou acesse</p><a href="https://form.menti.com/s/alngp51j2w7r" target="_blank" rel="noopener" style="color:#9fd3ff;font-weight:700">form.menti.com/s/alngp51j2w7r</a></div></div>
-  <p class="sub" id="galmsg" style="font-size:.8em;margin:0"></p>
-  <div class="gallery" id="gallery"></div>
   <p class="team" style="font-size:.72em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
   <a class="more" href="projetos-winterfood-fontes.html">Acervo de fontes →</a>
 </div></section>
 
 </div>
-<div class="hud" role="navigation" aria-label="Navegação dos slides">
-  <a href="projetos-winterfood.html">◀ PROJETO</a><span>WINTERFOOD.EXE</span>
-  <div class="prog" id="prog"></div>
-  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/14</span></span>
-  <button class="arr" id="prev" aria-label="Slide anterior">◀</button><span id="pos">1/9</span><button class="arr" id="next" aria-label="Próximo slide">▶</button>
-</div>
-<div id="toast" role="status"></div>
 <script>
 /* Gantt resumido: mesmos prazos da página principal (semanas a partir da aprovação) */
 const G=[["Aprovação e plano",0,3,1],["Captação de patrocínio",3,11,1],["Regulamento e identidade",3,7,0],["Adesão e curadoria dos pratos",7,16,0],["Site e Passaporte",7,15,0],["Contratação de mídia",11,17,1],["Campanha de lançamento",17,21,1],["Festival (4 semanas)",21,25,1],["Relatório de impacto",25,29,1]];
@@ -371,15 +365,10 @@ CM.forEach(([id,n,o,band,list])=>{
   ch+=`<div class="nm"><b>${id}</b>${n}</div><div class="rw">${r}</div>`;
 });
 document.getElementById("ct").innerHTML=ch;
-const S=[...document.querySelectorAll(".slide")], track=document.getElementById("track"), prog=document.getElementById("prog");
+const S=[...document.querySelectorAll(".slide")], track=document.getElementById("track");
 let cur=0, lock=false;
-prog.innerHTML=S.map((_,i)=>`<button aria-label="Slide ${i+1}"></button>`).join("");
-const pb=[...prog.children]; pb.forEach((b,i)=>b.onclick=()=>go(i));
 function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;track.style.transform=`translateX(${-i*100}vw)`;
-  document.getElementById("pos").textContent=(i+1)+"/"+S.length;pb.forEach((b,k)=>{b.classList.toggle("on",k===i);if(k<i)b.classList.add("seen");});
   history.replaceState(null,"","#s"+(i+1));}
-document.getElementById("prev").onclick=()=>go(cur-1);
-document.getElementById("next").onclick=()=>go(cur+1);
 addEventListener("keydown",e=>{
   if(["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();go(cur+1);}
   if(["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(cur-1);}
@@ -442,8 +431,15 @@ const EGGS={
    R(g,7,0,4,1,"#e74c3c");R(g,6,1,5,1,"#e74c3c");R(g,7,2,4,2,SK[1]);R(g,10,2,1,1,"#2a1d14");R(g,6,1,1,4,"#5a2d16");
    R(g,8,4,3,4,"#2ecc71");R(g,11,4,2,2,"#2ecc71");R(g,13,5,2,1,SK[1]);
    if(f){R(g,9,8,2,2,"#1f2f4a");R(g,11,10,1,2,"#1f2f4a");R(g,11,12,2,1,"#222");}else{R(g,9,8,2,2,"#1f2f4a");R(g,9,10,1,3,"#1f2f4a");R(g,9,13,2,1,"#222");}}},
- cafe:{w:18,h:15,name:"Hora do café",d:(g,t)=>{person(g,3,2,{shirt:"#8e5a3c",hair:"#111",beard:0,skin:SK[1],noArms:1});R(g,2,6,1,3,"#8e5a3c");R(g,9,6,3,1,"#8e5a3c");
-   R(g,11,4,3,3,"#fff");R(g,14,5,1,1,"#fff");R(g,12,4,1,1,"#5a3a1a");const s=t%3;R(g,12,2-s%2,1,1,"#ccc");R(g,13,1+s%2,1,1,"#ccc");}},
+ cafe:{w:28,h:17,name:"Hora do café",d:(g,t)=>{
+   R(g,2,4,1,9,"#6b4a2b");R(g,2,10,7,1,"#6b4a2b");R(g,3,13,1,4,"#6b4a2b");R(g,8,11,1,6,"#6b4a2b");
+   R(g,4,1,4,1,"#111");R(g,4,2,4,3,SK[1]);R(g,6,3,1,1,"#2a1d14");R(g,3,2,1,2,"#111");
+   R(g,4,5,4,5,"#8e5a3c");R(g,8,6,5,1,"#8e5a3c");R(g,13,6,1,1,SK[1]);R(g,8,10,5,2,"#2c3e50");R(g,12,12,1,4,"#2c3e50");R(g,12,16,2,1,"#222");
+   R(g,13,10,14,1,"#8b5a2b");R(g,14,11,1,6,"#8b5a2b");R(g,25,11,1,6,"#8b5a2b");
+   const mx=17,my=3;
+   R(g,mx+1,my,6,1,"#111");R(g,mx,my+1,1,5,"#111");R(g,mx+7,my+1,1,5,"#111");R(g,mx+1,my+6,6,1,"#111");R(g,mx+1,my+1,6,1,"#6b3a1a");R(g,mx+1,my+2,6,4,"#fff");R(g,mx+1,my+2,2,4,"#d6e8fb");
+   R(g,mx-2,my+2,1,3,"#111");R(g,mx-1,my+1,1,1,"#111");R(g,mx-1,my+5,1,1,"#111");
+   const a=t%2;R(g,mx+2+a,my-3,1,1,"#111");R(g,mx+3-a,my-2,1,1,"#111");R(g,mx+5+a,my-3,1,1,"#111");R(g,mx+4+a,my-4,1,1,"#111");}},
  abelhas:{w:24,h:16,name:"Apicultor",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666",beard:"#6b4a2b"});R(g,2,2,6,1,"#e0e0e0");R(g,3,3,4,1,"#9aa3a9");
    R(g,13,7,8,3,"#d9a441");R(g,13,10,8,4,"#b8862e");R(g,12,6,10,1,"#7a5a2a");R(g,16,11,2,1,"#3a2a10");
    for(let i=0;i<5;i++){const a=t*0.9+i*1.7;const x=17+Math.cos(a)*6,y=5+Math.sin(a*1.3)*4;R(g,x,y,1,1,"#111");R(g,x+1,y,1,1,"#ffcc00");}}},
@@ -455,11 +451,12 @@ const EGGS={
    R(g,gx+3,gy+2,4,3,SK[0]);R(g,gx+4,gy+3,1,1,"#111");R(g,gx+6,gy+3,1,1,"#111");
    R(g,gx+2,7,6,5,"#1a1a1a");R(g,gx+4,7,2,4,"#f4f4f4");R(g,gx+1,8,1,3,"#1a1a1a");R(g,gx+8,8,1,3,"#1a1a1a");
    R(g,gx+3,12,1,4,"#151515");R(g,gx+6,12,1,4,"#151515");R(g,gx+2,16,2,1,"#333");R(g,gx+6,16,2,1,"#333");
-   R(g,gx-3,11,6,2,"#111");R(g,gx-4,12,3,2,"#f4f4f4");R(g,gx-3,10,2,1,"#111");R(g,gx+3,10,1,1,"#888");
-   for(let i=0;i<7;i++)R(g,gx+4+i,10-Math.floor(i*0.6),1,1,"#bbb");R(g,gx+10,5,2,2,"#111");
+   R(g,gx-1,9,6,4,"#c0392b");R(g,gx-2,10,1,3,"#c0392b");R(g,gx,13,4,1,"#c0392b");R(g,gx,10,3,2,"#f4f4f4");R(g,gx+1,11,1,1,"#555");
+   for(let i=0;i<9;i++)R(g,gx+5+i,10-Math.floor(i/2),1,1,"#8b5a2b");R(g,gx+13,5,2,2,"#5a3a1a");R(g,gx+14,4,1,1,"#bbb");
+   R(g,gx+9,8,1,1,SK[0]);R(g,gx+1,9+(f?0:1),1,1,SK[0]);R(g,gx+2,7,1,2,"#7a4b2e");
    if(f){R(g,32,2,1,2,"#e2b33c");R(g,14,1,1,2,"#e2b33c");}}},
- gemeas:{w:22,h:15,name:"Mãe com as gêmeas",d:(g,t)=>{const f=t%2;person(g,8,1,{long:1,hair:"#6b3e1f",shirt:"#e67e22",skin:SK[1],walk:1},f);
-   kid(g,2,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);kid(g,16,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);R(g,1,6,1,1,"#ff4081");R(g,15,6,1,1,"#ff4081");}},
+ gemeas:{w:22,h:15,name:"Mãe com as gêmeas",d:(g,t)=>{const f=t%2;person(g,8,1,{long:1,hair:"#f2d16b",shirt:"#e67e22",walk:1},f);
+   kid(g,2,6,{hair:"#f2d16b",dress:"#f06292"},f);kid(g,16,6,{hair:"#f2d16b",dress:"#f06292"},f);R(g,1,6,1,1,"#ff4081");R(g,15,6,1,1,"#ff4081");}},
  paquita:{w:44,h:24,name:"Paquita e a nave da Xuxa",d:(g,t)=>{
    const x=3,y=2,f=t%2,sk=SK[0],bl="#2441c9",gd="#e8c13a";
    R(g,x+3,y,2,1,"#ffd400");R(g,x+2,y+1,4,1,"#ffd400");
@@ -575,7 +572,7 @@ const SCENES={
    R(g,200,22,22,6,"#8b5a2b");R(g,200,22,22,1,"#6b4a2b");for(let i=0;i<4;i++)VEG[i+4](g,200+i*5,17);}},
  /* 7: mexendo, com vários outros caldeirões ao lado */
  mexer:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fdf0e6","#fdf0e6");ground(g,256,32,"#c9b79c");
-   for(let i=0;i<6;i++){const x=12+i*41,a=(t+i)%4,sw=a<2?a:4-a;
+   for(let i=0;i<5;i++){const x=10+i*42,a=(t+i)%4,sw=a<2?a:4-a;
      R(g,x-3,14,30,2,"#7a5232");R(g,x-3,16,30,1,"#5a3a1a");R(g,x-2,17,2,11,"#7a5232");R(g,x+23,17,2,11,"#7a5232");R(g,x-1,22,25,1,"#8b6a45");R(g,x+25,20,3,1,"#8b6a45");R(g,x+26,24,3,1,"#8b6a45");
      person(g,x+9,1,{shirt:["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i],hair:["#222","#8a5a2b","#e0c070","#222","#5a2d16","#111"][i],skin:SK[i%4],noArms:1},0);
      R(g,x+9+sw,6,1,10,"#7a4b2e");R(g,x+8+sw,15,3,1,"#7a4b2e");R(g,x+10,7,sw+1,1,SK[i%4]);R(g,x+8,5,1,3,["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i]);
@@ -606,9 +603,7 @@ let TICK=0;
 function loop(){TICK++;ANIM.forEach(f=>f());}
 /* Contador de easter eggs */
 const FOUND=new Set();
-function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}
-  if(FOUND.has(k))return;FOUND.add(k);document.getElementById("eggs").textContent=FOUND.size+"/"+EGG_ORDER.length;
-  const t=document.getElementById("toast");t.textContent="+1 · "+EGGS[k].name;t.classList.remove("show");void t.offsetWidth;t.classList.add("show");renderGallery();}
+function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}FOUND.add(k);}
 function renderGallery(){const gal=document.getElementById("gallery");if(!gal)return;
   gal.innerHTML=EGG_ORDER.map(k=>`<div class="gi${FOUND.has(k)?' ok':''}" title="${FOUND.has(k)?EGGS[k].name:'?'}"><canvas class="egg-g" data-e="${k}"></canvas></div>`).join("");
   gal.querySelectorAll("canvas").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);const g=c.getContext("2d");e.d(g,1);
@@ -616,6 +611,7 @@ function renderGallery(){const gal=document.getElementById("gallery");if(!gal)re
   const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===EGG_ORDER.length?`Você achou todos os ${EGG_ORDER.length}! A equipe agradece.`:`Você achou ${FOUND.size} de ${EGG_ORDER.length} personagens escondidos nos slides.`;}
 function sizeEggs(){document.querySelectorAll(".band").forEach(b=>{const sc=b.querySelector("canvas.scene");if(!sc||!sc.width)return;const k=b.clientWidth/sc.width;
   b.querySelectorAll("canvas.egg").forEach(c=>{c.style.width=(EGGS[c.dataset.e].w*k)+"px";});});
+  document.querySelectorAll("canvas.egg.tit").forEach(c=>{const fr=c.closest(".frame");c.style.width=(EGGS[c.dataset.e].w*fr.clientWidth/256*.8)+"px";});
   document.querySelectorAll("canvas.egg.chao").forEach(c=>{const fr=c.closest(".frame");c.style.width=(EGGS[c.dataset.e].w*fr.clientWidth/256*.6)+"px";});}
 mount();sizeEggs();addEventListener("resize",sizeEggs);renderGallery();loop();
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(loop,220);
