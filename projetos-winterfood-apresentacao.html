@@ -26,7 +26,7 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--bo
 a{color:var(--accent)}
 .slide{height:100vh;scroll-snap-align:start;display:grid;place-items:center;padding:2vh 2vw}
 .frame{width:min(96vw,calc(94vh*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
-  padding:4.2% 5%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
+  padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
 .kicker{font:700 .72em var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
 h1,h2{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}
 h1{font-size:3.3em} h2{font-size:2em}
@@ -52,6 +52,8 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .lt{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:4px;background:var(--c);color:#fff;font:800 .72em var(--display);vertical-align:.15em;margin:0 .15em}
 .cS{--c:#1f5f7a}.cM{--c:#b8641a}.cA{--c:#2d7a3e}.cR{--c:#8e44ad}.cT{--c:#c0392b}
 .smart{font-size:1.05em;line-height:1.9}
+.smt{display:flex;align-items:center;gap:.4em;margin:0 0 .3em;font:700 1em var(--display)}
+.smt span.blk{display:inline-flex}.smt .blk i{font:600 .95em var(--body);font-style:normal;color:#fff;background:var(--c);padding:.05em .45em}
 .smk{display:grid;grid-template-columns:repeat(5,1fr);gap:.6em;font-size:.78em;color:var(--muted)}
 .smk div{display:flex;gap:.45em;align-items:flex-start}.smk .lt{font-size:1.1em;flex:none;margin:0;vertical-align:0}
 .smk b{color:var(--ink)}
@@ -68,6 +70,14 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 /* Dica nos itens da matriz */
 .chip{position:relative;cursor:default}
 .chip[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:50%;bottom:130%;transform:translateX(-50%);background:var(--ink);color:#fff;font:600 .95em var(--body);padding:.35em .6em;border-radius:6px;white-space:nowrap;z-index:3;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+/* Cronograma da comunicação */
+.ct{display:grid;grid-template-columns:17em 1fr;font-size:.6em;align-items:center}
+.ct .nm{padding:.25em 0;border-bottom:1px solid var(--line);display:flex;gap:.4em}.ct .nm b{color:var(--warm)}
+.ct .rw{position:relative;height:100%;min-height:1.75em;border-bottom:1px solid var(--line);background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
+.ct .d{position:absolute;top:50%;width:.6em;height:.6em;margin:-.3em 0 0 -.3em;border-radius:50%;background:var(--warm)}
+.ct .ln{position:absolute;top:50%;height:2px;margin-top:-1px;background:var(--warm);opacity:.4}
+.ct .bd{position:absolute;top:25%;height:50%;border-radius:4px;background:var(--warm);color:#fff;font-size:.85em;font-weight:700;padding-left:.4em;display:flex;align-items:center}
+.ct .ax{display:flex;border-bottom:1.5px solid var(--ink)}.ct .ax span{flex:1;text-align:center;color:var(--muted);font-size:.85em}
 /* EAP */
 .wbs{display:flex;flex-direction:column;align-items:center;gap:.7em;flex:1}
 .root{background:var(--accent);color:#fff;border-radius:8px;padding:.4em 1.2em;font-weight:700}
@@ -76,7 +86,7 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .lv2 b{display:block;background:var(--soft);padding:.35em .6em}
 .lv2 ul{padding:.3em .6em .4em 1.6em}
 /* Gantt simplificado */
-.gt{display:grid;grid-template-columns:12em 1fr;font-size:.8em;row-gap:.35em;align-items:center}
+.gt{display:grid;grid-template-columns:12em 1fr;font-size:.68em;row-gap:.3em;align-items:center}
 .gt .bar{position:relative;height:1.3em;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/29) 100%}
 .gt .bar i{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--accent)}
 .gt .bar i.c{background:var(--crit)}
@@ -127,15 +137,8 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
       <div class="card"><div class="big">R$ 722 mi</div>movimentados no Natal de 2025</div>
       <div class="card"><div class="big">~25%</div>alta no faturamento de bares, restaurantes e hotéis</div>
     </div>
-    <div class="card why"><h3>Objetivo (SMART)</h3>
-      <p class="smart" style="margin:.2em 0 .6em"><span class="sm cS">Realizar o Winterfood Curitiba</span><span class="lt cS">S</span> <span class="sm cT">durante 4 semanas no primeiro inverno após a aprovação</span><span class="lt cT">T</span>, <span class="sm cA">com 50 restaurantes</span><span class="lt cA">A</span>, <span class="sm cM">55 mil pratos vendidos</span><span class="lt cM">M</span> e <span class="sm cR">+10% de turistas no período sobre o ano anterior</span><span class="lt cR">R</span>, <span class="sm cM">medido pelo BI de Turismo e pelo Passaporte do Turista</span><span class="lt cM">M</span>.</p>
-      <div class="smk">
-        <div><span class="lt cS">S</span><span><b>Específico:</b> um festival, com nome e formato definidos</span></div>
-        <div><span class="lt cM">M</span><span><b>Mensurável:</b> pratos vendidos, com fonte de medição</span></div>
-        <div><span class="lt cA">A</span><span><b>Alcançável:</b> 50 casas cabem na base da Abrasel-PR</span></div>
-        <div><span class="lt cR">R</span><span><b>Relevante:</b> mais turistas no inverno resolve a sazonalidade</span></div>
-        <div><span class="lt cT">T</span><span><b>Temporal:</b> 4 semanas, no 1º inverno após a aprovação</span></div>
-      </div></div>
+    <div class="card why"><h3 class="smt">Objetivo <span class="blk"><i class="cS">S</i><i class="cM">M</i><i class="cA">A</i><i class="cR">R</i><i class="cT">T</i></span></h3>
+      <p class="smart" style="margin:.2em 0 0"><span class="sm cS">Realizar o Winterfood Curitiba</span> <span class="sm cT">durante 4 semanas no primeiro inverno após a aprovação</span>, <span class="sm cA">com 50 restaurantes</span>, <span class="sm cM">55 mil pratos vendidos</span> e <span class="sm cR">+10% de turistas no período sobre o ano anterior</span>, <span class="sm cM">medido pelo BI de Turismo e pelo Passaporte do Turista</span>.</p></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-porque">Justificativa e benchmarks →</a>
 </div></section>
@@ -187,7 +190,6 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
   <h2>29 semanas; o caminho crítico passa pelo patrocínio e pela mídia</h2>
   <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
   <div class="gt" id="gt"></div>
-  <p class="sub" style="font-size:.75em;margin-bottom:2.2em">Aprovação → Plano → Captação de patrocínio → Contratação de mídia → Lançamento → Festival → Relatório de impacto. Semanas contadas a partir da aprovação.</p>
   <a class="more" href="projetos-winterfood.html#cronograma">Gantt e caminho crítico →</a>
 </div></section>
 
@@ -241,22 +243,9 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
 
 <section class="slide" id="s8"><div class="frame">
   <div class="kicker">Plano de Comunicação</div>
-  <h2>Do kick-off ao encerramento, cada público com dono e frequência</h2>
-  <table>
-    <thead><tr><th>ID</th><th>Comunicação</th><th>Para quem</th><th>Responsável</th><th>Frequência</th><th>Semanas</th></tr></thead>
-    <tbody>
-      <tr><td>01</td><td>Kick-off</td><td>Patrocinador, comitê, Prefeitura, Abrasel</td><td>Gerente</td><td>Única</td><td>1</td></tr>
-      <tr><td>02</td><td>Status executivo</td><td>Patrocinador e comitê diretor</td><td>Gerente</td><td>Quinzenal</td><td>2–29</td></tr>
-      <tr><td>03</td><td>Alinhamento tático (Kanban)</td><td>Equipe e fornecedores</td><td>Gerente</td><td>Semanal</td><td>2–29</td></tr>
-      <tr><td>04</td><td>Relatório aos patrocinadores</td><td>Empresas patrocinadoras</td><td>Gerente</td><td>Mensal</td><td>10–29</td></tr>
-      <tr><td>05</td><td>Newsletter e WhatsApp da rede</td><td>Restaurantes</td><td>Operação + Abrasel</td><td>Semanal</td><td>8–25</td></tr>
-      <tr><td>06</td><td>Briefing operacional</td><td>Restaurantes</td><td>Operação</td><td>Única</td><td>20</td></tr>
-      <tr><td>07</td><td>Campanha omnichannel</td><td>Turistas e moradores</td><td>SECOM</td><td>Contínua</td><td>18–25</td></tr>
-      <tr><td>08</td><td>Assessoria de imprensa</td><td>Imprensa</td><td>SECOM</td><td>Nos marcos</td><td>18–26</td></tr>
-      <tr><td>09</td><td>Encerramento e lições</td><td>Patrocinador, comitê, Abrasel</td><td>Gerente</td><td>Única</td><td>29</td></tr>
-    </tbody>
-  </table>
-  <a class="more" href="projetos-winterfood.html#crono-comunicacao">Cronograma da comunicação →</a>
+  <h2>Quando cada comunicação acontece</h2>
+  <div class="ct" id="ct"></div>
+  <a class="more" href="projetos-winterfood.html#crono-comunicacao">Plano completo e sobreposição ao cronograma →</a>
 </div></section>
 
 <section class="slide" id="s9"><div class="frame cover">
@@ -282,6 +271,19 @@ function openBlock(k){const [cls,grp,t,html]=CV[k];panel.className="panel "+cls;
   document.querySelectorAll("#mini button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k));}
 document.querySelectorAll("#mini button").forEach(b=>b.addEventListener("click",()=>openBlock(b.dataset.k)));
 openBlock("just");
+
+/* Cronograma da comunicação (só a comunicação, sem sobreposição) */
+const CM=[["C01","Kick-off",[1]],["C02","Status executivo (quinzenal)",[2,29,2]],["C03","Alinhamento tático (semanal)",[2,29,1]],["C04","Relatório a patrocinadores (mensal)",[10,29,4]],["C05","Boletim técnico à rede (semanal)",[8,25,1]],["C06","Briefing operacional",[20]],["C07","Campanha ao público (contínua)",null,[18,25]],["C08","Assessoria de imprensa (marcos)",[18,22,25,26],null,true],["C09","Encerramento",[29]]];
+let ch='<div></div><div class="ax">'+Array.from({length:29},(_,i)=>`<span>${i+1}</span>`).join("")+'</div>';
+CM.forEach(([id,n,o,band,list])=>{
+  let occ=[]; if(o&&o.length===3&&!list){for(let w=o[0];w<=o[1];w+=o[2])occ.push(w);} else if(o) occ=o;
+  let r='';
+  if(band) r=`<div class="bd" style="left:${(band[0]-1)/29*100}%;width:${(band[1]-band[0]+1)/29*100}%">sem. ${band[0]}–${band[1]}</div>`;
+  else{ if(occ.length>1) r+=`<div class="ln" style="left:${(occ[0]-.5)/29*100}%;width:${(occ[occ.length-1]-occ[0])/29*100}%"></div>`;
+        r+=occ.map(w=>`<div class="d" style="left:${(w-.5)/29*100}%" title="${id} ${n}: semana ${w}"></div>`).join(""); }
+  ch+=`<div class="nm"><b>${id}</b>${n}</div><div class="rw">${r}</div>`;
+});
+document.getElementById("ct").innerHTML=ch;
 const S=[...document.querySelectorAll(".slide")];
 let cur=0;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.5){cur=S.indexOf(e.target);document.getElementById("pos").textContent=(cur+1)+" / "+S.length;}}),{threshold:[.5]});
