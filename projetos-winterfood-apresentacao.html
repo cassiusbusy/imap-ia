@@ -14,21 +14,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Winterfood Curitiba – Apresentação</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Pixelify+Sans:wght@500;700&family=Press+Start+2P&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* Apresentação em slides 16:9: uma seção por slide, rolagem com encaixe, setas do teclado */
 :root{--bg:#dfe5ea;--paper:#fff;--ink:#18242f;--muted:#5a6876;--line:#d3dae1;--accent:#1f5f7a;--warm:#b8641a;--crit:#c0392b;--soft:#e3eef6;
 --why:#fde5d2;--what:#e0f0e2;--who:#faf0c8;--how:#e6e8eb;--when:#dce9f5;
 --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+html,body{height:100%;overflow:hidden}
+#track{display:flex;height:100vh;transition:transform .8s cubic-bezier(.75,0,.25,1)}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--body)}
 a{color:var(--accent)}
-.slide{height:100vh;scroll-snap-align:start;display:grid;place-items:center;padding:2vh 2vw}
-.frame{width:min(96vw,calc(94vh*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
+.slide{flex:0 0 100vw;width:100vw;min-width:0;overflow:hidden;height:100vh;display:grid;place-items:center;padding:1.5vh 2vw calc(1.5vh + 36px)}
+.frame{width:min(96vw,calc((94vh - 40px)*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
   padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
-.kicker{font:700 .72em var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
-h1,h2{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance}
+.kicker{font:400 .5em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
+h1,h2{font-family:"Pixelify Sans",var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
 h1{font-size:3.3em} h2{font-size:2em}
 .sub{color:var(--muted);font-size:1.05em;margin:0}
 .body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1em}
@@ -44,7 +45,8 @@ ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .foot{position:absolute;left:5%;bottom:4%;font-size:.7em;color:var(--muted)}
 .why{background:var(--why)}.what{background:var(--what)}.who{background:var(--who)}.how{background:var(--how)}.when{background:var(--when)}
 .cv .card{font-size:.95em}.cv .card h3{font-size:1.05em}
-.cover{background:linear-gradient(135deg,#1f5f7a,#18242f);color:#fff}
+.cover{background:linear-gradient(90deg,rgba(6,14,30,.92) 0%,rgba(6,14,30,.55) 45%,rgba(6,14,30,0) 70%),url(data:image/png;base64,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) center/cover;image-rendering:pixelated;color:#fff}
+.cover.end{background:linear-gradient(135deg,#0f1b2d,#18242f)}
 .cover .kicker{color:#f3b27a}.cover .sub{color:#cfe0ea}.cover .sub a{color:#fff}.cover .more{color:var(--ink)}
 .team{font-size:1.2em;margin-top:auto}
 /* SMART */
@@ -104,6 +106,31 @@ table{border-collapse:collapse;width:100%;font-size:.95em;align-self:start}
 th,td{text-align:left;padding:.3em .5em;border-bottom:1px solid var(--line)}
 th{background:var(--soft)} td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.t td{font-weight:700;border-top:2px solid var(--ink)}
+/* Cabeçalho com cena em pixel art */
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2em}
+.hd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:.5em}
+canvas.scene{flex:none;width:30%;image-rendering:pixelated;border:3px solid var(--ink);border-radius:4px;background:#fff}
+.cover canvas.scene{border:0;background:transparent;width:60%;margin:-2% 0 -1% -1%}
+canvas.egg{position:absolute;bottom:1.6%;z-index:4;cursor:pointer;image-rendering:pixelated;filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
+canvas.egg.walk{animation:walk 18s linear infinite alternate}
+@keyframes walk{from{transform:translateX(0)}to{transform:translateX(min(30vw,420px))}}
+canvas.egg.pop{animation:pop .5s steps(4)}
+@keyframes pop{50%{transform:translateY(-14px) scale(1.15)}}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:.4em;margin:.2em 0 .6em;max-width:100%}
+.gi{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);border-radius:4px;display:grid;place-items:center;aspect-ratio:1}
+.gi canvas{width:86%;image-rendering:pixelated}.gi.ok{border-color:#ffd34d;background:rgba(255,211,77,.12)}
+.pix{font:400 .55em "Press Start 2P",monospace;letter-spacing:.04em}
+.blink{animation:blink 1s steps(2) infinite}@keyframes blink{50%{opacity:0}}
+/* HUD inferior */
+.hud{position:fixed;left:0;right:0;bottom:0;height:36px;background:#0f1b2d;color:#e6edf2;font:400 10px "Press Start 2P",monospace;display:flex;align-items:center;gap:14px;padding:0 14px;z-index:20}
+.hud a{color:#9fd3ff;text-decoration:none}
+.hud .prog{display:flex;gap:5px;margin:0 auto}
+.hud .prog button{width:16px;height:16px;padding:0;border:2px solid #e6edf2;background:transparent;cursor:pointer;border-radius:0}
+.hud .prog button.on{background:#ffd34d;border-color:#ffd34d}.hud .prog button.seen{background:#5a6876}
+.hud .arr{font:inherit;background:#1f5f7a;color:#fff;border:0;padding:6px 10px;cursor:pointer}
+.hud .eg{color:#ffd34d}
+#toast{position:fixed;left:50%;bottom:50px;transform:translateX(-50%);background:#0f1b2d;color:#ffd34d;font:400 11px "Press Start 2P",monospace;padding:10px 14px;border:3px solid #ffd34d;opacity:0;pointer-events:none;z-index:30}
+#toast.show{animation:toast 1.8s steps(6)}@keyframes toast{10%,80%{opacity:1}100%{opacity:0}}
 /* Navegação */
 .nav{position:fixed;right:14px;bottom:12px;display:flex;gap:6px;align-items:center;font:600 13px var(--body);color:var(--muted);z-index:5}
 .nav button{font:inherit;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:4px 10px;cursor:pointer;color:var(--ink)}
@@ -113,24 +140,32 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
   html{scroll-snap-type:none} body{background:#fff}
   .slide{height:210mm;padding:0;break-after:page}
   .frame{width:297mm;height:210mm;aspect-ratio:auto;border-radius:0;box-shadow:none;font-size:19px}
-  .nav,.toc{display:none}
+  .nav,.toc,.hud,#toast{display:none}
+  #track{display:block;transform:none!important}
+  html,body{overflow:visible;height:auto}
+  .slide{width:auto}
+  canvas.egg.walk{animation:none}
 }
 </style>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
+<div id="track">
 <section class="slide" id="s1"><div class="frame cover">
+  <canvas class="scene" data-s="palacio" aria-hidden="true"></canvas>
   <div class="kicker">Gerenciamento de Projetos do Setor Público · IMAP</div>
   <h1>Winterfood Curitiba</h1>
   <p class="sub">Festival gastronômico de inverno em rede de restaurantes, para estender a temporada turística de Curitiba aos meses de frio.</p>
   <p class="team"><b>Equipe:</b> Cassius, Daniela, Edycleusa, Teresa e Paulo<br><span class="sub">Prof. Armando Terribili Filho · 26 de novembro de 2026</span></p>
   <a class="more" href="projetos-winterfood.html">Página completa do projeto →</a>
+  <canvas class="egg " data-e="casal" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s2"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">Por quê</div>
   <h2>O Natal provou o modelo. O inverno ainda não tem o seu evento.</h2>
+  </div><canvas class="scene" data-s="fazenda" aria-hidden="true"></canvas></div>
   <div class="body">
     <div class="kpis">
       <div class="card"><div class="big">469,8 mil</div>turistas no Natal de Curitiba 2025</div>
@@ -141,12 +176,16 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
       <p class="smart" style="margin:.2em 0 0"><span class="sm cS">Realizar o Winterfood Curitiba</span> <span class="sm cT">durante 4 semanas no primeiro inverno após a aprovação</span>, <span class="sm cA">com 50 restaurantes</span>, <span class="sm cM">55 mil pratos vendidos</span> e <span class="sm cR">+10% de turistas no período sobre o ano anterior</span>, <span class="sm cM">medido pelo BI de Turismo e pelo Passaporte do Turista</span>.</p></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-porque">Justificativa e benchmarks →</a>
+  <canvas class="egg walk" data-e="bike" style="left:4%" title="?"></canvas>
+  <canvas class="egg " data-e="remo" style="left:40%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s3"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">PM Canvas</div>
   <h2>O projeto em uma tela</h2>
-  <p class="sub" style="font-size:.75em;margin-top:-.6em">Clique num bloco para ler o conteúdo.</p>
+  <p class="sub" style="font-size:.75em">Clique num bloco para ler o conteúdo.</p>
+  </div><canvas class="scene" data-s="araucaria" aria-hidden="true"></canvas></div>
   <div class="mc">
     <div class="mini" id="mini">
       <div class="hd">Por quê?</div><div class="hd">O quê?</div><div class="hd">Quem?</div><div class="hd">Como?</div><div class="hd">Quanto e quando?</div>
@@ -167,35 +206,46 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
     <div class="panel why" id="panel" aria-live="polite"></div>
   </div>
   <a class="more" href="projetos-winterfood.html#canvas">Abrir o canvas completo →</a>
+  <canvas class="egg " data-e="abelhas" style="left:4%" title="?"></canvas>
+  <canvas class="egg walk" data-e="duas" style="left:22%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s4"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">EAP</div>
-  <h2>Cinco entregas, 23 pacotes de trabalho</h2>
+  <h2>Cinco entregas, 21 pacotes de trabalho</h2>
+  </div><canvas class="scene" data-s="blocos" aria-hidden="true"></canvas></div>
   <div class="wbs">
     <div class="root">1. Winterfood Curitiba</div>
     <div class="lv2">
       <div><b>1.1 Gerenciamento</b><ul><li>Termo de abertura e EAP</li><li>Matriz de riscos</li><li>Orçamento e contas</li><li>Lições aprendidas</li></ul></div>
       <div><b>1.2 Governança</b><ul><li>Acordo Abrasel e Movimente</li><li>Regulamento e adesão</li><li>Capacitação Senac</li><li>Marca no INPI</li><li>Patrocínio</li></ul></div>
       <div><b>1.3 Plataforma</b><ul><li>Site, mapa e cardápios</li><li>Votação com LGPD</li><li>Passaporte e pesquisa</li><li>Painel de indicadores</li></ul></div>
-      <div><b>1.4 Operação</b><ul><li>Curadoria dos pratos</li><li>Categoria lámen</li><li>Insumos locais</li><li>Desafio de Chefs</li><li>Desafio Amador</li><li>Concurso da Sopa de Pinhão</li></ul></div>
+      <div><b>1.4 Operação</b><ul><li>Curadoria dos pratos</li><li>Categoria lámen</li><li>Insumos locais</li><li>Concurso da Sopa de Pinhão</li></ul></div>
       <div><b>1.5 Comunicação</b><ul><li>Campanha (SECOM)</li><li>Imprensa e influência</li><li>Pesquisa de gasto</li><li>Relatório de impacto</li></ul></div>
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#eap">EAP completa →</a>
+  <canvas class="egg " data-e="gemeas" style="left:4%" title="?"></canvas>
+  <canvas class="egg " data-e="paquita" style="left:30%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s5"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">Cronograma</div>
   <h2>29 semanas; o caminho crítico passa pelo patrocínio e pela mídia</h2>
+  </div><canvas class="scene" data-s="onibus" aria-hidden="true"></canvas></div>
   <div class="legend"><span><i style="background:var(--crit)"></i>Caminho crítico</span><span><i style="background:var(--accent)"></i>Com folga</span></div>
   <div class="gt" id="gt"></div>
   <a class="more" href="projetos-winterfood.html#cronograma">Gantt e caminho crítico →</a>
+  <canvas class="egg walk" data-e="corrida" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s6"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">Plano de Gestão de Riscos · 1/2</div>
   <h2>Matriz de severidade: probabilidade × impacto</h2>
+  </div><canvas class="scene" data-s="chuva" aria-hidden="true"></canvas></div>
   <div class="cols c2" style="grid-template-columns:1.1fr 1fr">
     <div class="mx">
       <div class="y">P3</div><div class="cell m"></div><div class="cell h"><span class="chip" tabindex="0" title="R01 · Inverno quente ou chuvoso · prioridade 4" data-tip="R01 · Inverno quente ou chuvoso · prioridade 4">R01</span><span class="chip" tabindex="0" title="R05 · Pouca oferta de lámen · prioridade 5" data-tip="R05 · Pouca oferta de lámen · prioridade 5">R05</span></div><div class="cell h"></div>
@@ -214,11 +264,15 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
     <p class="sub" style="font-size:.7em;margin-top:.6em">Os três têm severidade 6 (P2 × I3). Passe o mouse sobre os itens da matriz para ver nome e prioridade.</p></div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-riscos">Os 16 riscos →</a>
+  <canvas class="egg " data-e="rock" style="left:4%" title="?"></canvas>
+  <canvas class="egg " data-e="massagem" style="left:24%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s7"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">Plano de Gestão de Riscos · 2/2</div>
-  <h2>Exposição de R$ 73,5 mil; reservas cobrem cerca de 92%</h2>
+  <h2>Exposição de R$ 73,5 mil; reservas cobrem cerca de 76%</h2>
+  </div><canvas class="scene" data-s="cofre" aria-hidden="true"></canvas></div>
   <div class="cols c2" style="grid-template-columns:1.5fr 1fr">
     <table style="font-size:.75em">
       <thead><tr><th>Risco</th><th class="r">Prob.</th><th class="r">Impacto</th><th class="r">VME</th></tr></thead>
@@ -234,38 +288,51 @@ tr.t td{font-weight:700;border-top:2px solid var(--ink)}
       </tbody>
     </table>
     <div style="display:flex;flex-direction:column;gap:1em">
-      <div class="card when" style="font-size:.85em"><div class="big">R$ 67,5 mil</div>reserva de contingência (10%, R$ 45 mil) + reserva gerencial (5%, R$ 22,5 mil)</div>
+      <div class="card when" style="font-size:.85em"><div class="big">R$ 55,5 mil</div>reserva de contingência (10%, R$ 37 mil) + reserva gerencial (5%, R$ 18,5 mil). O restante fica com a mitigação e a folga até o teto de R$ 450 mil.</div>
       <div class="card" style="font-size:.85em"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
     </div>
   </div>
   <a class="more" href="projetos-winterfood.html#d-riscos">Plano de riscos completo →</a>
+  <canvas class="egg " data-e="cafe" style="left:4%" title="?"></canvas>
 </div></section>
 
 <section class="slide" id="s8"><div class="frame">
+  <div class="hd"><div>
   <div class="kicker">Plano de Comunicação</div>
   <h2>Quando cada comunicação acontece</h2>
+  </div><canvas class="scene" data-s="torre" aria-hidden="true"></canvas></div>
   <div class="ct" id="ct"></div>
   <a class="more" href="projetos-winterfood.html#crono-comunicacao">Plano completo e sobreposição ao cronograma →</a>
+  <canvas class="egg " data-e="sax" style="left:4%" title="?"></canvas>
 </div></section>
 
-<section class="slide" id="s9"><div class="frame cover">
-  <div class="kicker">Obrigado</div>
+<section class="slide" id="s9"><div class="frame cover end">
+  <div class="hd"><div>
+  <div class="kicker">Fim de jogo · obrigado</div>
   <h1>Perguntas?</h1>
-  <p class="sub">Página completa com canvas, EAP, cronograma, riscos, comunicação e as fontes catalogadas pela equipe.</p>
-  <p class="team" style="font-size:.85em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
+  <p class="pix blink" style="color:#ffd34d">CONTINUE? PRESS START</p>
+  </div><canvas class="scene" data-s="sopa" aria-hidden="true" style="border:0;background:transparent;width:34%"></canvas></div>
+  <p class="sub" id="galmsg" style="font-size:.85em"></p>
+  <div class="gallery" id="gallery"></div>
+  <p class="team" style="font-size:.72em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
   <a class="more" href="projetos-winterfood-fontes.html">Acervo de fontes →</a>
 </div></section>
 
-<a class="toc" href="projetos-winterfood.html">← Página do projeto</a>
-<div class="nav"><button type="button" id="prev" aria-label="Slide anterior">↑</button><span id="pos">1 / 9</span><button type="button" id="next" aria-label="Próximo slide">↓</button></div>
-
+</div>
+<div class="hud" role="navigation" aria-label="Navegação dos slides">
+  <a href="projetos-winterfood.html">◀ PROJETO</a><span>WINTERFOOD.EXE</span>
+  <div class="prog" id="prog"></div>
+  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/12</span></span>
+  <button class="arr" id="prev" aria-label="Slide anterior">◀</button><span id="pos">1/9</span><button class="arr" id="next" aria-label="Próximo slide">▶</button>
+</div>
+<div id="toast" role="status"></div>
 <script>
 /* Gantt resumido: mesmos prazos da página principal (semanas a partir da aprovação) */
 const G=[["Aprovação e plano",0,3,1],["Captação de patrocínio",3,11,1],["Regulamento e identidade",3,7,0],["Adesão e curadoria dos pratos",7,16,0],["Site e Passaporte",7,15,0],["Contratação de mídia",11,17,1],["Campanha de lançamento",17,21,1],["Festival (4 semanas)",21,25,1],["Relatório de impacto",25,29,1]];
 document.getElementById("gt").innerHTML=G.map(([n,a,b,c])=>`<div>${n}</div><div class="bar"><i class="${c?'c':''}" style="left:${a/29*100}%;width:${(b-a)/29*100}%" title="Semanas ${a+1} a ${b}"></i></div>`).join("")+'<div></div><div class="ax"><span>sem. 1</span><span>10</span><span>20</span><span>29</span></div>';
 
 /* Mini canvas: clique num bloco abre o conteúdo; Justificativas aberto por padrão */
-const CV={"just": ["why", "Por quê?", "Justificativas", "<p>Nos últimos anos, Curitiba conseguiu atrair turistas fora das férias de verão: o Natal de 2025 trouxe 469,8 mil visitantes e movimentou R$ 722 milhões. Esse resultado mostrou que eventos sazonais bem posicionados ampliam o período de visitação e espalham os ganhos para hotéis, restaurantes e comércio. Faltava levar essa estratégia ao inverno, para que a cidade tivesse motivos para receber turistas o ano todo.</p>"], "obj": ["why", "Por quê?", "Objetivo SMART", "<p>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes participantes, 55 mil pratos do festival vendidos e aumento de 10% no número de turistas no período em relação ao ano anterior, medido pelo BI de Turismo e pelo Passaporte do Turista.</p>"], "res": ["why", "Por quê?", "Resultados esperados", "<ul><li><b>Tangíveis:</b> cerca de R$ 3 milhões em vendas nos restaurantes; +10% a 20% de turistas no inverno; gasto de visitantes de fora medido; festival no calendário oficial.</li><li><b>Intangíveis:</b> Curitiba lembrada como destino gastronômico de inverno; orgulho local; cooperação entre restaurantes; valorização do pinhão.</li></ul>"], "prod": ["what", "O quê?", "Produto", "<p>Festival de 4 semanas em que 50 restaurantes de várias regiões servem pratos quentes exclusivos (sopas, caldos, lámen) a R$ 60, ou R$ 50 com o Passaporte do Turista. Nos fins de semana, o Mercado Municipal recebe o Desafio de Chefs, o Desafio Amador e o Concurso da Sopa de Pinhão.</p>"], "req": ["what", "O quê?", "Principais requisitos", "<ul><li>Pelo menos 50 restaurantes em diferentes regiões</li><li>Prato exclusivo por casa, com preço-teto</li><li>Passaporte do Turista com pesquisa e LGPD</li><li>Receitas autorais; porção no padrão do cardápio</li><li>Percentual mínimo de ingredientes locais</li><li>Mapa digital e votação popular</li></ul>"], "pat": ["who", "Quem?", "Patrocinador", "<p>Presidente do Instituto Municipal de Turismo de Curitiba, <b>Rodrigo Swinka</b>.</p>"], "areas": ["who", "Quem?", "Áreas envolvidas (da Prefeitura)", "<ul><li>Instituto Municipal de Turismo</li><li>Movimente Curitiba Gastronômica (comitê do CTur)</li><li>SECOM</li><li>SMSAN</li><li>Vigilância Sanitária</li><li>Agência Curitiba, ICI e Procuradoria</li></ul>"], "ext": ["who", "Quem?", "Partes interessadas externas", "<ul><li>Abrasel-PR e restaurantes</li><li>Produtores de pinhão e erva-mate</li><li>Hotéis (Seha) e patrocinadores</li><li>Senac e agricultura familiar</li><li>Casas de lámen fora da Abrasel</li><li>Turistas, moradores, imprensa</li></ul>"], "prem": ["how", "Como?", "Premissas", "<ul><li>O festival entra no calendário oficial do Inverno Curitiba</li><li>Adesão sem custo; cada restaurante arca com seus pratos e fica com a receita</li><li>A Abrasel-PR aceita ser parceira na articulação</li><li>O BI de Turismo fornece a linha de base</li></ul>"], "restr": ["how", "Como?", "Restrições", "<ul><li>Teto de R$ 450 mil</li><li>Janela fixa: inverno (junho a agosto)</li><li>Contratações pela Lei 14.133</li><li>Normas sanitárias</li><li>LGPD na votação</li></ul>"], "risc": ["when", "Quanto e quando?", "Riscos (por prioridade)", "<ol><li>R03 Patrocínio insuficiente</li><li>R04 Atraso na contratação de mídia</li><li>R02 Baixa adesão dos restaurantes</li><li>R01 Inverno quente ou chuvoso</li><li>R05 Pouca oferta de lámen</li></ol><p style='font-size:.85em'>Mais 11 riscos no plano completo.</p>"], "cust": ["when", "Quanto e quando?", "Custos estimados", "<table><tr><td>Comunicação e mídia</td><td class='r'>R$ 190 mil</td></tr><tr><td>Plataforma, Passaporte e pesquisa</td><td class='r'>R$ 65 mil</td></tr><tr><td>Desafios, Concurso e premiação</td><td class='r'>R$ 127,5 mil</td></tr><tr><td>Reservas (10% + 5%)</td><td class='r'>R$ 67,5 mil</td></tr><tr class='t'><td>Total</td><td class='r'>R$ 450 mil</td></tr></table>"], "entr": ["when", "Quanto e quando?", "Entregas e prazos (a partir da aprovação)", "<ul><li><b>Mês 1:</b> plano e governança</li><li><b>Meses 1–3:</b> regulamento e patrocínio</li><li><b>Meses 2–4:</b> adesão dos restaurantes</li><li><b>Meses 3–5:</b> site, pratos e mídia</li><li><b>Meses 5–6:</b> lançamento</li><li><b>Meses 6–7:</b> festival</li><li><b>Meses 7–8:</b> premiação e relatório</li></ul>"]};
+const CV={"just": ["why", "Por quê?", "Justificativas", "<p>Nos últimos anos, Curitiba conseguiu atrair turistas fora das férias de verão: o Natal de 2025 trouxe 469,8 mil visitantes e movimentou R$ 722 milhões. Esse resultado mostrou que eventos sazonais bem posicionados ampliam o período de visitação e espalham os ganhos para hotéis, restaurantes e comércio. Faltava levar essa estratégia ao inverno, para que a cidade tivesse motivos para receber turistas o ano todo.</p>"], "obj": ["why", "Por quê?", "Objetivo SMART", "<p>Realizar o Winterfood Curitiba durante 4 semanas no primeiro inverno após a aprovação, com 50 restaurantes participantes, 55 mil pratos do festival vendidos e aumento de 10% no número de turistas no período em relação ao ano anterior, medido pelo BI de Turismo e pelo Passaporte do Turista.</p>"], "res": ["why", "Por quê?", "Resultados esperados", "<ul><li><b>Tangíveis:</b> cerca de R$ 3 milhões em vendas nos restaurantes; +10% a 20% de turistas no inverno; gasto de visitantes de fora medido; festival no calendário oficial.</li><li><b>Intangíveis:</b> Curitiba lembrada como destino gastronômico de inverno; orgulho local; cooperação entre restaurantes; valorização do pinhão.</li></ul>"], "prod": ["what", "O quê?", "Produto", "<p>Festival de 4 semanas em que 50 restaurantes de várias regiões servem pratos quentes exclusivos (sopas, caldos, lámen) a R$ 60, ou R$ 50 com o Passaporte do Turista. Nos fins de semana, o Mercado Municipal recebe o Concurso da Sopa de Pinhão.</p>"], "req": ["what", "O quê?", "Principais requisitos", "<ul><li>Pelo menos 50 restaurantes em diferentes regiões</li><li>Prato exclusivo por casa, com preço-teto</li><li>Passaporte do Turista com pesquisa e LGPD</li><li>Receitas autorais; porção no padrão do cardápio</li><li>Percentual mínimo de ingredientes locais</li><li>Mapa digital e votação popular</li></ul>"], "pat": ["who", "Quem?", "Patrocinador", "<p>Presidente do Instituto Municipal de Turismo de Curitiba, <b>Rodrigo Swinka</b>.</p>"], "areas": ["who", "Quem?", "Áreas envolvidas (da Prefeitura)", "<ul><li>Instituto Municipal de Turismo</li><li>Movimente Curitiba Gastronômica (comitê do CTur)</li><li>SECOM</li><li>SMSAN</li><li>Vigilância Sanitária</li><li>Agência Curitiba, ICI e Procuradoria</li></ul>"], "ext": ["who", "Quem?", "Partes interessadas externas", "<ul><li>Abrasel-PR e restaurantes</li><li>Produtores de pinhão e erva-mate</li><li>Hotéis (Seha) e patrocinadores</li><li>Senac e agricultura familiar</li><li>Casas de lámen fora da Abrasel</li><li>Turistas, moradores, imprensa</li></ul>"], "prem": ["how", "Como?", "Premissas", "<ul><li>O festival entra no calendário oficial do Inverno Curitiba</li><li>Adesão sem custo; cada restaurante arca com seus pratos e fica com a receita</li><li>A Abrasel-PR aceita ser parceira na articulação</li><li>O BI de Turismo fornece a linha de base</li></ul>"], "restr": ["how", "Como?", "Restrições", "<ul><li>Teto de R$ 450 mil (orçamento estimado: R$ 370 mil)</li><li>Janela fixa: inverno (junho a agosto)</li><li>Contratações pela Lei 14.133</li><li>Normas sanitárias</li><li>LGPD na votação</li></ul>"], "risc": ["when", "Quanto e quando?", "Riscos (por prioridade)", "<ol><li>R03 Patrocínio insuficiente</li><li>R04 Atraso na contratação de mídia</li><li>R02 Baixa adesão dos restaurantes</li><li>R01 Inverno quente ou chuvoso</li><li>R05 Pouca oferta de lámen</li></ol><p style='font-size:.85em'>Mais 11 riscos no plano completo.</p>"], "cust": ["when", "Quanto e quando?", "Custos estimados", "<table><tr><td>Comunicação e mídia</td><td class='r'>R$ 190 mil</td></tr><tr><td>Plataforma, Passaporte e pesquisa</td><td class='r'>R$ 65 mil</td></tr><tr><td>Concurso e premiação</td><td class='r'>R$ 59,5 mil</td></tr><tr><td>Reservas (10% + 5%)</td><td class='r'>R$ 55,5 mil</td></tr><tr class='t'><td>Total</td><td class='r'>R$ 370 mil</td></tr></table>"], "entr": ["when", "Quanto e quando?", "Entregas e prazos (a partir da aprovação)", "<ul><li><b>Mês 1:</b> plano e governança</li><li><b>Meses 1–3:</b> regulamento e patrocínio</li><li><b>Meses 2–4:</b> adesão dos restaurantes</li><li><b>Meses 3–5:</b> site, pratos e mídia</li><li><b>Meses 5–6:</b> lançamento</li><li><b>Meses 6–7:</b> festival</li><li><b>Meses 7–8:</b> premiação e relatório</li></ul>"]};
 const panel=document.getElementById("panel");
 function openBlock(k){const [cls,grp,t,html]=CV[k];panel.className="panel "+cls;panel.innerHTML=`<div class="grp">${grp}</div><h3>${t}</h3>${html}`;
   document.querySelectorAll("#mini button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k));}
@@ -284,11 +351,13 @@ CM.forEach(([id,n,o,band,list])=>{
   ch+=`<div class="nm"><b>${id}</b>${n}</div><div class="rw">${r}</div>`;
 });
 document.getElementById("ct").innerHTML=ch;
-const S=[...document.querySelectorAll(".slide")];
-let cur=0;
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.5){cur=S.indexOf(e.target);document.getElementById("pos").textContent=(cur+1)+" / "+S.length;}}),{threshold:[.5]});
-S.forEach(s=>io.observe(s));
-const go=i=>{i=Math.max(0,Math.min(S.length-1,i));S[i].scrollIntoView({behavior:"smooth"});};
+const S=[...document.querySelectorAll(".slide")], track=document.getElementById("track"), prog=document.getElementById("prog");
+let cur=0, lock=false;
+prog.innerHTML=S.map((_,i)=>`<button aria-label="Slide ${i+1}"></button>`).join("");
+const pb=[...prog.children]; pb.forEach((b,i)=>b.onclick=()=>go(i));
+function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;track.style.transform=`translateX(${-i*100}vw)`;
+  document.getElementById("pos").textContent=(i+1)+"/"+S.length;pb.forEach((b,k)=>{b.classList.toggle("on",k===i);if(k<i)b.classList.add("seen");});
+  history.replaceState(null,"","#s"+(i+1));}
 document.getElementById("prev").onclick=()=>go(cur-1);
 document.getElementById("next").onclick=()=>go(cur+1);
 addEventListener("keydown",e=>{
@@ -296,6 +365,174 @@ addEventListener("keydown",e=>{
   if(["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(cur-1);}
   if(e.key==="Home"){e.preventDefault();go(0);} if(e.key==="End"){e.preventDefault();go(S.length-1);}
 });
+/* Rolagem do mouse anda para os lados */
+addEventListener("wheel",e=>{const p=e.target.closest(".panel");if(p&&p.scrollHeight>p.clientHeight)return;
+  const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)<12||lock)return;lock=true;go(cur+(d>0?1:-1));setTimeout(()=>lock=false,850);},{passive:true});
+let tx=null;addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener("touchend",e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(cur+(d<0?1:-1));tx=null;});
+addEventListener("resize",()=>go(cur));
+track.style.transition="none";go(Math.max(0,(parseInt((location.hash||"").replace("#s",""))||1)-1));requestAnimationFrame(()=>requestAnimationFrame(()=>track.style.transition=""));
+</script>
+<script>
+/* ===== Pixel art: cenas e easter eggs desenhados em canvas, em pixels lógicos ampliados ===== */
+const R=(g,x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),w,h);};
+const SK=["#f1c7a0","#d9a27a","#a8714c","#7a4b2e"];
+/* Pessoa 6×13 (x,y = canto superior esquerdo). f = quadro de animação (0/1) */
+function person(g,x,y,o,f=0){
+  const s=o.skin||SK[0],hr=o.hair||"#3b2a1e",sh=o.shirt||"#1f5f7a",pt=o.pants||"#2c3440",ft=o.feet||"#222";
+  const dy=o.bob&&f?1:0; y+=dy;
+  if(o.hat) R(g,x+1,y-1,4,1,o.hat);
+  R(g,x+1,y,4,1,hr); R(g,x+1,y+1,4,3,s); R(g,x+1,y+1,1,1,hr); R(g,x+4,y+1,1,1,hr);
+  R(g,x+2,y+2,1,1,"#2a1d14"); R(g,x+4,y+2,1,1,"#2a1d14");
+  if(o.beard) R(g,x+1,y+3,4,2,o.beard);
+  if(o.long) {R(g,x,y+1,1,o.longLen||5,hr); R(g,x+5,y+1,1,o.longLen||5,hr);}
+  R(g,x+1,y+4,4,5,sh);
+  if(o.print) o.print(g,x,y);
+  if(!o.noArms){R(g,x,y+4,1,4,o.sleeve||sh); R(g,x+5,y+4,1,4,o.sleeve||sh); R(g,x,y+8,1,1,s); R(g,x+5,y+8,1,1,s);}
+  if(o.skirt){R(g,x,y+8,6,2,o.skirt);}
+  R(g,x+1,y+9,4,1,pt);
+  const sp=o.walk?f:0;
+  if(sp){R(g,x,y+10,1,2,o.legs||pt);R(g,x+5,y+10,1,2,o.legs||pt);R(g,x,y+12,1,1,ft);R(g,x+5,y+12,1,1,ft);}
+  else  {R(g,x+1,y+10,1,2,o.legs||pt);R(g,x+4,y+10,1,2,o.legs||pt);R(g,x+1,y+12,1,1,ft);R(g,x+4,y+12,1,1,ft);}
+}
+/* Criança 4×8 */
+function kid(g,x,y,o,f=0){
+  R(g,x,y,4,1,o.hair);R(g,x,y+1,4,2,o.skin||SK[0]);R(g,x-1,y+1,1,1,o.hair);R(g,x+4,y+1,1,1,o.hair);
+  R(g,x,y+3,4,3,o.dress);R(g,x+(f?0:1),y+6,1,2,o.skin||SK[0]);R(g,x+(f?3:2),y+6,1,2,o.skin||SK[0]);
+}
+const heart=(g,x,y,c="#e23b5a")=>{R(g,x,y,1,1,c);R(g,x+2,y,1,1,c);R(g,x,y+1,3,1,c);R(g,x+1,y+2,1,1,c);};
+const note=(g,x,y,c)=>{R(g,x+1,y,1,3,c);R(g,x,y+2,2,1,c);R(g,x+2,y,1,1,c);};
+
+/* ---------- Easter eggs (12) ---------- */
+const EGGS={
+ sax:{w:22,h:16,name:"Saxofonista",d:(g,t)=>{const f=t%2;person(g,4,2,{long:1,hair:"#5a2d16",shirt:"#7b2d8e",skin:SK[2]},0);
+   R(g,10,6,1,5,"#e2b33c");R(g,11,10,2,1,"#e2b33c");R(g,12,8,2,2,"#e2b33c");R(g,9,6,1,1,"#e2b33c");
+   note(g,15+(f?1:0),2-(t%3),"#2a2a2a");note(g,18,(t%4)+1,"#2a2a2a");}},
+ duas:{w:20,h:15,name:"Duas amigas caminhando",d:(g,t)=>{const f=t%2;person(g,2,1,{long:1,hair:"#c9a227",shirt:"#d9534f",walk:1},f);person(g,11,1,{long:1,hair:"#2b1b10",shirt:"#4a9a6b",walk:1,skin:SK[1]},1-f);}},
+ corrida:{w:28,h:15,name:"Três corredores",d:(g,t)=>{const f=t%2;[0,9,18].forEach((x,i)=>person(g,x+1,1,{shirt:["#ff7a00","#2a9df4","#c0392b"][i],hair:["#222","#8a5a2b","#e0c070"][i],pants:"#111",walk:1,bob:1,skin:SK[i]},(f+i)%2));}},
+ remo:{w:28,h:14,name:"Remadora",d:(g,t)=>{const f=t%2;R(g,0,11,28,3,"#4a90c2");R(g,4,10,18,2,"#c84a2b");R(g,5,12,16,1,"#8a2f1c");
+   R(g,11,4,4,1,"#3b2a1e");R(g,11,5,4,3,SK[0]);R(g,11,8,4,3,"#ffcc00");
+   if(f){R(g,6,9,8,1,"#6b4a2b");R(g,15,9,8,1,"#6b4a2b");}else{R(g,3,11,11,1,"#6b4a2b");R(g,15,11,11,1,"#6b4a2b");}}},
+ bike:{w:22,h:16,name:"Ciclista",d:(g,t)=>{const f=t%2;const ring=(cx,cy)=>{R(g,cx-1,cy-2,3,1,"#222");R(g,cx-1,cy+2,3,1,"#222");R(g,cx-2,cy-1,1,3,"#222");R(g,cx+2,cy-1,1,3,"#222");R(g,cx,cy,1,1,"#888")};
+   ring(5,12);ring(16,12);R(g,5,10,11,1,"#d9534f");R(g,8,9,1,3,"#d9534f");R(g,15,7,1,5,"#d9534f");R(g,14,6,3,1,"#333");
+   R(g,8,1,4,1,"#e74c3c");R(g,8,2,4,3,SK[1]);R(g,8,5,4,4,"#2ecc71");R(g,11,6,4,1,"#2ecc71");R(g,f?8:10,9,1,2,"#1f2f4a");R(g,f?10:8,9,1,3,"#1f2f4a");}},
+ cafe:{w:18,h:15,name:"Hora do café",d:(g,t)=>{person(g,3,2,{shirt:"#8e5a3c",hair:"#111",beard:0,skin:SK[1],noArms:1});R(g,2,6,1,3,"#8e5a3c");R(g,9,6,3,1,"#8e5a3c");
+   R(g,11,4,3,3,"#fff");R(g,14,5,1,1,"#fff");R(g,12,4,1,1,"#5a3a1a");const s=t%3;R(g,12,2-s%2,1,1,"#ccc");R(g,13,1+s%2,1,1,"#ccc");}},
+ abelhas:{w:24,h:16,name:"Apicultora",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666"});R(g,3,3,4,2,"#9aa3a9");
+   R(g,13,7,8,3,"#d9a441");R(g,13,10,8,4,"#b8862e");R(g,12,6,10,1,"#7a5a2a");R(g,16,11,2,1,"#3a2a10");
+   for(let i=0;i<5;i++){const a=t*0.9+i*1.7;const x=17+Math.cos(a)*6,y=5+Math.sin(a*1.3)*4;R(g,x,y,1,1,"#111");R(g,x+1,y,1,1,"#ffcc00");}}},
+ rock:{w:16,h:16,name:"Headbanger",d:(g,t)=>{const f=t%2;person(g,5,2+(f?1:0),{long:1,longLen:f?7:5,hair:"#111",shirt:"#111",sleeve:"#111",pants:"#3a4a6a",
+   print:(g,x,y)=>{R(g,x+2,y+5,2,2,"#eee");R(g,x+2,y+7,1,1,"#c0392b");R(g,x+3,y+7,1,1,"#c0392b");}},0);
+   R(g,5,1+(f?1:0),6,1,"#444");R(g,4,3+(f?1:0),1,2,"#c0392b");R(g,11,3+(f?1:0),1,2,"#c0392b");
+   if(f){R(g,13,0,1,2,"#e2b33c");R(g,1,1,1,2,"#e2b33c");}}},
+ gemeas:{w:22,h:15,name:"Mãe com as gêmeas",d:(g,t)=>{const f=t%2;person(g,8,1,{long:1,hair:"#6b3e1f",shirt:"#e67e22",skin:SK[1],walk:1},f);
+   kid(g,2,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);kid(g,16,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);R(g,1,6,1,1,"#ff4081");R(g,15,6,1,1,"#ff4081");}},
+ paquita:{w:14,h:17,name:"Paquita",d:(g,t)=>{const f=t%2;R(g,4,1,6,1,"#fff");R(g,5,0,4,1,"#fff");R(g,6,1,2,1,"#e74c3c");
+   person(g,4,3,{long:1,longLen:6,hair:"#f2d16b",shirt:"#fff",sleeve:"#fff",skirt:"#fff",pants:"#fff",legs:SK[0],feet:"#e74c3c",
+   print:(g,x,y)=>{R(g,x+1,y+4,4,1,"#e74c3c");R(g,x+2,y+6,2,1,"#e74c3c");}},0);
+   R(g,4,15,1,1,"#e74c3c");R(g,9,15,1,1,"#e74c3c");if(f){R(g,2,4,2,1,SK[0]);R(g,10,4,2,1,SK[0]);}}},
+ casal:{w:22,h:17,name:"Casal apaixonado",d:(g,t)=>{person(g,3,4,{shirt:"#2980b9",hair:"#2b1b10"});person(g,12,4,{long:1,hair:"#a0522d",shirt:"#e84393",skin:SK[2]});
+   for(let i=0;i<4;i++){const k=(t+i*2)%8;heart(g,8+((i*5)%7)-2,3-k+ (i%2),"#e23b5a");}}},
+ massagem:{w:26,h:15,name:"Massagem no pé",d:(g,t)=>{const f=t%2;R(g,1,9,9,2,"#8b5a2b");R(g,1,11,1,3,"#8b5a2b");R(g,8,11,1,3,"#8b5a2b");
+   R(g,3,2,4,1,"#d4a017");R(g,3,3,4,3,SK[0]);R(g,3,6,4,3,"#9b59b6");R(g,7,8,7,2,"#2c3e50");R(g,14,7,2,3,SK[0]);
+   if(f) R(g,2,4,1,1,"#ccc");
+   R(g,17,3,4,1,"#3b2a1e");R(g,17,4,4,2,SK[1]);R(g,17,6,4,2,"#3b2a1e");R(g,17,8,4,4,"#27ae60");R(g,16+(f?0:1),8,1,2,SK[1]);R(g,17,12,5,2,"#2c3440");}}
+};
+const EGG_ORDER=["casal","bike","remo","abelhas","duas","gemeas","paquita","corrida","rock","massagem","cafe","sax"];
+
+/* ---------- Cenas ---------- */
+const stars=(g,w,h,t,n=24)=>{for(let i=0;i<n;i++){const x=(i*53)%w,y=(i*29)%h;if((i+t)%5) R(g,x,y,1,1,"#cfd8ff");}};
+const SCENES={
+ /* Palácio Avenida no Natal, Papai Noel de trenó e o público na rua */
+ palacio:{w:200,h:64,d:(g,t)=>{g.clearRect(0,0,200,64);stars(g,200,30,t,30);
+   const bx=62;R(g,bx,14,76,40,"#efe3c4");R(g,bx-2,13,80,2,"#d8c79e");R(g,bx-2,30,80,1,"#d8c79e");R(g,bx+30,8,16,6,"#efe3c4");R(g,bx+34,5,8,3,"#d8c79e");R(g,bx+37,3,2,2,"#ffd34d");
+   for(let r=0;r<3;r++)for(let c=0;c<9;c++){const x=bx+3+c*8,y=17+r*12;R(g,x,y+1,5,7,"#ffcf4a");R(g,x+1,y,3,1,"#ffcf4a");R(g,x+1,y+3,3,2,SK[(c+r)%4]);R(g,x+1,y+5,3,3,(c+r)%2?"#c0392b":"#fff");}
+   for(let i=0;i<40;i++){const x=bx-2+i*2;R(g,x,12,1,1,["#ff4d4d","#4dff88","#ffd34d","#6ab0ff"][(i+t)%4]);}
+   for(let i=0;i<20;i++){R(g,bx-3,13+i*2,1,1,["#ff4d4d","#4dff88","#ffd34d"][(i+t)%3]);R(g,bx+78,13+i*2,1,1,["#ffd34d","#ff4d4d","#4dff88"][(i+t)%3]);}
+   [[30,40],[170,40]].forEach(([x,y])=>{R(g,x-1,y+8,2,6,"#5a3a1a");for(let k=0;k<4;k++)R(g,x-1-k*2,y+k*2,2+k*4,2,"#1e6b3a");for(let k=0;k<8;k++)R(g,x-6+((k*7)%13),y+1+((k*5)%8),1,1,["#ffd34d","#ff4d4d"][(k+t)%2]);});
+   const sx=((t*3)%280)-60,sy=6+Math.round(Math.sin(t/2)*2);
+   for(let k=0;k<3;k++){const rx=sx+40+k*9;R(g,rx,sy+2,6,3,"#8b5a2b");R(g,rx+5,sy,2,2,"#8b5a2b");R(g,rx+6,sy-2,1,2,"#5a3a1a");R(g,rx+1,sy+5,1,2,"#5a3a1a");R(g,rx+4,sy+5,1,2,"#5a3a1a");if(k===2)R(g,rx+7,sy+1,1,1,"#ff2a2a");}
+   R(g,sx+28,sy+3,12,1,"#d8c79e");R(g,sx+12,sy+3,16,6,"#c0392b");R(g,sx+10,sy+8,20,1,"#ffd34d");R(g,sx+14,sy,5,4,"#7a4b2e");
+   R(g,sx+21,sy-1,4,2,"#c0392b");R(g,sx+21,sy+1,4,2,SK[0]);R(g,sx+21,sy+3,4,2,"#fff");
+   for(let k=1;k<6;k++) if((t+k)%2) R(g,sx+10-k*5,sy+6+(k%2),1,1,"#ffd34d");
+   R(g,0,56,200,8,"#3a3f4a");
+   for(let i=0;i<46;i++){const x=2+i*4.3,j=(i*7)%5,up=(i+t)%6===0;R(g,x,53-j%2,3,2,SK[i%4]);R(g,x,55-j%2,3,4,["#c0392b","#2980b9","#27ae60","#8e44ad","#f39c12","#ecf0f1"][i%6]);if(up){R(g,x+3,50,1,3,SK[i%4]);R(g,x+3,49,1,1,"#fff");}}
+ }},
+ /* Terrenos vistos de cima; caminhão sai da zona rural com insumos para a cidade */
+ fazenda:{w:128,h:40,d:(g,t)=>{const C=["#6aa84f","#93c47d","#d9c46b","#8b6b3d","#b6d7a8","#7fb069"];
+   for(let y=0;y<40;y+=10)for(let x=0;x<96;x+=12){const c=C[(x*3+y*7)%6];R(g,x,y,12,10,c);if(c==="#8b6b3d"||c==="#d9c46b")for(let k=0;k<10;k+=2)R(g,x,y+k,12,1,"rgba(0,0,0,.12)");R(g,x,y,12,1,"rgba(0,0,0,.08)");R(g,x,y,1,10,"rgba(0,0,0,.08)");}
+   R(g,20,22,14,9,"#4a90c2");R(g,22,21,10,1,"#4a90c2");
+   [[50,4],[70,30],[8,6],[88,14]].forEach(([x,y])=>{R(g,x,y,5,5,"#1e4d2b");R(g,x+1,y-1,3,7,"#1e4d2b");R(g,x-1,y+1,7,3,"#1e4d2b");R(g,x+2,y+2,1,1,"#2d6e3e");});
+   R(g,40,15,6,5,"#b03a2e");R(g,40,15,6,1,"#7a2a20");
+   R(g,96,0,32,40,"#9aa3a9");for(let y=2;y<40;y+=8)for(let x=98;x<128;x+=8)R(g,x,y,6,6,["#c7cdd1","#7f8c8d","#b2bec3"][(x+y)%3]);
+   R(g,0,18,128,3,"#a1846a");R(g,0,19,128,1,"#c4a98a");
+   const tx=((t*2)%150)-20;R(g,tx,17,9,5,"#ecf0f1");R(g,tx+1,18,2,1,"#e67e22");R(g,tx+4,18,2,1,"#8b5a2b");R(g,tx+1,20,2,1,"#27ae60");R(g,tx+5,20,2,1,"#e67e22");R(g,tx+9,17,4,5,"#c0392b");R(g,tx+11,18,2,3,"#9fd3ff");
+ }},
+ /* Araucárias e gralha-azul plantando pinhão */
+ araucaria:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#ffe7c4");R(g,0,24,128,16,"#9cc58a");R(g,0,30,128,10,"#7fb069");
+   const arv=(x,h)=>{R(g,x,40-h,2,h,"#5a3a1a");for(let k=0;k<4;k++){const y=40-h+k*3,w=16-k*3;R(g,x-w/2+1,y,w,2,"#2d5a3a");R(g,x-w/2,y-1,2,1,"#2d5a3a");R(g,x+w/2,y-1,2,1,"#2d5a3a");}};
+   arv(18,30);arv(52,24);arv(96,32);arv(116,20);
+   const bx=((t*2)%160)-16,by=10+Math.round(Math.sin(t/1.5)*2);R(g,bx,by,6,3,"#1f6fd1");R(g,bx+5,by-1,3,3,"#111");R(g,bx+8,by,1,1,"#555");R(g,bx+1,by-1-(t%2),3,1,"#1f6fd1");
+   const py=(by+4+(t%10)*3);if(py<38) R(g,bx+2,py,2,2,"#7a4b2e");}},
+ /* Blocos caindo e formando a EAP */
+ blocos:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#eaf2f8");R(g,0,38,128,2,"#b0bec5");const k=t%16;
+   R(g,49,2,30,7,"#1f5f7a");R(g,62,9,2,4,"#5a6876");R(g,10,13,108,1,"#5a6876");
+   const cols=["#c0392b","#e67e22","#27ae60","#8e44ad","#2980b9"];
+   for(let i=0;i<5;i++){const x=6+i*24,ty=22,show=k>i*2;R(g,x+9,13,1,ty-13,"#5a6876");if(show){const y=Math.min(ty,-8+(k-i*2)*12);R(g,x,y,20,8,cols[i]);R(g,x+1,y+1,18,1,"rgba(255,255,255,.35)");}}}},
+ /* Linha Turismo passando pela Estufa do Jardim Botânico */
+ onibus:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#cfe8ff");R(g,0,30,128,10,"#7d8a91");R(g,0,34,128,1,"#f4f4f4");
+   R(g,82,14,34,14,"#e8f4fb");for(let x=82;x<116;x+=4)R(g,x,14,1,14,"#ffffff");R(g,82,14,34,1,"#fff");R(g,90,8,18,6,"#e8f4fb");R(g,95,4,8,4,"#e8f4fb");R(g,98,2,2,2,"#fff");
+   for(let x=84;x<114;x+=4)R(g,x+1,16,2,10,"#b9dff5");R(g,80,28,38,2,"#3c8a3c");for(let x=0;x<80;x+=6)R(g,x,27,4,3,["#e74c3c","#f1c40f","#9b59b6"][x/6%3]);
+   const bx=((t*3)%170)-40;R(g,bx,16,30,14,"#2e8b57");R(g,bx,22,30,2,"#f1c40f");for(let x=2;x<28;x+=5){R(g,bx+x,18,3,3,"#bfe6ff");R(g,bx+x,25,3,3,"#bfe6ff");}R(g,bx+5,30,4,3,"#222");R(g,bx+21,30,4,3,"#222");R(g,bx+29,26,1,2,"#ffd34d");}},
+ /* Chuva, sol e raio: inverno quente ou chuvoso */
+ chuva:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,t%11===0?"#f5f5ff":"#9fb3c8");R(g,0,34,128,6,"#6d7b86");
+   R(g,98,4,10,10,"#ffd34d");R(g,96,6,14,6,"#ffd34d");
+   [[10,4],[40,2],[70,6]].forEach(([x,y])=>{R(g,x,y+3,26,6,"#e8edf2");R(g,x+4,y,12,4,"#e8edf2");R(g,x+2,y+8,22,2,"#c9d3dc");});
+   for(let i=0;i<34;i++){const x=(i*11)%96+6,y=(i*7+t*4)%26+12;R(g,x,y,1,2,"#2f6fb5");}
+   if(t%11===0){R(g,52,12,2,6,"#fff59d");R(g,50,18,2,4,"#fff59d");R(g,52,22,2,4,"#fff59d");}
+   R(g,58,24,12,2,"#c0392b");R(g,59,22,10,2,"#e74c3c");R(g,63,26,1,8,"#333");R(g,56,30,16,4,"#8b5a2b");R(g,62,28,4,2,"#ddd");}},
+ /* Cofrinho recebendo moedas: reservas */
+ cofre:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#fdf0e6");R(g,0,36,128,4,"#d6c2b0");
+   R(g,48,16,32,18,"#f4a6b8");R(g,46,20,4,8,"#f4a6b8");R(g,80,22,4,4,"#f4a6b8");R(g,50,34,4,2,"#e48aa0");R(g,72,34,4,2,"#e48aa0");R(g,74,14,4,3,"#f4a6b8");R(g,72,21,2,2,"#333");R(g,58,15,10,1,"#b85c76");
+   for(let i=0;i<3;i++){const y=((t*3+i*12)%22)-6;if(y<14)R(g,61+i*2,y,4,4,"#f1c40f");}
+   for(let s=0;s<3;s++)for(let k=0;k<(3+s);k++)R(g,8+s*10,33-k*2,8,2,k%2?"#e0b20c":"#f1c40f");
+   for(let s=0;s<3;s++)for(let k=0;k<(5-s);k++)R(g,96+s*10,33-k*2,8,2,k%2?"#e0b20c":"#f1c40f");}},
+ /* Torre transmitindo, outdoor e notificações no celular */
+ torre:{w:128,h:40,d:(g,t)=>{R(g,0,0,128,40,"#e8f0ff");R(g,0,36,128,4,"#9aa3a9");
+   R(g,20,8,2,28,"#c0392b");R(g,16,20,10,1,"#c0392b");R(g,18,14,6,1,"#c0392b");R(g,20,6,2,2,"#ffd34d");
+   for(let k=1;k<4;k++){const r=((t+k*2)%8)*2+3;g.strokeStyle="rgba(31,95,122,"+(1-r/20)+")";g.lineWidth=1;g.beginPath();g.arc(21,7,r,-1.2,1.2);g.stroke();g.beginPath();g.arc(21,7,r,Math.PI-1.2,Math.PI+1.2);g.stroke();}
+   R(g,44,10,46,18,"#1f2a36");R(g,46,12,42,14,"#b8641a");R(g,58,28,2,8,"#555");R(g,74,28,2,8,"#555");
+   const W="WINTERFOOD";g.fillStyle="#fff";for(let i=0;i<W.length;i++)R(g,48+i*4,17,3,4,"#fff");
+   R(g,102,10,14,24,"#222");R(g,103,12,12,19,"#dfe9f5");const n=t%6;for(let i=0;i<Math.min(n,4);i++){R(g,104,13+i*4,10,3,i%2?"#b8641a":"#1f5f7a");}R(g,107,32,4,1,"#555");}},
+ /* Sopa fumegante e "CONTINUE?" */
+ sopa:{w:128,h:40,d:(g,t)=>{g.clearRect(0,0,128,40);
+   R(g,40,22,48,4,"#8a9aa6");R(g,42,26,44,6,"#7a8a96");R(g,46,32,36,3,"#6a7a86");R(g,42,21,44,2,"#e6a23c");R(g,50,20,4,1,"#7a4b2e");R(g,66,20,3,1,"#2ecc71");
+   for(let i=0;i<5;i++){const x=48+i*8,y=18-((t+i*2)%8);R(g,x+((t+i)%2),y,1,2,"rgba(255,255,255,.7)");R(g,x+1,y-3,1,2,"rgba(255,255,255,.5)");}}}
+};
+
+function scale(c){c.style.imageRendering="pixelated";}
+const ANIM=[];
+function mount(){
+  document.querySelectorAll("canvas.scene").forEach(c=>{const s=SCENES[c.dataset.s];c.width=s.w;c.height=s.h;scale(c);ANIM.push(()=>{const g=c.getContext("2d");s.d(g,TICK);});});
+  document.querySelectorAll("canvas.egg").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);c.style.width=`calc(${e.w} * min(.3vw, .53vh))`;c.setAttribute("aria-label","Easter egg");
+    ANIM.push(()=>{const g=c.getContext("2d");g.clearRect(0,0,e.w,e.h);e.d(g,TICK);});
+    c.addEventListener("click",()=>found(c.dataset.e,c));});
+}
+let TICK=0;
+function loop(){TICK++;ANIM.forEach(f=>f());}
+/* Contador de easter eggs */
+const FOUND=new Set();
+function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}
+  if(FOUND.has(k))return;FOUND.add(k);document.getElementById("eggs").textContent=FOUND.size+"/12";
+  const t=document.getElementById("toast");t.textContent="+1 · "+EGGS[k].name;t.classList.remove("show");void t.offsetWidth;t.classList.add("show");renderGallery();}
+function renderGallery(){const gal=document.getElementById("gallery");if(!gal)return;
+  gal.innerHTML=EGG_ORDER.map(k=>`<div class="gi${FOUND.has(k)?' ok':''}" title="${FOUND.has(k)?EGGS[k].name:'?'}"><canvas class="egg-g" data-e="${k}"></canvas></div>`).join("");
+  gal.querySelectorAll("canvas").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);const g=c.getContext("2d");e.d(g,1);
+    if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#56657a";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
+  const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===12?"Você achou todos os 12! A equipe agradece.":`Você achou ${FOUND.size} de 12 personagens escondidos nos slides.`;}
+mount();renderGallery();loop();
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(loop,220);
+
 </script>
 </body>
 </html>
