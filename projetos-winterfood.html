@@ -142,6 +142,19 @@ td.r,th.r{text-align:right}
 .g-bar{position:absolute;top:7px;height:20px;border-radius:5px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:1px 6px;white-space:nowrap;overflow:hidden}
 .g-bar.crit{background:var(--crit)}
 .g-bar.com{background:var(--warm)}
+.com-grid{display:grid;grid-template-columns:1fr 200px;gap:14px;align-items:start}
+.com-side{position:sticky;top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;display:flex;flex-direction:column;gap:8px}
+.com-side b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.com-side div{display:flex;gap:8px;align-items:flex-start}
+.com-side i{flex:none;width:11px;height:11px;border-radius:50%;margin-top:3px}
+.com-side i.sq{border-radius:3px}
+.com-side i.dm{border-radius:0;transform:rotate(45deg);background:var(--ink);width:10px;height:10px}
+.com-side small{color:var(--muted)}
+.cg1{--c:#1f5f7a}.cg2{--c:#6aa6c4}.cg3{--c:#b8641a}.cg4{--c:#e8b07a}
+.g-dia{position:absolute;top:9px;width:15px;height:15px;margin-left:-7.5px;background:var(--ink);transform:rotate(45deg);border:2px solid var(--paper);z-index:2;cursor:help}
+.g-cd{position:absolute;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--c);cursor:help}
+.g-cd.on{top:10px;width:13px;height:13px;margin-left:-6.5px;border:2px solid #fff;z-index:1}
+@media (max-width:760px){.com-grid{grid-template-columns:1fr}.com-side{position:static}}
 .g-dot{position:absolute;top:11px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--warm);border:2px solid var(--paper)}
 .g-line{position:absolute;top:16px;height:2px;background:var(--warm);opacity:.45}
 .g-sep{grid-column:1/-1;padding:8px 8px 4px;font:700 12px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
@@ -407,10 +420,9 @@ tr.crit td{color:var(--crit);font-weight:600}
     </tbody></table></div>
   <p class="note">Comitê diretor: patrocinador e representantes do Instituto Municipal de Turismo, da Abrasel-PR e do Movimente Curitiba Gastronômica.</p>
   <h3 id="crono-comunicacao">Cronograma da comunicação</h3>
-  <p>Cada ponto é uma ocorrência (reunião, relatório, boletim); barra cheia é ação contínua. Ligue a sobreposição para ver as comunicações ao lado das atividades do projeto e conferir se cada uma acontece no marco certo.</p>
+  <p>Cada ponto é uma ocorrência; barra cheia é ação contínua. Ao sobrepor, as comunicações entram nas barras do caminho crítico e os losangos marcam as decisões que liberam a próxima atividade.</p>
   <div class="canvas-tools"><button type="button" class="b-toggle" id="comBoth" aria-pressed="false">Sobrepor ao cronograma do projeto</button></div>
-  <div class="legend"><span><i class="sw" style="background:var(--warm)"></i>Comunicação</span><span class="proj-leg" hidden><i class="sw" style="background:var(--crit)"></i>Atividade no caminho crítico</span><span class="proj-leg" hidden><i class="sw" style="background:var(--accent)"></i>Atividade com folga</span></div>
-  <div class="scroll"><div class="gantt" id="comGantt"></div></div>
+  <div class="com-grid"><div class="scroll"><div class="gantt" id="comGantt"></div></div><aside class="com-side" id="comSide"></aside></div>
 </section>
 
 <!-- ===== CUSTOS ===== -->
@@ -609,25 +621,50 @@ const COM=[
  {id:"COM#09",n:"Reunião de encerramento",occ:[29]}
 ];
 COM.forEach(c=>{ if(c.step){c.occ=[];for(let w=c.s;w<=c.e;w+=c.step)c.occ.push(w);} });
+const CG={1:"Reuniões de governança (kick-off, status, briefing, encerramento)",2:"Alinhamento tático",3:"Relatórios e boletins",4:"Campanha e imprensa"};
+const CGRP={"COM#01":1,"COM#02":1,"COM#06":1,"COM#09":1,"COM#03":2,"COM#04":3,"COM#05":3,"COM#07":4,"COM#08":4};
+/* Marcos de decisão: comunicações que liberam a próxima atividade */
+const MD=[
+ {w:1,lane:"B",t:"Kick-off (COM#01): formaliza papéis e o plano; libera B"},
+ {w:11,lane:"I",t:"Status executivo (COM#02): fechamento das cotas; libera a contratação de mídia"},
+ {w:13,lane:"F",t:"Status executivo (COM#02): go/no-go da adesão, gatilho do risco R02"},
+ {w:20,lane:"N",t:"Briefing operacional (COM#06): condição para abrir o festival"},
+ {w:29,lane:"Q",t:"Encerramento (COM#09): aprova o relatório de impacto e fecha o projeto"}
+];
+const occOf=c=>c.cont?Array.from({length:c.e-c.s+1},(_,i)=>c.s+i):c.occ;
 function renderCom(both){
-  const cg=document.getElementById("comGantt");
+  const cg=document.getElementById("comGantt"), side=document.getElementById("comSide");
   let html=head+'</div>';
   if(both){
-    html+='<div class="g-sep">Atividades do projeto</div>';
-    T.forEach(t=>{ html+=`<div class="g-name"><span class="id">${t.id}</span><span>${t.n}</span></div><div class="g-row" style="--w:${W}"><div class="g-bar${t.crit?' crit':''}" style="left:${t.es/W*100}%;width:${t.d/W*100}%" title="${t.n}: semanas ${t.es+1} a ${t.ef}">${t.d} sem.</div></div>`; });
-    html+='<div class="g-sep">Comunicação</div>';
+    T.forEach(t=>{
+      const ms=MD.filter(m=>m.lane===t.id).map(m=>`<div class="g-dia" style="left:${(m.w-.5)/W*100}%" title="${m.t}"></div>`).join("");
+      let dots="", k=0;
+      if(t.crit){
+        for(let w=t.es+1; w<=t.ef; w++){
+          const here=COM.filter(c=>occOf(c).includes(w)).sort((p,q)=>CGRP[p.id]-CGRP[q.id]);
+          here.forEach((c,i)=>{ dots+=`<div class="g-cd cg${CGRP[c.id]}${i?'':' on'}" style="left:${(w-.5)/W*100}%;${i?`top:${22+i*11}px`:''}" title="${c.id} ${c.n} · semana ${w}"></div>`; k=Math.max(k,i); });
+        }
+      }
+      html+=`<div class="g-name"><span class="id">${t.id}</span><span>${t.n}</span></div><div class="g-row" style="--w:${W};${k?`min-height:${36+k*11}px`:''}"><div class="g-bar${t.crit?' crit':''}" style="left:${t.es/W*100}%;width:${t.d/W*100}%" title="${t.n}: semanas ${t.es+1} a ${t.ef}"></div>${dots}${ms}</div>`;
+    });
+    side.hidden=false;
+    side.innerHTML='<b>Legenda</b><div><i class="sq" style="background:var(--crit)"></i><span>Caminho crítico</span></div><div><i class="sq" style="background:var(--accent)"></i><span>Atividade com folga</span></div><div><i class="dm"></i><span>Marco de decisão</span></div>'+
+      Object.entries(CG).map(([g,n])=>`<div><i class="cg${g}" style="background:var(--c)"></i><span>${n}<br><small>${Object.keys(CGRP).filter(k=>CGRP[k]==g).map(k=>k.replace("COM#","C")).join(", ")}</small></span></div>`).join("")+
+      '<small>Mais de uma comunicação na mesma semana: as outras descem uma linha. Passe o mouse para ver qual é.</small>';
+  } else {
+    side.hidden=true;
+    COM.forEach(c=>{
+      let r='';
+      if(c.cont) r=`<div class="g-bar com" style="left:${(c.s-1)/W*100}%;width:${(c.e-c.s+1)/W*100}%" title="${c.id}: semanas ${c.s} a ${c.e}">sem. ${c.s}–${c.e}</div>`;
+      else{
+        if(c.occ.length>1){const a=c.occ[0],b=c.occ[c.occ.length-1]; r+=`<div class="g-line" style="left:${(a-.5)/W*100}%;width:${(b-a)/W*100}%"></div>`;}
+        r+=c.occ.map(w=>`<div class="g-dot" style="left:${(w-.5)/W*100}%" title="${c.id}: semana ${w}"></div>`).join("");
+      }
+      html+=`<div class="g-name com"><span class="id">${c.id.replace("COM#","C")}</span><span>${c.n}</span></div><div class="g-row" style="--w:${W}">${r}</div>`;
+    });
   }
-  COM.forEach(c=>{
-    let r='';
-    if(c.cont) r=`<div class="g-bar com" style="left:${(c.s-1)/W*100}%;width:${(c.e-c.s+1)/W*100}%" title="${c.id}: semanas ${c.s} a ${c.e}">sem. ${c.s}–${c.e}</div>`;
-    else{
-      if(c.occ.length>1){const a=c.occ[0],b=c.occ[c.occ.length-1]; r+=`<div class="g-line" style="left:${(a-.5)/W*100}%;width:${(b-a)/W*100}%"></div>`;}
-      r+=c.occ.map(w=>`<div class="g-dot" style="left:${(w-.5)/W*100}%" title="${c.id}: semana ${w}"></div>`).join("");
-    }
-    html+=`<div class="g-name com"><span class="id">${c.id.replace("COM#","C")}</span><span>${c.n}</span></div><div class="g-row" style="--w:${W}">${r}</div>`;
-  });
   cg.innerHTML=html;
-  document.querySelectorAll(".proj-leg").forEach(e=>e.hidden=!both);
+  cg.closest(".com-grid").style.gridTemplateColumns=both?"":"1fr";
 }
 renderCom(false);
 document.getElementById("comBoth").addEventListener("click",e=>{
