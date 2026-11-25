@@ -136,6 +136,8 @@ canvas.egg.pop{animation:pop .5s steps(4)}
 .gi canvas{width:86%;image-rendering:pixelated}.gi.ok{border-color:#ffd34d;background:rgba(255,211,77,.12)}
 .pix{font:400 .55em "Press Start 2P",monospace;letter-spacing:.04em}
 .blink{animation:blink 1s steps(2) infinite}
+.menti{display:flex;gap:1.2em;align-items:center}.menti img{width:7.5em;height:7.5em;image-rendering:pixelated;background:#fff;padding:.3em;border:3px solid #ffd34d}
+#s9 .gallery{grid-template-columns:repeat(14,1fr)}
 .start{align-self:flex-start;font:400 1.1em "Press Start 2P",monospace;color:#ffd34d;background:none;border:3px solid #ffd34d;padding:.6em 1em;cursor:pointer;margin-top:.4em}
 .start:hover{background:#ffd34d;color:#0f1b2d;animation:none}
 canvas.egg.chao{bottom:1.5%;left:58%}
@@ -200,7 +202,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </div></section>
 
 <section class="slide" id="s3"><div class="frame">
-  <div class="band"><canvas class="scene" data-s="caminhao" aria-hidden="true"></canvas><canvas class="egg " data-e="abelhas" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="duas" style="left:62%" title="?"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="caminhao" aria-hidden="true"></canvas><canvas class="egg " data-e="abelhas" style="left:2%" title="?"></canvas><canvas class="egg walk" data-e="duas" style="left:62%" title="?"></canvas><canvas class="egg " data-e="leitura" style="left:86%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">PM Canvas</div>
   <h2>O projeto em uma tela <span class="sub" style="font:500 .4em var(--body)">clique num terreno para ler</span></h2>
@@ -306,7 +308,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
       </tbody>
     </table>
     <div style="display:flex;flex-direction:column;gap:1em">
-      <div class="card when" style="font-size:.85em"><div class="big">R$ 55,5 mil</div>reserva de contingência (10%, R$ 37 mil) + reserva gerencial (5%, R$ 18,5 mil). O restante fica com a mitigação e a folga até o teto de R$ 450 mil.</div>
+      <div class="card when" style="font-size:.85em"><h3>Reserva de contingência e gerencial</h3><div class="big">R$ 55,5 mil</div>reserva de contingência (10%, R$ 37 mil) + reserva gerencial (5%, R$ 18,5 mil). O restante fica com a mitigação e a folga até o teto de R$ 450 mil.</div>
       <div class="card" style="font-size:.85em"><h3>Contexto mapeado</h3>PESTLE (macro), TECOP (operação) e VUCA (decisão) alimentam a lista de riscos.</div>
     </div>
   </div>
@@ -317,7 +319,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
   <div class="band"><canvas class="scene" data-s="barracas" aria-hidden="true"></canvas><canvas class="egg " data-e="sax" style="left:93%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">Plano de Comunicação</div>
-  <h2>Quando cada comunicação acontece</h2>
+  <h2>Essa reunião podia ser 1 e-mail?</h2>
   </div>
   <div class="ct" id="ct"></div>
   <a class="more" href="projetos-winterfood.html#crono-comunicacao">Plano completo e sobreposição ao cronograma →</a>
@@ -329,7 +331,8 @@ canvas.egg.chao{bottom:1.5%;left:58%}
   <h1>Perguntas?</h1>
   <p class="pix blink" style="color:#ffd34d">CONTINUE? PRESS START</p>
   </div><canvas class="scene" data-s="sopa" aria-hidden="true" style="border:0;background:transparent;width:34%"></canvas></div>
-  <p class="sub" id="galmsg" style="font-size:.85em"></p>
+  <div class="menti"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQAAAAB0CZXLAAADIklEQVR42u2ZT47jRBTGf68dqbwro9kiVSQWXIFVV7NiyRW4Ais0UkicSd+AC3AFluwcOAWLluwLgL0rS44/Fhl6elqZDpPWSDZ0LUtfXt6r+up7f2zi6XXFC+AF8F8DII0AWRtTKLmGAVyNLwE20lSi8JJK9rDid2nhx36ZtSapntVd7G2Jl69vue4Ndqr7gt4W82NUZ/0ya3EaukNO1k6X9n6b45R1cTHDxxtVA4mDfZ2aQ7GmORQ4DbOKojOzkuj3g6/6mDUbXw/IzJbTkcG3q1K98qOrpa3q+13N6G3m3ILFRXcDBysJVsjsYOVMCLMAum+75Z1Ft/9C0OC/z/+gK92vUzpqFcDtUQuvAG4A3hwDeGghhQEIcE3IVBKzelK0T2za6OqVH50G1oTBj8QhzIX2R1nPwwK6L+9++o3m8+N2pv28KjEvJ7UkNkfVGQlS6aphSpVYZzQLyEO5X0KXQ3Mo6DfuEla3z3YyXWTBWro4vPfrAJtEfyIlDc92cjxvoSueBOgJtY/5/aarXWN+e9FdUD6bMNWJt6mgPu+LdxFYZ8Or7Q/fnLRQf2pWx/LxST8C7L/7AGGcXBvNSr56e9SgfH84QZg/zzl5OAuozoX580ffBdJIJAygelNRgBudMo2QnSpy0rm/GM4Brj7aApJUOe3a6KQKA6cUBl8SVV8igyqfzajqspTUL+9e/XKz/IfSbp81n4nF3SkL9QRSUvHBIic+cDLAj2ZTbEhpiNJfStDAm0eAFaSHEue3KQ7TmsNIuzYmVkRp8KNT1q5dNasGxCSzvsDXmbZmrrmCQwHRZtOAII2+SmQSrLAUsnYNaoHLJOgTle4tToOvACyBHwmZtqom4+S/o31MYafKqcQSUvl2usFsGpD76UEbnXaqnDKVgFeKUyrdZWa28FW/fG03NL0pne5Yp94lSTspsVEFak314JViNhva34+CgbAAghX0SzrL90OYmk52N66GmMCXBNeu5yTmV+/Sfb98bZY3sD6mJLJ6frSvUlCLq7N2k8KATWg+ef8tSUph8Epk7SZNTwafXvbyIfgF8P8D/A1G7dklTdcb+wAAAABJRU5ErkJggg==" alt="QR code do Menti"><div><p class="pix" style="color:#ffd34d;margin:0 0 .6em">SUA VEZ DE JOGAR</p><p style="margin:0 0 .4em;font-size:1.05em">Responda nossas perguntas no <b>Menti</b>: aponte a câmera para o QR code ou acesse</p><a href="https://form.menti.com/s/alngp51j2w7r" target="_blank" rel="noopener" style="color:#9fd3ff;font-weight:700">form.menti.com/s/alngp51j2w7r</a></div></div>
+  <p class="sub" id="galmsg" style="font-size:.8em;margin:0"></p>
   <div class="gallery" id="gallery"></div>
   <p class="team" style="font-size:.72em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
   <a class="more" href="projetos-winterfood-fontes.html">Acervo de fontes →</a>
@@ -339,7 +342,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 <div class="hud" role="navigation" aria-label="Navegação dos slides">
   <a href="projetos-winterfood.html">◀ PROJETO</a><span>WINTERFOOD.EXE</span>
   <div class="prog" id="prog"></div>
-  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/13</span></span>
+  <span class="eg" title="Personagens escondidos encontrados">EASTER EGGS <span id="eggs">0/14</span></span>
   <button class="arr" id="prev" aria-label="Slide anterior">◀</button><span id="pos">1/9</span><button class="arr" id="next" aria-label="Próximo slide">▶</button>
 </div>
 <div id="toast" role="status"></div>
@@ -431,18 +434,30 @@ const EGGS={
  remo:{w:28,h:14,name:"Remadora",d:(g,t)=>{const f=t%2;R(g,0,11,28,3,"#4a90c2");R(g,4,10,18,2,"#c84a2b");R(g,5,12,16,1,"#8a2f1c");
    R(g,11,4,4,1,"#3b2a1e");R(g,11,5,4,3,SK[0]);R(g,11,8,4,3,"#ffcc00");
    if(f){R(g,6,9,8,1,"#6b4a2b");R(g,15,9,8,1,"#6b4a2b");}else{R(g,3,11,11,1,"#6b4a2b");R(g,15,11,11,1,"#6b4a2b");}}},
- bike:{w:22,h:16,name:"Ciclista",d:(g,t)=>{const f=t%2;const ring=(cx,cy)=>{R(g,cx-1,cy-2,3,1,"#222");R(g,cx-1,cy+2,3,1,"#222");R(g,cx-2,cy-1,1,3,"#222");R(g,cx+2,cy-1,1,3,"#222");R(g,cx,cy,1,1,"#888")};
-   ring(5,12);ring(16,12);R(g,5,10,11,1,"#d9534f");R(g,8,9,1,3,"#d9534f");R(g,15,7,1,5,"#d9534f");R(g,14,6,3,1,"#333");
-   R(g,8,1,4,1,"#e74c3c");R(g,8,2,4,3,SK[1]);R(g,8,5,4,4,"#2ecc71");R(g,11,6,4,1,"#2ecc71");R(g,f?8:10,9,1,2,"#1f2f4a");R(g,f?10:8,9,1,3,"#1f2f4a");}},
+ bike:{w:24,h:17,name:"Ciclista",d:(g,t)=>{const f=t%2;
+   const ring=(cx,cy)=>{R(g,cx-1,cy-3,3,1,"#222");R(g,cx-1,cy+3,3,1,"#222");R(g,cx-3,cy-1,1,3,"#222");R(g,cx+3,cy-1,1,3,"#222");R(g,cx-2,cy-2,1,1,"#222");R(g,cx+2,cy-2,1,1,"#222");R(g,cx-2,cy+2,1,1,"#222");R(g,cx+2,cy+2,1,1,"#222");R(g,cx,cy,1,1,"#999");};
+   ring(5,13);ring(19,13);
+   R(g,8,9,1,4,"#d9534f");R(g,8,9,9,1,"#d9534f");R(g,9,10,1,1,"#d9534f");R(g,10,11,1,1,"#d9534f");R(g,11,12,2,1,"#d9534f");R(g,16,6,1,7,"#d9534f");R(g,17,12,2,1,"#d9534f");R(g,5,12,3,1,"#d9534f");
+   R(g,15,5,3,1,"#333");R(g,7,8,3,1,"#333");
+   R(g,7,0,4,1,"#e74c3c");R(g,6,1,5,1,"#e74c3c");R(g,7,2,4,2,SK[1]);R(g,10,2,1,1,"#2a1d14");R(g,6,1,1,4,"#5a2d16");
+   R(g,8,4,3,4,"#2ecc71");R(g,11,4,2,2,"#2ecc71");R(g,13,5,2,1,SK[1]);
+   if(f){R(g,9,8,2,2,"#1f2f4a");R(g,11,10,1,2,"#1f2f4a");R(g,11,12,2,1,"#222");}else{R(g,9,8,2,2,"#1f2f4a");R(g,9,10,1,3,"#1f2f4a");R(g,9,13,2,1,"#222");}}},
  cafe:{w:18,h:15,name:"Hora do café",d:(g,t)=>{person(g,3,2,{shirt:"#8e5a3c",hair:"#111",beard:0,skin:SK[1],noArms:1});R(g,2,6,1,3,"#8e5a3c");R(g,9,6,3,1,"#8e5a3c");
    R(g,11,4,3,3,"#fff");R(g,14,5,1,1,"#fff");R(g,12,4,1,1,"#5a3a1a");const s=t%3;R(g,12,2-s%2,1,1,"#ccc");R(g,13,1+s%2,1,1,"#ccc");}},
  abelhas:{w:24,h:16,name:"Apicultor",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666",beard:"#6b4a2b"});R(g,2,2,6,1,"#e0e0e0");R(g,3,3,4,1,"#9aa3a9");
    R(g,13,7,8,3,"#d9a441");R(g,13,10,8,4,"#b8862e");R(g,12,6,10,1,"#7a5a2a");R(g,16,11,2,1,"#3a2a10");
    for(let i=0;i<5;i++){const a=t*0.9+i*1.7;const x=17+Math.cos(a)*6,y=5+Math.sin(a*1.3)*4;R(g,x,y,1,1,"#111");R(g,x+1,y,1,1,"#ffcc00");}}},
- rock:{w:16,h:16,name:"Headbanger",d:(g,t)=>{const f=t%2;person(g,5,2+(f?1:0),{long:1,longLen:f?7:5,hair:"#111",shirt:"#111",sleeve:"#111",pants:"#3a4a6a",
+ rock:{w:34,h:18,name:"Headbanger e o guitarrista",d:(g,t)=>{const f=t%2;person(g,3,3+(f?1:0),{long:1,longLen:f?7:5,hair:"#111",shirt:"#111",sleeve:"#111",pants:"#3a4a6a",
    print:(g,x,y)=>{R(g,x+2,y+5,2,2,"#eee");R(g,x+2,y+7,1,1,"#c0392b");R(g,x+3,y+7,1,1,"#c0392b");}},0);
-   R(g,5,1+(f?1:0),6,1,"#444");R(g,4,3+(f?1:0),1,2,"#c0392b");R(g,11,3+(f?1:0),1,2,"#c0392b");
-   if(f){R(g,13,0,1,2,"#e2b33c");R(g,1,1,1,2,"#e2b33c");}}},
+   R(g,3,2+(f?1:0),6,1,"#444");R(g,2,4+(f?1:0),1,2,"#c0392b");R(g,9,4+(f?1:0),1,2,"#c0392b");
+   const gx=17,gy=f?1:0;
+   R(g,gx+1,gy,8,2,"#111");R(g,gx,gy+1,10,6,"#111");R(g,gx-1,gy+3,2,5,"#111");R(g,gx+9,gy+3,2,5,"#111");R(g,gx+2,gy-1,2,1,"#111");R(g,gx+6,gy-1,2,1,"#111");
+   R(g,gx+3,gy+2,4,3,SK[0]);R(g,gx+4,gy+3,1,1,"#111");R(g,gx+6,gy+3,1,1,"#111");
+   R(g,gx+2,7,6,5,"#1a1a1a");R(g,gx+4,7,2,4,"#f4f4f4");R(g,gx+1,8,1,3,"#1a1a1a");R(g,gx+8,8,1,3,"#1a1a1a");
+   R(g,gx+3,12,1,4,"#151515");R(g,gx+6,12,1,4,"#151515");R(g,gx+2,16,2,1,"#333");R(g,gx+6,16,2,1,"#333");
+   R(g,gx-3,11,6,2,"#111");R(g,gx-4,12,3,2,"#f4f4f4");R(g,gx-3,10,2,1,"#111");R(g,gx+3,10,1,1,"#888");
+   for(let i=0;i<7;i++)R(g,gx+4+i,10-Math.floor(i*0.6),1,1,"#bbb");R(g,gx+10,5,2,2,"#111");
+   if(f){R(g,32,2,1,2,"#e2b33c");R(g,14,1,1,2,"#e2b33c");}}},
  gemeas:{w:22,h:15,name:"Mãe com as gêmeas",d:(g,t)=>{const f=t%2;person(g,8,1,{long:1,hair:"#6b3e1f",shirt:"#e67e22",skin:SK[1],walk:1},f);
    kid(g,2,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);kid(g,16,6,{hair:"#6b3e1f",dress:"#f06292",skin:SK[1]},f);R(g,1,6,1,1,"#ff4081");R(g,15,6,1,1,"#ff4081");}},
  paquita:{w:44,h:24,name:"Paquita e a nave da Xuxa",d:(g,t)=>{
@@ -471,7 +486,12 @@ EGGS.leao={w:34,h:17,name:"O domador e o leão",say:"Ele é terribili",d:(g,t)=>
    R(g,14,8,14,6,"#e1a73b");R(g,15,14,2,3,"#c98d26");R(g,25,14,2,3,"#c98d26");R(g,27,9,3,1,"#e1a73b");R(g,30,8,1,1,"#7a4b2e");
    R(g,10,3,9,10,"#8a4b1f");R(g,9,5,1,6,"#8a4b1f");R(g,11,5,6,6,"#e1a73b");R(g,12,6,1,1,"#111");R(g,15,6,1,1,"#111");R(g,13,8,2,1,"#5a2d16");
    if(f){R(g,12,9,4,2,"#5a1010");R(g,12,9,1,1,"#fff");R(g,15,9,1,1,"#fff");R(g,6,3,2,1,"#c0392b");R(g,5,6,2,1,"#c0392b");R(g,6,9,2,1,"#c0392b");}else R(g,12,10,4,1,"#5a2d16");}};
-const EGG_ORDER=["bike","remo","casal","abelhas","duas","gemeas","paquita","leao","corrida","rock","massagem","cafe","sax"];
+EGGS.leitura={w:28,h:16,name:"Leitores",d:(g,t)=>{const f=t%16<1;
+   R(g,1,10,11,2,"#8b5a2b");R(g,2,12,1,4,"#8b5a2b");R(g,10,12,1,4,"#8b5a2b");
+   R(g,4,2,4,1,"#5a2d16");R(g,4,3,4,3,SK[2]);R(g,3,3,1,4,"#5a2d16");R(g,4,6,4,4,"#e67e22");R(g,8,8,4,2,"#2c3e50");R(g,11,10,1,5,"#2c3e50");R(g,11,15,2,1,"#222");
+   R(g,7,5,5,3,"#fff");R(g,9,5,1,3,"#bbb");R(g,8,6,1,1,"#999");R(g,10,6,1,1,"#999");if(f)R(g,10,5,2,3,"#f4f4f4");
+   person(g,18,2,{shirt:"#16a085",hair:"#c9a227",long:1,noArms:1},0);R(g,17,6,1,3,"#16a085");R(g,24,6,1,2,"#16a085");R(g,15,7,5,4,"#c0392b");R(g,16,8,3,2,"#fff");R(g,24,8,1,1,SK[0]);}};
+const EGG_ORDER=["bike","remo","casal","abelhas","duas","gemeas","paquita","leao","corrida","leitura","rock","massagem","cafe","sax"];
 
 /* ---------- Cenas (faixa no alto de cada slide) ---------- */
 const stars=(g,w,h,t,n=24)=>{for(let i=0;i<n;i++){const x=(i*53)%w,y=(i*29)%h;if((i+t)%5) R(g,x,y,1,1,"#cfd8ff");}};
@@ -488,6 +508,18 @@ const ground=(g,w,h,c="#7fb069")=>{R(g,0,h-4,w,4,c);R(g,0,h-4,w,1,"rgba(0,0,0,.1
 const tree=(g,x,base,h,c="#2d6e3e")=>{R(g,x+2,base-h+5,2,h-5,"#5a3a1a");R(g,x,base-h,6,6,c);R(g,x+1,base-h-1,4,1,c);};
 const arv=(g,x,base,h)=>{R(g,x,base-h,2,h,"#5a3a1a");for(let k=0;k<4;k++){const y=base-h+k*3,w=14-k*3;R(g,x-w/2+1,y,w,2,"#2d5a3a");R(g,x-w/2,y-1,2,1,"#2d5a3a");R(g,x+w/2,y-1,2,1,"#2d5a3a");}};
 
+
+/* Verduras em pixel (5×6) */
+const VEG=[
+ (g,x,y)=>{R(g,x+1,y,1,2,"#2ecc71");R(g,x+3,y,1,2,"#27ae60");R(g,x,y+2,5,1,"#e67e22");R(g,x+1,y+3,3,1,"#e67e22");R(g,x+1,y+4,2,1,"#d35400");R(g,x+2,y+5,1,1,"#d35400");},
+ (g,x,y)=>{R(g,x+2,y,1,1,"#27ae60");R(g,x+1,y+1,3,1,"#2ecc71");R(g,x,y+2,5,3,"#e74c3c");R(g,x+1,y+5,3,1,"#c0392b");R(g,x+1,y+2,1,1,"#ff8a80");},
+ (g,x,y)=>{R(g,x+1,y,3,2,"#27ae60");R(g,x,y+1,5,2,"#2ecc71");R(g,x+2,y+3,1,3,"#58d68d");R(g,x+1,y+1,1,1,"#1e8449");},
+ (g,x,y)=>{R(g,x+2,y,1,1,"#27ae60");R(g,x,y+1,5,4,"#f39c12");R(g,x+1,y+1,1,4,"#e67e22");R(g,x+3,y+1,1,4,"#e67e22");R(g,x+1,y+5,3,1,"#d35400");},
+ (g,x,y)=>{R(g,x+3,y,2,1,"#27ae60");R(g,x+1,y+1,3,4,"#8e44ad");R(g,x,y+2,1,2,"#8e44ad");R(g,x+2,y+1,1,1,"#bb8fce");R(g,x+1,y+5,2,1,"#6c3483");},
+ (g,x,y)=>{R(g,x,y+1,1,4,"#27ae60");R(g,x+4,y+1,1,4,"#27ae60");R(g,x+1,y,3,5,"#f4d03f");R(g,x+2,y+1,1,1,"#d4ac0d");R(g,x+2,y+3,1,1,"#d4ac0d");R(g,x+2,y+5,1,1,"#27ae60");},
+ (g,x,y)=>{R(g,x+2,y,1,1,"#27ae60");R(g,x+1,y+1,3,1,"#27ae60");R(g,x,y+2,5,3,"#a93226");R(g,x+1,y+5,3,1,"#7b241c");R(g,x+3,y+2,1,1,"#e6b0aa");},
+ (g,x,y)=>{R(g,x,y+3,1,2,"#7a4b2e");R(g,x+1,y+1,1,4,"#7a4b2e");R(g,x+2,y,2,5,"#8b5a2b");R(g,x+4,y+1,1,3,"#7a4b2e");R(g,x+2,y+5,1,1,"#5a3a1a");}
+];
 const SCENES={
  /* Capa: Parque Barigui, lago, capivaras e ciclovia */
  barigui:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#0f1b2d","#0f1b2d");stars(g,256,14,t,40);R(g,226,3,5,5,"#f4f1c9");R(g,227,3,4,4,"#0f1b2d");
@@ -536,17 +568,20 @@ const SCENES={
    if(k>2)for(let i=0;i<4;i++)R(g,124+i*5,8-((t+i)%4),1,1,i%2?"#ff9f1a":"#ffd34d");}},
  /* 6: jogando ingredientes no caldeirão */
  ingredientes:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fff6e0","#fff6e0");ground(g,256,32,"#c9b79c");
-   pot(g,116,10,28,1,1,t);steam(g,122,8,t,4);
-   const items=["#e67e22","#2ecc71","#7a4b2e","#f1c40f","#c0392b"];
-   person(g,84,15,{shirt:"#c0392b",hair:"#222"});person(g,160,15,{shirt:"#2980b9",hair:"#8a5a2b",skin:SK[2]});person(g,180,15,{shirt:"#27ae60",hair:"#e0c070"});
-   for(let i=0;i<3;i++){const p=((t+i*3)%9)/9;const sx=[90,160,180][i],x=sx+(128-sx)*p,y=17-Math.sin(p*Math.PI)*14;R(g,x,y,2,2,items[(i+t)%5]);}
-   R(g,64,22,10,6,"#8b5a2b");for(let i=0;i<4;i++)R(g,65+i*2,21,2,2,items[i]);R(g,196,22,10,6,"#8b5a2b");for(let i=0;i<4;i++)R(g,197+i*2,21,2,2,items[4-i]);}},
+   pot(g,114,12,30,1,1,t);steam(g,120,10,t,4);
+   person(g,84,15,{shirt:"#c0392b",hair:"#222"});person(g,162,15,{shirt:"#2980b9",hair:"#8a5a2b",skin:SK[2]});person(g,182,15,{shirt:"#27ae60",hair:"#e0c070"});
+   for(let i=0;i<3;i++){const p=((t+i*4)%12)/12;const sx=[88,162,182][i],x=sx+(127-sx)*p,y=14-Math.sin(p*Math.PI)*13;if(p<.92)VEG[(i*3+Math.floor((t+i*4)/12))%8](g,x,y);else{R(g,124,10,1,1,"#9fd3ff");R(g,132,9,1,1,"#9fd3ff");}}
+   R(g,56,22,22,6,"#8b5a2b");R(g,56,22,22,1,"#6b4a2b");for(let i=0;i<4;i++)VEG[i](g,56+i*5,17);
+   R(g,200,22,22,6,"#8b5a2b");R(g,200,22,22,1,"#6b4a2b");for(let i=0;i<4;i++)VEG[i+4](g,200+i*5,17);}},
  /* 7: mexendo, com vários outros caldeirões ao lado */
  mexer:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fdf0e6","#fdf0e6");ground(g,256,32,"#c9b79c");
-   for(let i=0;i<6;i++){const x=10+i*40;pot(g,x,12,22,1,1,t+i);steam(g,x+4,10,t+i,3);person(g,x+24,15,{shirt:["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i],hair:["#222","#8a5a2b","#e0c070","#222","#5a2d16","#111"][i],skin:SK[i%4]},0);
-     const a=(t+i)%4;R(g,x+14+(a<2?a:4-a)*2,4,1,10,"#7a4b2e");}}},
+   for(let i=0;i<6;i++){const x=12+i*41,a=(t+i)%4,sw=a<2?a:4-a;
+     R(g,x-3,14,30,2,"#7a5232");R(g,x-3,16,30,1,"#5a3a1a");R(g,x-2,17,2,11,"#7a5232");R(g,x+23,17,2,11,"#7a5232");R(g,x-1,22,25,1,"#8b6a45");R(g,x+25,20,3,1,"#8b6a45");R(g,x+26,24,3,1,"#8b6a45");
+     person(g,x+9,1,{shirt:["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i],hair:["#222","#8a5a2b","#e0c070","#222","#5a2d16","#111"][i],skin:SK[i%4],noArms:1},0);
+     R(g,x+9+sw,6,1,10,"#7a4b2e");R(g,x+8+sw,15,3,1,"#7a4b2e");R(g,x+10,7,sw+1,1,SK[i%4]);R(g,x+8,5,1,3,["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085"][i]);
+     pot(g,x+3,15,18,1,1,t+i);steam(g,x+6,13,t+i,3);}}},
  /* 8: rua com barraquinhas de sopa e fila */
- barracas:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#1d2b44","#1d2b44");stars(g,256,10,t,24);R(g,0,26,256,6,"#5d6d7e");
+ barracas:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#cfe8ff","#cfe8ff");R(g,236,3,6,6,"#ffd34d");R(g,20,4,16,3,"#fff");R(g,120,2,14,3,"#fff");R(g,0,26,256,6,"#5d6d7e");
    for(let i=0;i<5;i++){const x=8+i*50,c=["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22"][i];
      for(let k=0;k<6;k++)R(g,x+k*4,6,4,4,k%2?c:"#f4f4f4");R(g,x,10,24,1,"#333");R(g,x+1,11,1,10,"#555");R(g,x+22,11,1,10,"#555");R(g,x,18,24,8,"#8b5a2b");R(g,x+2,19,20,1,"#ffd34d");
      pot(g,x+5,12,12,1,0,t);steam(g,x+7,11,t+i,2);
