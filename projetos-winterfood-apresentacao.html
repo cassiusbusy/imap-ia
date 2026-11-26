@@ -41,7 +41,7 @@ h1{font-size:2.6em} h2{font-size:2em}
 ul{margin:0;padding-left:1.1em} li{margin:.15em 0}
 .big{font:800 2.2em var(--display);color:var(--warm);line-height:1}
 .kpis{display:flex;gap:1em}.kpis .card{flex:1}
-.more{position:absolute;right:5%;bottom:4%;font:600 .8em var(--body);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.3em .9em;background:var(--soft)}
+.more{position:absolute;right:5%;bottom:3%;font:600 .5em var(--body);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.25em .7em;background:var(--soft)}
 .more:hover{background:var(--accent);color:#fff}
 .foot{position:absolute;left:5%;bottom:4%;font-size:.7em;color:var(--muted)}
 .why{background:var(--why)}.what{background:var(--what)}.who{background:var(--who)}.how{background:var(--how)}.when{background:var(--when)}
@@ -136,12 +136,16 @@ canvas.egg.walk{animation:walk 18s linear infinite alternate}
 canvas.egg.pop{animation:pop .5s steps(4)}
 @keyframes pop{50%{transform:translateY(-14px) scale(1.15)}}
 .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:.4em;margin:.2em 0 .6em;max-width:100%}
-.gi{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);border-radius:4px;display:grid;place-items:center;aspect-ratio:1}
+.gi{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2em;aspect-ratio:.9;padding:.2em;cursor:pointer;color:#e6edf2;font:400 .42em "Press Start 2P",monospace;line-height:1.3;text-align:center}
+.gi:hover{border-color:#ffd34d}
 .gi canvas{width:86%;image-rendering:pixelated}.gi.ok{border-color:#ffd34d;background:rgba(255,211,77,.12)}
 .pix{font:400 .55em "Press Start 2P",monospace;letter-spacing:.04em}
 .blink{animation:blink 1s steps(2) infinite}
 .menti{display:flex;gap:1.2em;align-items:center}.menti img{width:7.5em;height:7.5em;image-rendering:pixelated;background:#fff;padding:.3em;border:3px solid #ffd34d}
-#s9 .gallery{grid-template-columns:repeat(14,1fr)}
+#s9 .gallery{grid-template-columns:repeat(13,1fr)}
+#s9 h1{font-size:2em}
+#s9 .menti img{width:5.5em;height:5.5em}
+#s9 .menti{font-size:.85em}
 .start{align-self:flex-start;font:400 1.1em "Press Start 2P",monospace;color:#ffd34d;background:none;border:3px solid #ffd34d;padding:.6em 1em;cursor:pointer;margin-top:.4em}
 .start:hover{background:#ffd34d;color:#0f1b2d;animation:none}
 canvas.egg.chao{bottom:1.5%;left:58%}
@@ -237,7 +241,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
   <div class="band"><canvas class="scene" data-s="carregar" aria-hidden="true"></canvas><canvas class="egg " data-e="gemeas" style="left:3%" title="?"></canvas><canvas class="egg " data-e="leao" style="left:70%" title="?"></canvas></div>
   <div class="hdr">
   <div class="kicker">EAP</div>
-  <h2>5 macro entregas</h2>
+  <h2>Cinco macro entregas</h2>
   </div>
   <div class="wbs">
     <div class="root">1. Winterfood Curitiba</div>
@@ -329,13 +333,12 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </div></section>
 
 <section class="slide" id="s9"><div class="frame cover end">
-  <div class="hd"><div>
-  <div class="kicker">Fim de jogo · obrigado</div>
-  <h1>Perguntas?</h1>
-  <p class="pix blink" style="color:#ffd34d">CONTINUE? PRESS START</p>
-  </div><canvas class="scene" data-s="sopa" aria-hidden="true" style="border:0;background:transparent;width:34%"></canvas></div>
+  <div class="band"><canvas class="scene" data-s="concurso" aria-hidden="true"></canvas></div>
+  <div class="trow"><div><div class="kicker">Fim de jogo · obrigado</div><h1>Perguntas?</h1></div><button type="button" class="start" id="restart" style="margin-left:auto">↺ RESTART</button></div>
   <div class="menti"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQAAAAB0CZXLAAADIklEQVR42u2ZT47jRBTGf68dqbwro9kiVSQWXIFVV7NiyRW4Ais0UkicSd+AC3AFluwcOAWLluwLgL0rS44/Fhl6elqZDpPWSDZ0LUtfXt6r+up7f2zi6XXFC+AF8F8DII0AWRtTKLmGAVyNLwE20lSi8JJK9rDid2nhx36ZtSapntVd7G2Jl69vue4Ndqr7gt4W82NUZ/0ya3EaukNO1k6X9n6b45R1cTHDxxtVA4mDfZ2aQ7GmORQ4DbOKojOzkuj3g6/6mDUbXw/IzJbTkcG3q1K98qOrpa3q+13N6G3m3ILFRXcDBysJVsjsYOVMCLMAum+75Z1Ft/9C0OC/z/+gK92vUzpqFcDtUQuvAG4A3hwDeGghhQEIcE3IVBKzelK0T2za6OqVH50G1oTBj8QhzIX2R1nPwwK6L+9++o3m8+N2pv28KjEvJ7UkNkfVGQlS6aphSpVYZzQLyEO5X0KXQ3Mo6DfuEla3z3YyXWTBWro4vPfrAJtEfyIlDc92cjxvoSueBOgJtY/5/aarXWN+e9FdUD6bMNWJt6mgPu+LdxFYZ8Or7Q/fnLRQf2pWx/LxST8C7L/7AGGcXBvNSr56e9SgfH84QZg/zzl5OAuozoX580ffBdJIJAygelNRgBudMo2QnSpy0rm/GM4Brj7aApJUOe3a6KQKA6cUBl8SVV8igyqfzajqspTUL+9e/XKz/IfSbp81n4nF3SkL9QRSUvHBIic+cDLAj2ZTbEhpiNJfStDAm0eAFaSHEue3KQ7TmsNIuzYmVkRp8KNT1q5dNasGxCSzvsDXmbZmrrmCQwHRZtOAII2+SmQSrLAUsnYNaoHLJOgTle4tToOvACyBHwmZtqom4+S/o31MYafKqcQSUvl2usFsGpD76UEbnXaqnDKVgFeKUyrdZWa28FW/fG03NL0pne5Yp94lSTspsVEFak314JViNhva34+CgbAAghX0SzrL90OYmk52N66GmMCXBNeu5yTmV+/Sfb98bZY3sD6mJLJ6frSvUlCLq7N2k8KATWg+ef8tSUph8Epk7SZNTwafXvbyIfgF8P8D/A1G7dklTdcb+wAAAABJRU5ErkJggg==" alt="QR code do Menti"><div><p class="pix" style="color:#ffd34d;margin:0 0 .6em">SUA VEZ DE JOGAR</p><p style="margin:0 0 .4em;font-size:1.05em">Responda nossas perguntas no <b>Menti</b>: aponte a câmera para o QR code ou acesse</p><a href="https://form.menti.com/s/alngp51j2w7r" target="_blank" rel="noopener" style="color:#9fd3ff;font-weight:700">form.menti.com/s/alngp51j2w7r</a></div></div>
-  <p class="team" style="font-size:.72em"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
+  <p class="pix" style="color:#ffd34d;margin:.2em 0 0">HAVIA 13 PERSONAGENS ESCONDIDOS NOS SLIDES. CLIQUE PARA DESCOBRIR QUEM ERAM</p>
+  <div class="gallery" id="gallery"></div>
+  <p class="team" style="font-size:.6em;margin:0"><b>Uso de inteligência artificial:</b> ferramentas de IA generativa foram usadas como apoio na revisão de texto e na preparação desta apresentação (Claude, Anthropic | Gemini, Google | NotebookLM, Google). O conteúdo, as análises e as conclusões são de responsabilidade dos autores, que revisaram todo o material.</p>
   <a class="more" href="projetos-winterfood-fontes.html">Acervo de fontes →</a>
 </div></section>
 
@@ -381,6 +384,7 @@ let tx=null;addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:tr
 addEventListener("touchend",e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(cur+(d<0?1:-1));tx=null;});
 addEventListener("resize",()=>go(cur));
 track.style.transition="none";document.getElementById("start").onclick=()=>go(1);
+document.getElementById("restart").onclick=()=>go(0);
 go(Math.max(0,(parseInt((location.hash||"").replace("#s",""))||1)-1));requestAnimationFrame(()=>requestAnimationFrame(()=>track.style.transition=""));
 </script>
 <script>
@@ -436,10 +440,10 @@ const EGGS={
    R(g,4,1,4,1,"#111");R(g,4,2,4,3,SK[1]);R(g,6,3,1,1,"#2a1d14");R(g,3,2,1,2,"#111");
    R(g,4,5,4,5,"#8e5a3c");R(g,8,6,5,1,"#8e5a3c");R(g,13,6,1,1,SK[1]);R(g,8,10,5,2,"#2c3e50");R(g,12,12,1,4,"#2c3e50");R(g,12,16,2,1,"#222");
    R(g,13,10,14,1,"#8b5a2b");R(g,14,11,1,6,"#8b5a2b");R(g,25,11,1,6,"#8b5a2b");
-   const mx=17,my=3;
-   R(g,mx+1,my,6,1,"#111");R(g,mx,my+1,1,5,"#111");R(g,mx+7,my+1,1,5,"#111");R(g,mx+1,my+6,6,1,"#111");R(g,mx+1,my+1,6,1,"#6b3a1a");R(g,mx+1,my+2,6,4,"#fff");R(g,mx+1,my+2,2,4,"#d6e8fb");
-   R(g,mx-2,my+2,1,3,"#111");R(g,mx-1,my+1,1,1,"#111");R(g,mx-1,my+5,1,1,"#111");
-   const a=t%2;R(g,mx+2+a,my-3,1,1,"#111");R(g,mx+3-a,my-2,1,1,"#111");R(g,mx+5+a,my-3,1,1,"#111");R(g,mx+4+a,my-4,1,1,"#111");}},
+   const mx=18,my=5;
+   R(g,mx+1,my,4,1,"#111");R(g,mx,my+1,1,3,"#111");R(g,mx+5,my+1,1,3,"#111");R(g,mx+1,my+4,4,1,"#111");R(g,mx+1,my+1,4,1,"#6b3a1a");R(g,mx+1,my+2,4,2,"#fff");R(g,mx+1,my+2,1,2,"#d6e8fb");
+   R(g,mx-1,my+2,1,1,"#111");
+   const a=t%2;R(g,mx+2+a,my-2,1,1,"#111");R(g,mx+3-a,my-1,1,1,"#111");R(g,mx+4+a,my-3,1,1,"#111");}},
  abelhas:{w:24,h:16,name:"Apicultor",d:(g,t)=>{person(g,2,2,{shirt:"#f4f4f4",sleeve:"#f4f4f4",pants:"#f4f4f4",hat:"#f4f4f4",hair:"#f4f4f4",feet:"#666",beard:"#6b4a2b"});R(g,2,2,6,1,"#e0e0e0");R(g,3,3,4,1,"#9aa3a9");
    R(g,13,7,8,3,"#d9a441");R(g,13,10,8,4,"#b8862e");R(g,12,6,10,1,"#7a5a2a");R(g,16,11,2,1,"#3a2a10");
    for(let i=0;i<5;i++){const a=t*0.9+i*1.7;const x=17+Math.cos(a)*6,y=5+Math.sin(a*1.3)*4;R(g,x,y,1,1,"#111");R(g,x+1,y,1,1,"#ffcc00");}}},
@@ -488,7 +492,7 @@ EGGS.leitura={w:28,h:16,name:"Leitores",d:(g,t)=>{const f=t%16<1;
    R(g,4,2,4,1,"#5a2d16");R(g,4,3,4,3,SK[2]);R(g,3,3,1,4,"#5a2d16");R(g,4,6,4,4,"#e67e22");R(g,8,8,4,2,"#2c3e50");R(g,11,10,1,5,"#2c3e50");R(g,11,15,2,1,"#222");
    R(g,7,5,5,3,"#fff");R(g,9,5,1,3,"#bbb");R(g,8,6,1,1,"#999");R(g,10,6,1,1,"#999");if(f)R(g,10,5,2,3,"#f4f4f4");
    person(g,18,2,{shirt:"#16a085",hair:"#c9a227",long:1,noArms:1},0);R(g,17,6,1,3,"#16a085");R(g,24,6,1,2,"#16a085");R(g,15,7,5,4,"#c0392b");R(g,16,8,3,2,"#fff");R(g,24,8,1,1,SK[0]);}};
-const EGG_ORDER=["bike","remo","casal","abelhas","duas","gemeas","paquita","leao","corrida","leitura","rock","massagem","cafe","sax"];
+const EGG_ORDER=["bike","casal","abelhas","duas","gemeas","paquita","leao","corrida","leitura","rock","massagem","cafe","sax"];
 
 /* ---------- Cenas (faixa no alto de cada slide) ---------- */
 const stars=(g,w,h,t,n=24)=>{for(let i=0;i<n;i++){const x=(i*53)%w,y=(i*29)%h;if((i+t)%5) R(g,x,y,1,1,"#cfd8ff");}};
@@ -549,7 +553,11 @@ const SCENES={
    [tx+5,tx+22,tx+34].forEach(x=>{R(g,x,23,5,5,"#222");R(g,x+2,24+(t%2)*2,1,1,"#aaa");R(g,x+1+(t%2)*2,25,1,1,"#aaa");});
    if(t%2)R(g,tx-3,20,2,1,"#bbb");}},
  /* 4: três ajudantes trazem um caldeirão gigante */
- carregar:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#fdf3e3","#fdf3e3");ground(g,256,32,"#c9b79c");
+ carregar:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#dff3d6","#dff3d6");ground(g,256,32,"#8fbf6a");
+   const zx=206;R(g,zx,8,2,20,"#6b4a2b");R(g,zx+26,8,2,20,"#6b4a2b");R(g,zx-1,6,30,4,"#2e7d32");R(g,zx-1,6,30,1,"#1b5e20");
+   const Z=[[0,0],[1,0],[2,0],[2,1],[1,2],[0,3],[1,3],[2,3]],O=[[0,0],[1,0],[2,0],[0,1],[2,1],[0,2],[2,2],[0,3],[1,3],[2,3]];
+   [[Z,zx+6],[O,zx+12],[O,zx+18]].forEach(([L,ox])=>L.forEach(([px,py])=>R(g,ox+px,6+py*1,1,1,"#ffd34d")));
+   for(let k=0;k<6;k++)R(g,zx+3+k*4,10,1,18,"#5a3a1a");
    const x=((t*2)%300)-60,f=t%2;
    person(g,x,15,{shirt:"#c0392b",hair:"#222",walk:1},f);pot(g,x+8,8,26);person(g,x+36,15,{shirt:"#2980b9",hair:"#8a5a2b",walk:1,skin:SK[2]},1-f);
    person(g,x+46,15,{shirt:"#27ae60",hair:"#e0c070",walk:1},f);R(g,x+44,20,3,1,"#7a4b2e");R(g,x+5,19,4,1,"#2b2b2b");R(g,x+33,19,4,1,"#2b2b2b");
@@ -584,6 +592,14 @@ const SCENES={
      pot(g,x+5,12,12,1,0,t);steam(g,x+7,11,t+i,2);
      for(let q=0;q<2;q++){const px=x+26+q*7;if(px<250)person(g,px,13,{shirt:["#ecf0f1","#f39c12","#1abc9c","#e84393"][(i+q)%4],hair:"#222",skin:SK[(i+q)%4]},0);}
      for(let k=0;k<3;k++)R(g,x+3+k*8,5,1,1,["#ffd34d","#ff4d4d","#4dff88"][(k+t+i)%3]);}}},
+ /* Fim: concurso, fileira tomando sopa bem rápido */
+ concurso:{w:256,h:32,d:(g,t)=>{sky(g,256,32,"#2b2140","#2b2140");stars(g,256,8,t,20);
+   for(let i=0;i<12;i++)R(g,8+i*20,2,10,4,["#c0392b","#f1c40f","#27ae60","#2980b9"][i%4]);R(g,0,2,256,1,"#ddd");
+   for(let i=0;i<9;i++){const x=10+i*27,c=["#c0392b","#2980b9","#27ae60","#8e44ad","#e67e22","#16a085","#d35400","#2c3e50","#e84393"][i],up=(t+i)%2;
+     person(g,x,8+(up?0:1),{shirt:c,hair:["#222","#8a5a2b","#e0c070","#111","#5a2d16"][i%5],skin:SK[i%4],noArms:1},0);
+     R(g,x+5,12+(up?-1:2),1,3,c);R(g,x+6,up?11:15,3,1,"#bbb");if(up)R(g,x+4,11,1,1,"#e6a23c");
+     R(g,x+3,17,9,3,"#ecf0f1");R(g,x+4,17,7,1,"#e6a23c");if((t+i)%3===0)R(g,x+5,15,1,1,"rgba(255,255,255,.8)");}
+   R(g,0,20,256,3,"#8b5a2b");R(g,0,23,256,9,"#6b4a2b");for(let x=0;x<256;x+=16)R(g,x,23,1,9,"#5a3a1a");}},
  /* Fim: sopa fumegante */
  sopa:{w:128,h:40,d:(g,t)=>{g.clearRect(0,0,128,40);
    R(g,40,22,48,4,"#8a9aa6");R(g,42,26,44,6,"#7a8a96");R(g,46,32,36,3,"#6a7a86");R(g,42,21,44,2,"#e6a23c");R(g,50,20,4,1,"#7a4b2e");R(g,66,20,3,1,"#2ecc71");
@@ -603,12 +619,12 @@ let TICK=0;
 function loop(){TICK++;ANIM.forEach(f=>f());}
 /* Contador de easter eggs */
 const FOUND=new Set();
-function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}FOUND.add(k);}
+function found(k,c){if(c){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}FOUND.add(k);renderGallery();}
 function renderGallery(){const gal=document.getElementById("gallery");if(!gal)return;
-  gal.innerHTML=EGG_ORDER.map(k=>`<div class="gi${FOUND.has(k)?' ok':''}" title="${FOUND.has(k)?EGGS[k].name:'?'}"><canvas class="egg-g" data-e="${k}"></canvas></div>`).join("");
+  gal.innerHTML=EGG_ORDER.map(k=>`<button type="button" class="gi${FOUND.has(k)?' ok':''}" data-k="${k}" aria-label="Revelar personagem"><canvas data-e="${k}"></canvas><span>${FOUND.has(k)?EGGS[k].name:"?"}</span></button>`).join("");
   gal.querySelectorAll("canvas").forEach(c=>{const e=EGGS[c.dataset.e];c.width=e.w;c.height=e.h;scale(c);const g=c.getContext("2d");e.d(g,1);
-    if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#2a3440";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
-  const m=document.getElementById("galmsg");if(m)m.textContent=FOUND.size===EGG_ORDER.length?`Você achou todos os ${EGG_ORDER.length}! A equipe agradece.`:`Você achou ${FOUND.size} de ${EGG_ORDER.length} personagens escondidos nos slides.`;}
+    if(!FOUND.has(c.dataset.e)){g.globalCompositeOperation="source-in";g.fillStyle="#56657a";g.fillRect(0,0,e.w,e.h);g.globalCompositeOperation="source-over";}});
+  gal.querySelectorAll("button").forEach(b=>b.onclick=()=>{FOUND.add(b.dataset.k);renderGallery();});}
 function sizeEggs(){document.querySelectorAll(".band").forEach(b=>{const sc=b.querySelector("canvas.scene");if(!sc||!sc.width)return;const k=b.clientWidth/sc.width;
   b.querySelectorAll("canvas.egg").forEach(c=>{c.style.width=(EGGS[c.dataset.e].w*k)+"px";});});
   document.querySelectorAll("canvas.egg.tit").forEach(c=>{const fr=c.closest(".frame");c.style.width=(EGGS[c.dataset.e].w*fr.clientWidth/256*.8)+"px";});
