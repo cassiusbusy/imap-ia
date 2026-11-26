@@ -656,7 +656,7 @@ function sizeEggs(){document.querySelectorAll(".band").forEach(b=>{const sc=b.qu
   document.querySelectorAll("canvas.egg.chao").forEach(c=>{const fr=c.closest(".frame");c.style.width=(EGGS[c.dataset.e].w*fr.clientWidth/256*.6)+"px";});}
 /* ===== Prédio em corte: um morador por cômodo da matriz de severidade (48×24) ===== */
 const FONT={T:["111","010","010","010","010"],I:["111","010","010","010","111"],R:["110","101","110","101","101"],A:["010","101","111","101","101"],
- N:["10001","11011","10101","10001","10001"],S:["011","100","010","001","110"],U:["101","101","101","101","111"]};
+ M:["10001","11011","10101","10001","10001"],S:["011","100","010","001","110"],U:["101","101","101","101","111"]};
 function txt(g,str,x,y,c){for(const ch of str){const gl=FONT[ch];gl.forEach((row,j)=>[...row].forEach((b,i)=>{if(b==="1")R(g,x+i,y+j,1,1,c);}));x+=gl[0].length+1;}}
 const floor=(g,c="#9a7350")=>{R(g,0,22,48,2,c);R(g,0,22,48,1,"rgba(0,0,0,.18)");};
 const oven=(g,x,y,glow)=>{R(g,x,y,12,12,"#7f8c8d");R(g,x,y,12,1,"#95a5a6");R(g,x+2,y+3,8,6,glow?"#ff9f43":"#5d4037");R(g,x+3,y+4,6,1,glow?"#ffd34d":"#6d4c41");R(g,x+2,y+1,2,1,"#c0392b");R(g,x+6,y+1,2,1,"#c0392b");R(g,x+1,y+10,10,1,"#636e72");};
@@ -675,7 +675,7 @@ const ROOMS={
    person(g,3,8,{shirt:"#f1c40f",hair:"#2b1b10",long:1,noArms:1},0);R(g,8,10,1,3,"#f1c40f");
    const k=t%4;R(g,9+Math.min(k,2),11-k,4,1,"#6b4a2b");R(g,13+Math.min(k,2),10-k,1,1,["#27ae60","#c0392b","#fff","#27ae60"][k]);}},
  tv:{w:48,h:24,name:"Maratona de série",d:(g,t)=>{floor(g,"#6d5843");
-   R(g,17,2,14,9,"#111");R(g,18,3,12,7,t%4<2?"#3a0a0a":"#160404");if(t%4<3)txt(g,"N",22,4,"#e50914");R(g,23,11,2,2,"#333");R(g,20,13,8,1,"#333");
+   R(g,17,2,14,9,"#111");R(g,18,3,12,7,t%4<2?"#3a0a0a":"#160404");if(t%4<3)txt(g,"M",22,4,"#e50914");R(g,23,11,2,2,"#333");R(g,20,13,8,1,"#333");
    R(g,10,13,28,7,"#7b4a2b");R(g,8,12,4,10,"#6b3d22");R(g,36,12,4,10,"#6b3d22");R(g,10,13,28,1,"#8e5a36");R(g,12,20,2,2,"#4a2a16");R(g,34,20,2,2,"#4a2a16");
    R(g,22,9,4,4,"#3b2a1e");R(g,21,10,1,3,"#3b2a1e");R(g,26,10,1,3,"#3b2a1e");R(g,6,8,1,1,t%4<2?"rgba(229,9,20,.35)":"rgba(0,0,0,0)");}},
  pao:{w:48,h:24,name:"Pão saindo do forno",d:(g,t)=>{floor(g);oven(g,30,10,1);
