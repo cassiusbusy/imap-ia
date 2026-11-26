@@ -27,7 +27,7 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--bo
 a{color:var(--accent)}
 .slide{flex:0 0 100vw;width:100vw;min-width:0;overflow:hidden;height:100vh;display:grid;place-items:center;padding:1.5vh 2vw}
 .frame{width:min(96vw,calc(96vh*16/9));aspect-ratio:16/9;background:var(--paper);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.08);
-  padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:clamp(12px,1.75vw,25px);overflow:hidden;position:relative}
+  padding:4.2% 5% 7%;display:flex;flex-direction:column;gap:2.2%;font-size:calc(clamp(9px, min(1.68vw, 2.99vh), 24px) * var(--k,1) * var(--u,1));overflow:hidden;position:relative}
 .kicker{font:400 .38em "Press Start 2P",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--warm);line-height:1.6}
 h1,h2{font-family:"Pixelify Sans",var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
 h2{font-size:1.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -160,6 +160,11 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 .hud .eg{color:#ffd34d}
 #toast{position:fixed;left:50%;bottom:50px;transform:translateX(-50%);background:#0f1b2d;color:#ffd34d;font:400 11px "Press Start 2P",monospace;padding:10px 14px;border:3px solid #ffd34d;opacity:0;pointer-events:none;z-index:30}
 #toast.show{animation:toast 1.8s steps(6)}@keyframes toast{10%,80%{opacity:1}100%{opacity:0}}
+/* Controle de tamanho do texto */
+.zoom{position:fixed;left:10px;bottom:8px;z-index:20;display:flex;gap:4px;opacity:.35;transition:opacity .2s}
+.zoom:hover,.zoom:focus-within{opacity:1}
+.zoom button{font:400 10px "Press Start 2P",monospace;background:#0f1b2d;color:#fff;border:0;padding:6px 8px;cursor:pointer}
+@media print{.zoom{display:none}}
 /* Navegação */
 .nav{position:fixed;right:14px;bottom:12px;display:flex;gap:6px;align-items:center;font:600 13px var(--body);color:var(--muted);z-index:5}
 .nav button{font:inherit;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:4px 10px;cursor:pointer;color:var(--ink)}
@@ -179,6 +184,7 @@ canvas.egg.chao{bottom:1.5%;left:58%}
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV3VJ4KC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="zoom" aria-label="Tamanho do texto"><button type="button" id="zm">A−</button><button type="button" id="zp">A+</button></div>
 <div id="track">
 <section class="slide" id="s1"><div class="frame cover">
   
@@ -383,7 +389,21 @@ addEventListener("wheel",e=>{const p=e.target.closest(".panel");if(p&&p.scrollHe
 let tx=null;addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});
 addEventListener("touchend",e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(cur+(d<0?1:-1));tx=null;});
 addEventListener("resize",()=>go(cur));
-track.style.transition="none";document.getElementById("start").onclick=()=>go(1);
+track.style.transition="none";
+/* Ajuste automático: reduz o texto de cada slide até o conteúdo caber no quadro */
+let U=1;
+function fits(fr){return fr.scrollHeight<=fr.clientHeight+1 && [...fr.querySelectorAll("*")].every(el=>{const r=el.getBoundingClientRect();if(!r.height||getComputedStyle(el).position==="absolute")return true;const f=fr.getBoundingClientRect();return r.bottom<=f.bottom+1;});}
+function fitAll(){document.querySelectorAll(".frame").forEach(fr=>{fr.style.setProperty("--u",U);let k=1;fr.style.setProperty("--k",k);
+  while(!fits(fr)&&k>.55){k-=.04;fr.style.setProperty("--k",k.toFixed(2));}});
+  if(typeof sizeEggs==="function")sizeEggs();}
+document.getElementById("zm").onclick=()=>{U=Math.max(.6,U-.08);fitAll();};
+document.getElementById("zp").onclick=()=>{U=Math.min(1.4,U+.08);document.querySelectorAll(".frame").forEach(fr=>fr.style.setProperty("--u",U));if(typeof sizeEggs==="function")sizeEggs();};
+addEventListener("keydown",e=>{if(e.key==="-"){U=Math.max(.6,U-.08);fitAll();}if(e.key==="+"||e.key==="="){document.getElementById("zp").click();}});
+let fitT;addEventListener("resize",()=>{clearTimeout(fitT);fitT=setTimeout(fitAll,120);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
+addEventListener("load",fitAll);fitAll();
+window.__overflow=()=>[...document.querySelectorAll(".frame")].map((fr,i)=>fits(fr)?null:"s"+(i+1)).filter(Boolean);
+document.getElementById("start").onclick=()=>go(1);
 document.getElementById("restart").onclick=()=>go(0);
 go(Math.max(0,(parseInt((location.hash||"").replace("#s",""))||1)-1));requestAnimationFrame(()=>requestAnimationFrame(()=>track.style.transition=""));
 </script>
