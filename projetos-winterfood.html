@@ -168,6 +168,7 @@ tr.crit td{color:var(--crit);font-weight:600}
 
 @media (max-width:1100px){.canvas{grid-template-columns:1fr 1fr;grid-template-areas:"h1 h1" "j o" "r r" "h2 h2" "p q" "h3 h3" "s s" "a e" "h4 h4" "pr re" "h5 h5" "ri cu" "en en"}}
 @media (max-width:640px){.canvas{grid-template-columns:1fr;grid-template-areas:"h1" "j" "o" "r" "h2" "p" "q" "h3" "s" "a" "e" "h4" "pr" "re" "h5" "ri" "cu" "en"}.wrap{padding:18px 16px 60px}nav.top{margin:0 -16px;padding:10px 16px}.detail{padding:18px 16px}}
+#stable ol.sub{margin:0;padding-left:0;list-style:none}#stable ol.sub li{margin:.1em 0}#stable td{vertical-align:top}
 </style>
 </head>
 <body>
@@ -501,6 +502,9 @@ tr.crit td{color:var(--crit);font-weight:600}
   <p class="note">O pedido de registro da marca no INPI é feito na atividade E. A concessão do registro pode sair depois do festival e não trava o cronograma: o pedido já garante a prioridade sobre o nome.</p>
   <div class="scroll"><table id="ctable"><thead><tr><th>ID</th><th>Atividade</th><th>Depende de</th><th class="r">Duração (sem.)</th><th class="r">Início</th><th class="r">Fim</th><th class="r">Folga</th></tr></thead><tbody></tbody></table></div>
   <p class="note">Início e fim em semanas contadas a partir da aprovação (semana 0). Folga é quantas semanas a atividade pode atrasar sem atrasar o festival.</p>
+  <h3 id="subatividades">Desdobramento das atividades</h3>
+  <p>Cada atividade do cronograma se divide em tarefas menores, na ordem em que acontecem. Em vermelho, as atividades do caminho crítico.</p>
+  <div class="scroll"><table id="stable"><thead><tr><th>ID</th><th>Atividade</th><th class="r">Semanas</th><th>Subatividades</th></tr></thead><tbody></tbody></table></div>
 </section>
 
 <section class="detail" id="proximas">
@@ -563,25 +567,27 @@ tr.crit td{color:var(--crit);font-weight:600}
 </div>
 <script>
 const T = [
-  {id:"A",n:"Aprovação e designação do gerente",d:1,p:[]},
-  {id:"B",n:"Plano do projeto e comitê de governança",d:2,p:["A"]},
-  {id:"C",n:"Captação de patrocínio (cotas)",d:8,p:["B"]},
-  {id:"D",n:"Regulamento e parecer da Procuradoria",d:4,p:["B"]},
-  {id:"E",n:"Identidade visual, busca no INPI e pedido de registro da marca",d:4,p:["B"]},
-  {id:"R",n:"Linha de base dos indicadores (BI de Turismo)",d:2,p:["B"]},
-  {id:"F",n:"Chamamento e adesão dos restaurantes (Abrasel e categoria lámen)",d:6,p:["D","E"]},
-  {id:"H",n:"Desenvolvimento do site, mapa, votação e Passaporte",d:8,p:["D"]},
-  {id:"J",n:"Planejamento do Concurso (Mercado Municipal, protocolo e licenças)",d:6,p:["D"]},
-  {id:"I",n:"Contratação de agência e mídia (Lei 14.133)",d:6,p:["C"]},
-  {id:"G",n:"Curadoria e aprovação dos pratos",d:3,p:["F"]},
-  {id:"K",n:"Kit e orientação dos restaurantes",d:2,p:["G"]},
-  {id:"M",n:"Testes do site e carga dos cardápios",d:2,p:["H","G"]},
-  {id:"L",n:"Campanha de lançamento",d:4,p:["I","E","G"]},
-  {id:"N",n:"Festival (4 semanas) e Concurso",d:4,p:["K","L","M","J"]},
-  {id:"P",n:"Apuração e premiação",d:1,p:["N"]},
-  {id:"Q",n:"Pesquisa e relatório de impacto",d:4,p:["N","R"]}
+  {id:"A",n:"Aprovação e designação do gerente",d:1,p:[],s:["Aprovar o projeto no Instituto Municipal de Turismo", "Designar o gerente do projeto", "Formalizar o termo de abertura"]},
+  {id:"B",n:"Plano do projeto e comitê de governança",d:2,p:["A"],s:["Elaborar o plano do projeto (escopo, EAP, cronograma e custos)", "Instituir o comitê de governança", "Definir papéis e responsabilidades", "Realizar a reunião de início (kick-off)"]},
+  {id:"C",n:"Captação de patrocínio (cotas)",d:8,p:["B"],s:["Definir as cotas e as contrapartidas", "Elaborar o plano comercial de patrocínio", "Prospectar e negociar com empresas", "Formalizar os contratos de patrocínio", "Fechar as cotas no comitê"]},
+  {id:"D",n:"Regulamento e parecer da Procuradoria",d:4,p:["B"],s:["Redigir o regulamento do festival e do Concurso", "Submeter o regulamento à Procuradoria", "Ajustar o texto conforme o parecer", "Publicar o regulamento"]},
+  {id:"E",n:"Identidade visual, busca no INPI e pedido de registro da marca",d:4,p:["B"],s:["Criar a identidade visual e o manual da marca", "Realizar a busca de anterioridade no INPI", "Protocolar o pedido de registro da marca"]},
+  {id:"R",n:"Linha de base dos indicadores (BI de Turismo)",d:2,p:["B"],s:["Levantar os dados do BI de Turismo do inverno anterior", "Definir os indicadores e as metas", "Registrar a linha de base"]},
+  {id:"F",n:"Chamamento e adesão dos restaurantes (Abrasel e categoria lámen)",d:6,p:["D","E"],s:["Publicar o chamamento", "Divulgar o chamamento com a Abrasel-PR e as casas de lámen", "Receber e analisar as inscrições", "Selecionar os 50 restaurantes e formar a lista de espera", "Assinar os termos de adesão"]},
+  {id:"H",n:"Desenvolvimento do site, mapa, votação e Passaporte",d:8,p:["D"],s:["Especificar os requisitos do site", "Desenvolver o mapa, a votação e o Passaporte", "Adequar a coleta de dados à LGPD", "Integrar a pesquisa do Passaporte"]},
+  {id:"J",n:"Planejamento do Concurso (Mercado Municipal, protocolo e licenças)",d:6,p:["D"],s:["Reservar o espaço no Mercado Municipal", "Elaborar o protocolo de segurança do Concurso", "Obter alvarás e licenças", "Definir o júri e a premiação"]},
+  {id:"I",n:"Contratação de agência e mídia (Lei 14.133)",d:6,p:["C"],s:["Elaborar o termo de referência", "Licitar ou aderir a ata de registro de preços", "Contratar a agência", "Aprovar o plano de mídia"]},
+  {id:"G",n:"Curadoria e aprovação dos pratos",d:3,p:["F"],s:["Receber as fichas técnicas dos pratos", "Avaliar os pratos com a curadoria", "Aprovar os pratos e os preços"]},
+  {id:"K",n:"Kit e orientação dos restaurantes",d:2,p:["G"],s:["Produzir o kit do restaurante (selos, materiais e QR code)", "Capacitar as equipes com o Senac", "Realizar o briefing operacional"]},
+  {id:"M",n:"Testes do site e carga dos cardápios",d:2,p:["H","G"],s:["Carregar os cardápios no site", "Testar o mapa, a votação e o Passaporte", "Realizar o teste de carga", "Corrigir as falhas encontradas"]},
+  {id:"L",n:"Campanha de lançamento",d:4,p:["I","E","G"],s:["Produzir as peças da campanha", "Lançar a campanha nos canais", "Mobilizar a imprensa e os influenciadores"]},
+  {id:"N",n:"Festival (4 semanas) e Concurso",d:4,p:["K","L","M","J"],s:["Abrir o festival", "Monitorar a operação e os indicadores", "Realizar o Concurso da Sopa de Pinhão", "Atender as ocorrências"]},
+  {id:"P",n:"Apuração e premiação",d:1,p:["N"],s:["Apurar os votos", "Divulgar os vencedores", "Entregar os prêmios"]},
+  {id:"Q",n:"Pesquisa e relatório de impacto",d:4,p:["N","R"],s:["Aplicar a pesquisa de impacto", "Consolidar os dados do Passaporte e do BI", "Elaborar o relatório de impacto", "Registrar as lições aprendidas", "Realizar a reunião de encerramento"]}
 ];
 const by = Object.fromEntries(T.map(t=>[t.id,t]));
+/* tabela de subatividades: preenchida depois do CPM */
+setTimeout(()=>{const tb=document.querySelector("#stable tbody");if(!tb)return;tb.innerHTML=T.slice().sort((a,b)=>a.es-b.es||a.id.localeCompare(b.id)).map(t=>`<tr><td><b${t.crit?' style="color:var(--crit)"':''}>${t.id}</b></td><td>${t.n}</td><td class="r">${t.es+1}–${t.ef}</td><td><ol class="sub">${t.s.map((x,i)=>`<li>${t.id}.${i+1} ${x}</li>`).join("")}</ol></td></tr>`).join("");},0);
 T.forEach(t=>{ t.es = t.p.length ? Math.max(...t.p.map(x=>by[x].ef)) : 0; t.ef = t.es + t.d; });
 const total = Math.max(...T.map(t=>t.ef));
 [...T].reverse().forEach(t=>{ const succ = T.filter(s=>s.p.includes(t.id)); t.lf = succ.length ? Math.min(...succ.map(s=>s.ls)) : total; t.ls = t.lf - t.d; t.slack = t.ls - t.es; t.crit = t.slack===0; });
